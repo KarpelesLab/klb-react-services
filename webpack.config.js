@@ -16,12 +16,9 @@ module.exports = {
 		extensions: ['*', '.js', '.jsx'],
 	},
 	output: {
-		path: path.resolve(__dirname, './dist'),
-		filename: 'bundle.js',
+		path: path.resolve(__dirname, './'),
+		filename: 'index.js',
+		libraryTarget: 'commonjs2'
 	},
 	plugins: [new webpack.HotModuleReplacementPlugin()],
-	devServer: {
-		contentBase: path.resolve(__dirname, './dist'),
-		hot: true,
-	},
 };
