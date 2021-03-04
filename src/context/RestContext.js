@@ -1,5 +1,4 @@
 import React, { createContext, useCallback, useState } from 'react';
-import PropTypes                                       from 'prop-types';
 
 export const defaultRestContext = { snackMessageCallback: null, logoutUserCallback: null };
 export const RestContext = createContext(defaultRestContext);
@@ -25,11 +24,4 @@ export const RestContextContainer = ({ children }) => {
 			{children}
 		</RestContext.Provider>
 	);
-};
-
-RestContextContainer.propTypes = {
-	children: PropTypes.oneOfType([
-		PropTypes.arrayOf(PropTypes.node),
-		PropTypes.node
-	]).isRequired
 };
