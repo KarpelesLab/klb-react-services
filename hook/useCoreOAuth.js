@@ -11,7 +11,5 @@ export const useCoreFetchConsumerLink = consumerId => {
 
 	return [doAction, loading];
 };
-
 export const useCoreUnlinkToken = tokenId => useAction(`OAuth2/Consumer/Token/${tokenId}`, 'DELETE', { snackMessageToken: 'profile_oauth2_token_remove_success' });
-
 export const useCoreOAuth2ConsumerTokens = () => useResourceList('OAuth2/Consumer/Token');
