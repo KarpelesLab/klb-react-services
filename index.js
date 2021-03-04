@@ -2,8 +2,6 @@ export { useCoreAffiliate, useCoreUserWallets }                                 
 export { useCoreFetchConsumerLink, useCoreUnlinkToken, useCoreOAuth2ConsumerTokens }       from './hook/useCoreOAuth';
 export { useCoreKeychainKeys, useCoreKeychainKeyDelete, useCoreKeychainKeyCreate }         from './hook/useCoreKeychainKey';
 export { useCoreKeychains, useCoreKeychain, useCoreKeychainUpdate, useCoreKeychainCreate } from './hook/useCoreKeychain';
-
-export { useResource, useResourceList, useAction } from './hook/useBaseHooks';
-export { useApiErrorHandler }                      from './hook/useApiErrorHandler';
-
-export { RestContextContainer, RestContext, defaultRestContext } from './context/RestContext';
+export { useResource, useResourceList, useAction }                                         from './hook/useBaseHooks';
+export { useApiErrorHandler }                                                              from './hook/useApiErrorHandler';
+export { RestContextContainer, RestContext, defaultRestContext }                           from './context/RestContext';
