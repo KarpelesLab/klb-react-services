@@ -9,6 +9,7 @@
     "@semantic-release/gitlab": "^6.0.9",
     "@semantic-release/npm": "^7.0.10",
     "semantic-release": "^17.4.1",
+    "react-dom": "^17.0.1",
     "react": "^17.0.1"
   },
   "files": [
