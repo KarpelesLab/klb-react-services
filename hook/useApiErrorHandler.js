@@ -1,5 +1,5 @@
-import { useContext }     from 'react';
-import { RestContext }    from '../context/RestContext';
+import { useContext }  from 'react';
+import { RestContext } from '../context/RestContext';
 
 export const useApiErrorHandler = () => {
 	const { restContext } = useContext(RestContext);
