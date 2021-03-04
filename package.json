@@ -1,0 +1,14 @@
+{
+  "name": "@karpeleslab/klb-react-services",
+  "version": "1.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@karpeleslab/klbfw": "^0.0.33",
+    "prop-types": "^15.7.2",
+    "react": ">=16.12.0"
+  },
+  "publishConfig": {
+    "registry": "https://gitlab.com/api/v4/projects/546/packages/npm/"
+  }
+}
