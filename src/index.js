@@ -5,3 +5,4 @@ export { useCoreKeychains, useCoreKeychain, useCoreKeychainUpdate, useCoreKeycha
 export { useResource, useResourceList, useAction }                                         from './hook/useBaseHooks';
 export { useApiErrorHandler }                                                              from './hook/useApiErrorHandler';
 export { RestContextContainer, RestContext, defaultRestContext }                           from './context/RestContext';
+export { LoginContextContainer, LoginContext, defaultLoginContext }                        from './context/LoginContext';
