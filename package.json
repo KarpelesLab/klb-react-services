@@ -1,5 +1,5 @@
 {
-  "name": "@karpeleslab/klb-react-services",
+  "name": "klb-react-services",
   "version": "0.1.0",
   "dependencies": {
     "@karpeleslab/klbfw": "^0.0.33",
