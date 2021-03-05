@@ -14,7 +14,7 @@ export const useResource = endpoint => {
 	const refresh = useCallback(
 		data => {
 			if (data) {
-				setResource({ ...(resource ?? {}), data: data });
+				setResource({ ...(resource ? resource : {}), data: data });
 				return;
 			}
 
@@ -49,8 +49,8 @@ export const useResourceList = endpoint => {
 		if (paging) setLastPaging(lastFilter);
 
 		return rest(endpoint, 'GET', {
-			...(filters ?? lastFilter),
-			...(paging ?? lastPaging),
+			...(filters ? filters : lastFilter),
+			...(paging ? paging : lastPaging),
 		})
 			.then(catchRedirect)
 			.then(setList)

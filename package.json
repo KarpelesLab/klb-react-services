@@ -1,46 +1,67 @@
 {
   "name": "@karpeleslab/klb-react-services",
-  "version": "1.13.0",
-  "license": "MIT",
-  "main": "./index.js",
+  "version": "0.1.0",
   "dependencies": {
     "@karpeleslab/klbfw": "^0.0.33",
-    "@semantic-release/git": "^9.0.0",
-    "@semantic-release/gitlab": "^6.0.9",
-    "@semantic-release/npm": "^7.0.10",
-    "semantic-release": "^17.4.1"
-  },
-  "files": [
-    "index.js",
-    "README.md"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://git.atonline.com/karpeleslab/klb-react-services"
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "4.0.3",
+    "web-vitals": "^1.0.1"
   },
   "publishConfig": {
-    "access": "public"
+    "@karpeleslab:registry": "https://gitlab.com/api/v4/projects/546/packages/npm/"
   },
   "scripts": {
-    "start": "webpack --watch",
-    "build": "webpack",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "semantic-release": "semantic-release"
+    "start": "react-scripts start",
+    "build": "rm -rf dist && npx babel src --out-dir dist --copy-files",
+    "build-win": "rd /s /q dist && set NODE_ENV=production npx babel src/index.js --out-dir dist --copy-files",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
-  "peerDependencies": {
-    "react-dom": "^17.0.1",
-    "react": "^17.0.1"
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "devDependencies": {
-    "@babel/cli": "^7.13.0",
-    "@babel/core": "^7.13.8",
-    "@babel/preset-env": "^7.13.9",
-    "@babel/preset-react": "^7.12.13",
-    "@semantic-release/git": "^9.0.0",
-    "@semantic-release/gitlab": "^6.0.9",
-    "@semantic-release/npm": "^7.0.10",
-    "babel-loader": "^8.2.2",
-    "webpack": "^5.24.3",
-    "webpack-cli": "^4.5.0"
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.atonline.com:karpeleslab/klb-react-services.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "files": [
+    "/dist"
+  ],
+  "babel": {
+    "presets": [
+      "react",
+      "env",
+      "stage-0"
+    ]
   }
 }

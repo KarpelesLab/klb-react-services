@@ -4,7 +4,6 @@ export const defaultRestContext = { snackMessageCallback: null, logoutUserCallba
 export const RestContext = createContext(defaultRestContext);
 
 export const RestContextContainer = ({ children }) => {
-
 	const [restContext, setContext] = useState(defaultRestContext);
 
 	const setSnackMessageCallback = useCallback(callback => {
