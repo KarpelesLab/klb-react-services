@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.useAction = exports.useResourceList = exports.useResource = undefined;
+exports.useFileUploader = exports.useAction = exports.useResourceList = exports.useResource = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -11,7 +11,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 var _react = require('react');
 
-var _useApiErrorHandler7 = require('./useApiErrorHandler');
+var _useApiErrorHandler9 = require('./useApiErrorHandler');
 
 var _klbfw = require('@karpeleslab/klbfw');
 
@@ -27,7 +27,7 @@ var useResource = exports.useResource = function useResource(endpoint) {
 	    resource = _useState2[0],
 	    setResource = _useState2[1];
 
-	var _useApiErrorHandler = (0, _useApiErrorHandler7.useApiErrorHandler)(),
+	var _useApiErrorHandler = (0, _useApiErrorHandler9.useApiErrorHandler)(),
 	    _useApiErrorHandler2 = _slicedToArray(_useApiErrorHandler, 2),
 	    catchRedirect = _useApiErrorHandler2[0],
 	    handleError = _useApiErrorHandler2[1];
@@ -62,7 +62,7 @@ var useResourceList = exports.useResourceList = function useResourceList(endpoin
 	    loading = _useState6[0],
 	    setLoading = _useState6[1];
 
-	var _useApiErrorHandler3 = (0, _useApiErrorHandler7.useApiErrorHandler)(),
+	var _useApiErrorHandler3 = (0, _useApiErrorHandler9.useApiErrorHandler)(),
 	    _useApiErrorHandler4 = _slicedToArray(_useApiErrorHandler3, 2),
 	    catchRedirect = _useApiErrorHandler4[0],
 	    handleError = _useApiErrorHandler4[1];
@@ -104,7 +104,8 @@ var defaultSettings = {
 	snackMessageSeverity: 'success',
 	catchRedirect: true,
 	handleError: true,
-	rawResult: false
+	rawResult: false,
+	innerThen: null
 };
 
 var useAction = exports.useAction = function useAction(endpoint) {
@@ -118,7 +119,7 @@ var useAction = exports.useAction = function useAction(endpoint) {
 	    loading = _useState12[0],
 	    setLoading = _useState12[1];
 
-	var _useApiErrorHandler5 = (0, _useApiErrorHandler7.useApiErrorHandler)(),
+	var _useApiErrorHandler5 = (0, _useApiErrorHandler9.useApiErrorHandler)(),
 	    _useApiErrorHandler6 = _slicedToArray(_useApiErrorHandler5, 2),
 	    catchRedirect = _useApiErrorHandler6[0],
 	    handleError = _useApiErrorHandler6[1];
@@ -128,14 +129,19 @@ var useAction = exports.useAction = function useAction(endpoint) {
 
 	var doAction = (0, _react.useCallback)(function () {
 		var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+		var settingsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
+		settings = _extends({}, settings, settingsOverride);
 		setLoading(true);
 		return (0, _klbfw.rest)(endpoint, method, params).then(function (d) {
 			return settings.catchRedirect ? catchRedirect(d) : d;
+		}).then(function (d) {
+			return settings.rawResult ? d : d.data;
+		}).then(function (d) {
+			return settings.innerThen ? settings.innerThen(d) : d;
 		}).then(function (res) {
 			if (restContext.snackMessageCallback && settings.snackMessageToken) restContext.snackMessageCallback(settings.snackMessageToken, settings.snackMessageSeverity, true);
-			if (settings.rawResult) return res;
-			return res.data;
+			return res;
 		}).catch(function (d) {
 			return settings.handleError ? handleError(d) : d;
 		}).finally(function () {
@@ -144,4 +150,73 @@ var useAction = exports.useAction = function useAction(endpoint) {
 	}, [endpoint, method]); //eslint-disable-line
 
 	return [doAction, loading];
+};
+
+var useFileUploader = exports.useFileUploader = function useFileUploader() {
+	var restSettings = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+	var settings = _extends({}, defaultSettings, restSettings);
+
+	var _useState13 = (0, _react.useState)(0),
+	    _useState14 = _slicedToArray(_useState13, 2),
+	    progress = _useState14[0],
+	    setProgress = _useState14[1];
+
+	var _useApiErrorHandler7 = (0, _useApiErrorHandler9.useApiErrorHandler)(),
+	    _useApiErrorHandler8 = _slicedToArray(_useApiErrorHandler7, 2),
+	    catchRedirect = _useApiErrorHandler8[0],
+	    handleError = _useApiErrorHandler8[1];
+
+	var _useState15 = (0, _react.useState)(false),
+	    _useState16 = _slicedToArray(_useState15, 2),
+	    uploading = _useState16[0],
+	    setUploading = _useState16[1];
+
+	var _useContext2 = (0, _react.useContext)(_RestContext.RestContext),
+	    restContext = _useContext2.restContext;
+
+	var doIt = (0, _react.useCallback)(function (endpoint, file, params) {
+		var settingsOverride = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+
+		settings = _extends({}, settings, settingsOverride);
+		return new Promise(function (resolve, reject) {
+			setUploading(true);
+			_klbfw.upload.onprogress = function (d) {
+				var blockTotal = 0;
+				var progressTotal = 0;
+				d.running.forEach(function (running) {
+					if (running.status !== 'pending' && running.status !== 'complete') {
+						progressTotal += running.done;
+						blockTotal += running.blocks;
+					}
+				});
+
+				if (d.failed.length > 0) {
+					reject(d.failed[0].failure);
+					return;
+				}
+
+				setProgress(blockTotal > 0 ? progressTotal / blockTotal : 0);
+			};
+
+			_klbfw.upload.append(endpoint, file, params).then(function (d) {
+				return settings.catchRedirect ? catchRedirect(d) : d;
+			}).then(resolve).catch(reject);
+
+			_klbfw.upload.run();
+		}).then(function (data) {
+			return data.final;
+		}).then(function (d) {
+			return settings.innerThen ? settings.innerThen(d) : d;
+		}).then(function (res) {
+			if (restContext.snackMessageCallback && settings.snackMessageToken) restContext.snackMessageCallback(settings.snackMessageToken, settings.snackMessageSeverity, true);
+			return res;
+		}).catch(function (d) {
+			return settings.handleError ? handleError(d) : d;
+		}).finally(function () {
+			return setUploading(false);
+		});
+	}, []); //eslint-disable-line
+
+	return [doIt, uploading, progress];
 };

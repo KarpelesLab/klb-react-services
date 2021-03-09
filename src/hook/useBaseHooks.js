@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { useApiErrorHandler }                           from './useApiErrorHandler';
-import { rest }                                         from '@karpeleslab/klbfw';
+import { rest, upload }                                 from '@karpeleslab/klbfw';
 import { RestContext }                                  from '../context/RestContext';
 
 const deepCopy = (object) => {
@@ -73,25 +73,27 @@ const defaultSettings = {
 	catchRedirect: true,
 	handleError: true,
 	rawResult: false,
+	innerThen: null,
 };
 
 export const useAction = (endpoint, method = 'POST', restSettings = {}) => {
-	const settings = { ...defaultSettings, ...restSettings };
+	let settings = { ...defaultSettings, ...restSettings };
 
 	const [loading, setLoading] = useState(false);
 	const [catchRedirect, handleError] = useApiErrorHandler();
 	const { restContext } = useContext(RestContext);
 
-	const doAction = useCallback((params = {}) => {
+	const doAction = useCallback((params = {}, settingsOverride = {}) => {
+		settings = { ...settings, ...settingsOverride };
 		setLoading(true);
 		return rest(endpoint, method, params)
 			.then(d => settings.catchRedirect ? catchRedirect(d) : d)
+			.then(d => settings.rawResult ? d : d.data)
+			.then(d => settings.innerThen ? settings.innerThen(d) : d)
 			.then(res => {
 				if (restContext.snackMessageCallback && settings.snackMessageToken)
 					restContext.snackMessageCallback(settings.snackMessageToken, settings.snackMessageSeverity, true);
-				if (settings.rawResult)
-					return res;
-				return res.data;
+				return res;
 			})
 			.catch(d => settings.handleError ? handleError(d) : d)
 			.finally(() => {
@@ -100,4 +102,57 @@ export const useAction = (endpoint, method = 'POST', restSettings = {}) => {
 	}, [endpoint, method]);//eslint-disable-line
 
 	return [doAction, loading];
+};
+
+export const useFileUploader = (restSettings = {}) => {
+	let settings = { ...defaultSettings, ...restSettings };
+	const [progress, setProgress] = useState(0);
+	const [catchRedirect, handleError] = useApiErrorHandler();
+	const [uploading, setUploading] = useState(false);
+	const { restContext } = useContext(RestContext);
+
+	const doIt = useCallback((endpoint, file, params, settingsOverride = {}) => {
+		settings = { ...settings, ...settingsOverride };
+		return new Promise((resolve, reject) => {
+			setUploading(true);
+			upload.onprogress = d => {
+				let blockTotal = 0;
+				let progressTotal = 0;
+				d.running.forEach((running) => {
+					if (running.status !== 'pending' && running.status !== 'complete') {
+						progressTotal += running.done;
+						blockTotal += running.blocks;
+					}
+
+				});
+
+				if (d.failed.length > 0) {
+					reject(d.failed[0].failure);
+					return;
+				}
+
+				setProgress(blockTotal > 0 ? progressTotal / blockTotal : 0);
+			};
+
+			upload.append(endpoint, file, params)
+				.then(d => settings.catchRedirect ? catchRedirect(d) : d)
+				.then(resolve)
+				.catch(reject);
+
+			upload.run();
+
+		})
+			.then(data => data.final)
+			.then(d => settings.innerThen ? settings.innerThen(d) : d)
+			.then(res => {
+				if (restContext.snackMessageCallback && settings.snackMessageToken)
+					restContext.snackMessageCallback(settings.snackMessageToken, settings.snackMessageSeverity, true);
+				return res;
+			})
+			.catch(d => settings.handleError ? handleError(d) : d)
+			.finally(() => setUploading(false));
+
+	}, []);//eslint-disable-line
+
+	return [doIt, uploading, progress];
 };
