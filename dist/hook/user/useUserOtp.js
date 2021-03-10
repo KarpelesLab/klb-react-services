@@ -1,0 +1,67 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.useUserOTPUnsetAction = exports.useUserOTPSetAction = exports.useUserOTPAssociate = exports.useUserOTPDelete = exports.useUserOTPCreate = exports.useUserOTPs = undefined;
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var _useBaseHooks = require('../useBaseHooks');
+
+var _react = require('react');
+
+var useUserOTPs = exports.useUserOTPs = function useUserOTPs() {
+	return (0, _useBaseHooks.useResourceList)('User/Otp');
+};
+var useUserOTPCreate = exports.useUserOTPCreate = function useUserOTPCreate() {
+	var _useAction = (0, _useBaseHooks.useAction)('User/Otp', 'POST'),
+	    _useAction2 = _slicedToArray(_useAction, 2),
+	    _doAction = _useAction2[0],
+	    loading = _useAction2[1];
+
+	var doAction = (0, _react.useCallback)(function (name) {
+		return _doAction({ Name: name });
+	}, []); //eslint-disable-line
+
+	return [doAction, loading];
+};
+var useUserOTPDelete = exports.useUserOTPDelete = function useUserOTPDelete(otpId) {
+	return (0, _useBaseHooks.useAction)('User/Otp/' + otpId, 'DELETE', { snackMessageToken: 'otp_delete_success' });
+};
+var useUserOTPAssociate = exports.useUserOTPAssociate = function useUserOTPAssociate(otpId) {
+	var _useAction3 = (0, _useBaseHooks.useAction)('User/Otp/' + otpId + ':associate', 'POST', { snackMessageToken: 'otp_associate_success' }),
+	    _useAction4 = _slicedToArray(_useAction3, 2),
+	    _doAction = _useAction4[0],
+	    loading = _useAction4[1];
+
+	var doAction = (0, _react.useCallback)(function (code, name) {
+		return _doAction({ otp: code, name: name });
+	}, []); //eslint-disable-line
+
+	return [doAction, loading];
+};
+var useUserOTPSetAction = exports.useUserOTPSetAction = function useUserOTPSetAction(otpId) {
+	var _useAction5 = (0, _useBaseHooks.useAction)('User/Otp/' + otpId + ':set', 'POST'),
+	    _useAction6 = _slicedToArray(_useAction5, 2),
+	    _doAction = _useAction6[0],
+	    loading = _useAction6[1];
+
+	var doAction = (0, _react.useCallback)(function (action) {
+		return _doAction({ action: action }, { snackMessageToken: 'otp_action_set_' + action + '_success' });
+	}, []); //eslint-disable-line
+
+	return [doAction, loading];
+};
+var useUserOTPUnsetAction = exports.useUserOTPUnsetAction = function useUserOTPUnsetAction(otpId) {
+	var _useAction7 = (0, _useBaseHooks.useAction)('User/Otp/' + otpId + ':unset', 'POST'),
+	    _useAction8 = _slicedToArray(_useAction7, 2),
+	    _doAction = _useAction8[0],
+	    loading = _useAction8[1];
+
+	var doAction = (0, _react.useCallback)(function (action) {
+		return _doAction({ action: action }, { snackMessageToken: 'otp_action_unset_' + action + '_success' });
+	}, []); //eslint-disable-line
+
+	return [doAction, loading];
+};

@@ -38,7 +38,10 @@ var useResource = exports.useResource = function useResource(endpoint) {
 			return;
 		}
 
-		return (0, _klbfw.rest)(endpoint).then(catchRedirect).then(setResource).catch(function (e) {
+		return (0, _klbfw.rest)(endpoint).then(catchRedirect).then(function (r) {
+			setResource(r);
+			return r;
+		}).catch(function (e) {
 			setResource({ error: e });
 			handleError(e);
 		});
@@ -85,7 +88,10 @@ var useResourceList = exports.useResourceList = function useResourceList(endpoin
 		if (filters) setLastFilter(lastFilter);
 		if (paging) setLastPaging(lastFilter);
 
-		return (0, _klbfw.rest)(endpoint, 'GET', _extends({}, filters ? filters : lastFilter, paging ? paging : lastPaging)).then(catchRedirect).then(setList).catch(handleError).finally(function () {
+		return (0, _klbfw.rest)(endpoint, 'GET', _extends({}, filters ? filters : lastFilter, paging ? paging : lastPaging)).then(catchRedirect).then(function (list) {
+			setList(list);
+			return list;
+		}).catch(handleError).finally(function () {
 			return setLoading(false);
 		});
 	}, []); //eslint-disable-line

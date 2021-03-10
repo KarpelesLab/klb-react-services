@@ -8,7 +8,7 @@ const deepCopy = (object) => {
 };
 
 export const useResource = endpoint => {
-	const [resource, setResource] = useState(null);
+	const [resource, setResource]      = useState(null);
 	const [catchRedirect, handleError] = useApiErrorHandler();
 
 	const refresh = useCallback(
@@ -20,7 +20,10 @@ export const useResource = endpoint => {
 
 			return rest(endpoint)
 				.then(catchRedirect)
-				.then(setResource)
+				.then(r => {
+					setResource(r);
+					return r;
+				})
 				.catch(e => {
 					setResource({ error: e });
 					handleError(e);
@@ -35,13 +38,12 @@ export const useResource = endpoint => {
 	return [resource, refresh];
 };
 
-
 export const useResourceList = endpoint => {
-	const [list, setList] = useState(null);
-	const [loading, setLoading] = useState(false);
+	const [list, setList]              = useState(null);
+	const [loading, setLoading]        = useState(false);
 	const [catchRedirect, handleError] = useApiErrorHandler();
-	const [lastFilter, setLastFilter] = useState({});
-	const [lastPaging, setLastPaging] = useState({});
+	const [lastFilter, setLastFilter]  = useState({});
+	const [lastPaging, setLastPaging]  = useState({});
 
 	const fetch = useCallback((filters = null, paging = null) => {
 		setLoading(true);
@@ -53,13 +55,16 @@ export const useResourceList = endpoint => {
 			...(paging ? paging : lastPaging),
 		})
 			.then(catchRedirect)
-			.then(setList)
+			.then(list => {
+				setList(list);
+				return list;
+			})
 			.catch(handleError)
 			.finally(() => setLoading(false));
 	}, []); //eslint-disable-line
 
 	const setItem = (idx, item) => {
-		const cpy = deepCopy(list);
+		const cpy     = deepCopy(list);
 		cpy.data[idx] = item;
 		setList(cpy);
 	};
@@ -68,20 +73,20 @@ export const useResourceList = endpoint => {
 };
 
 const defaultSettings = {
-	snackMessageToken: null,
+	snackMessageToken:    null,
 	snackMessageSeverity: 'success',
-	catchRedirect: true,
-	handleError: true,
-	rawResult: false,
-	innerThen: null,
+	catchRedirect:        true,
+	handleError:          true,
+	rawResult:            false,
+	innerThen:            null,
 };
 
 export const useAction = (endpoint, method = 'POST', restSettings = {}) => {
 	let settings = { ...defaultSettings, ...restSettings };
 
-	const [loading, setLoading] = useState(false);
+	const [loading, setLoading]        = useState(false);
 	const [catchRedirect, handleError] = useApiErrorHandler();
-	const { restContext } = useContext(RestContext);
+	const { restContext }              = useContext(RestContext);
 
 	const doAction = useCallback((params = {}, settingsOverride = {}) => {
 		settings = { ...settings, ...settingsOverride };
@@ -105,18 +110,18 @@ export const useAction = (endpoint, method = 'POST', restSettings = {}) => {
 };
 
 export const useFileUploader = (restSettings = {}) => {
-	let settings = { ...defaultSettings, ...restSettings };
-	const [progress, setProgress] = useState(0);
+	let settings                       = { ...defaultSettings, ...restSettings };
+	const [progress, setProgress]      = useState(0);
 	const [catchRedirect, handleError] = useApiErrorHandler();
-	const [uploading, setUploading] = useState(false);
-	const { restContext } = useContext(RestContext);
+	const [uploading, setUploading]    = useState(false);
+	const { restContext }              = useContext(RestContext);
 
 	const doIt = useCallback((endpoint, file, params, settingsOverride = {}) => {
 		settings = { ...settings, ...settingsOverride };
 		return new Promise((resolve, reject) => {
 			setUploading(true);
 			upload.onprogress = d => {
-				let blockTotal = 0;
+				let blockTotal    = 0;
 				let progressTotal = 0;
 				d.running.forEach((running) => {
 					if (running.status !== 'pending' && running.status !== 'complete') {
@@ -135,9 +140,9 @@ export const useFileUploader = (restSettings = {}) => {
 			};
 
 			upload.append(endpoint, file, params)
-				.then(d => settings.catchRedirect ? catchRedirect(d) : d)
-				.then(resolve)
-				.catch(reject);
+			      .then(d => settings.catchRedirect ? catchRedirect(d) : d)
+			      .then(resolve)
+			      .catch(reject);
 
 			upload.run();
 
