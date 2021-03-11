@@ -8,6 +8,8 @@ export { useUserProfileUpdate, useUserProfileUpdateAvatar }                    f
 export { useUserBillings, useUserBillingUpdateLocation, useUserBillingUpdate } from './hook/user/useUserBilling';
 export { useUserBillingMethods, useUserBillingMethodUpdate }                   from './hook/user/useUserBillingMethod';
 export { useTwoStepValidation }                                                from './hook/util/useUtil';
+export { useMoneyBankAccount, useMoneyBankWithdraws }                          from './hook/money/bank/useMoneyBank';
+export { useMoneySwift }                                                       from './hook/money/useMoney';
 export {
 	useCatalogProduct, useCatalogProductsSearch
 }

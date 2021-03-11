@@ -22,6 +22,8 @@ var deepCopy = function deepCopy(object) {
 };
 
 var useResource = exports.useResource = function useResource(endpoint) {
+	var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
 	var _useState = (0, _react.useState)(null),
 	    _useState2 = _slicedToArray(_useState, 2),
 	    resource = _useState2[0],
@@ -38,7 +40,7 @@ var useResource = exports.useResource = function useResource(endpoint) {
 			return;
 		}
 
-		return (0, _klbfw.rest)(endpoint).then(catchRedirect).then(function (r) {
+		return (0, _klbfw.rest)(endpoint, 'GET', params).then(catchRedirect).then(function (r) {
 			setResource(r);
 			return r;
 		}).catch(function (e) {

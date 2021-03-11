@@ -7,7 +7,7 @@ const deepCopy = (object) => {
 	return JSON.parse(JSON.stringify(object));
 };
 
-export const useResource = endpoint => {
+export const useResource = (endpoint, params = {}) => {
 	const [resource, setResource]      = useState(null);
 	const [catchRedirect, handleError] = useApiErrorHandler();
 
@@ -18,7 +18,7 @@ export const useResource = endpoint => {
 				return;
 			}
 
-			return rest(endpoint)
+			return rest(endpoint, 'GET', params)
 				.then(catchRedirect)
 				.then(r => {
 					setResource(r);
