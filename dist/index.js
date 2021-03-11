@@ -249,6 +249,24 @@ Object.defineProperty(exports, 'useShellReconfigure', {
 		return _useShell.useShellReconfigure;
 	}
 });
+Object.defineProperty(exports, 'useShellStart', {
+	enumerable: true,
+	get: function get() {
+		return _useShell.useShellStart;
+	}
+});
+Object.defineProperty(exports, 'useShellStop', {
+	enumerable: true,
+	get: function get() {
+		return _useShell.useShellStop;
+	}
+});
+Object.defineProperty(exports, 'useShellReboot', {
+	enumerable: true,
+	get: function get() {
+		return _useShell.useShellReboot;
+	}
+});
 
 var _useShellVolumeSnapshot = require('./hook/shell/volume/useShellVolumeSnapshot');
 

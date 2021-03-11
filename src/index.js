@@ -19,7 +19,10 @@ export {
 	useShellDeleteIp,
 	useShellSetInitialOS,
 	useShellCancelSubscription,
-	useShellReconfigure
+	useShellReconfigure,
+	useShellStart,
+	useShellStop,
+	useShellReboot
 }                                                                              from './hook/shell/useShell';
 export {
 	useShellVolumeSnapshotRestore, useShellVolumeSnapshots

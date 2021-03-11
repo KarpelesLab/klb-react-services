@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.useShellCancelSubscription = exports.useShellReconfigure = exports.useShellSetInitialOS = exports.useShellDeleteIp = exports.useShellUpdate = exports.useShell = exports.useShells = undefined;
+exports.useShellReboot = exports.useShellStop = exports.useShellStart = exports.useShellCancelSubscription = exports.useShellReconfigure = exports.useShellSetInitialOS = exports.useShellDeleteIp = exports.useShellUpdate = exports.useShell = exports.useShells = undefined;
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
@@ -51,4 +51,13 @@ var useShellReconfigure = exports.useShellReconfigure = function useShellReconfi
 };
 var useShellCancelSubscription = exports.useShellCancelSubscription = function useShellCancelSubscription(shellId) {
 	return (0, _useBaseHooks.useAction)('Shell/' + shellId + ':cancel', 'POST', { snackMessageToken: 'shell_subscription_cancel_success' });
+};
+var useShellStart = exports.useShellStart = function useShellStart(shellId) {
+	return (0, _useBaseHooks.useAction)('Shell/' + shellId + ':start', 'POST', { snackMessageToken: 'shell_action_start_success' });
+};
+var useShellStop = exports.useShellStop = function useShellStop(shellId) {
+	return (0, _useBaseHooks.useAction)('Shell/' + shellId + ':stop', 'POST', { snackMessageToken: 'shell_action_stop_success' });
+};
+var useShellReboot = exports.useShellReboot = function useShellReboot(shellId) {
+	return (0, _useBaseHooks.useAction)('Shell/' + shellId + ':reboot', 'POST', { snackMessageToken: 'shell_action_reboot_success' });
 };
