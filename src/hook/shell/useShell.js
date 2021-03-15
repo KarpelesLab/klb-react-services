@@ -1,6 +1,5 @@
-import { useAction, useResourceList } from '../useBaseHooks';
-import { useResource }                from '../../../dist/hook/useBaseHooks';
-import { useCallback }                from 'react';
+import { useAction, useResource, useResourceList } from '../useBaseHooks';
+import { useCallback }                             from 'react';
 
 export const useShells = () => useResourceList('Shell');
 export const useShell = shellId => useResource(`Shell/${shellId}`);
