@@ -417,6 +417,12 @@ Object.defineProperty(exports, 'useOperatingSystemAddImageFromFile', {
 		return _useShellOperatingSystem.useOperatingSystemAddImageFromFile;
 	}
 });
+Object.defineProperty(exports, 'useOperatingSystemDelete', {
+	enumerable: true,
+	get: function get() {
+		return _useShellOperatingSystem.useOperatingSystemDelete;
+	}
+});
 
 var _useBaseHooks = require('./hook/useBaseHooks');
 

@@ -48,7 +48,8 @@ export {
 	useOperatingSystem,
 	useUpdateOperatingSystem,
 	useOperatingSystemAddImageFromShell,
-	useOperatingSystemAddImageFromFile
+	useOperatingSystemAddImageFromFile,
+	useOperatingSystemDelete
 }
                                                                                from './hook/shell/os/useShellOperatingSystem';
 export { useResource, useResourceList, useAction, useFileUploader }            from './hook/useBaseHooks';
