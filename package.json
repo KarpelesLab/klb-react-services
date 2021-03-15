@@ -66,5 +66,5 @@
       "stage-0"
     ]
   },
-  "types": "index.d.ts"
+  "types": "./dist/index.d.ts"
 }
