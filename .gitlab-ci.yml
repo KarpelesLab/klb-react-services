@@ -27,7 +27,6 @@ publish:
   script:
     - npm run-script build
     - cp index.d.ts dist
-    - cd dist
     - ls dist
     - npm publish
   rules:
