@@ -10,6 +10,7 @@ const deepCopy = (object) => {
 export const useResource = (endpoint, params = {}) => {
 	const [resource, setResource]      = useState(null);
 	const [catchRedirect, handleError] = useApiErrorHandler();
+	const [loading, setLoading] = useState(false)
 
 	const refresh = useCallback(
 		data => {
@@ -18,6 +19,7 @@ export const useResource = (endpoint, params = {}) => {
 				return;
 			}
 
+			setLoading(true)
 			return rest(endpoint, 'GET', params)
 				.then(catchRedirect)
 				.then(r => {
@@ -27,7 +29,7 @@ export const useResource = (endpoint, params = {}) => {
 				.catch(e => {
 					setResource({ error: e });
 					handleError(e);
-				});
+				}).finally(() => {setLoading(false)});
 		}
 		, [resource]); //eslint-disable-line
 
@@ -35,7 +37,7 @@ export const useResource = (endpoint, params = {}) => {
 		refresh();
 	}, []); //eslint-disable-line
 
-	return [resource, refresh];
+	return [resource, refresh, loading];
 };
 
 export const useResourceList = endpoint => {
