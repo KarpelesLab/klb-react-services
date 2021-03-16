@@ -5,7 +5,7 @@ declare type UnknownYet = unknown;
 
 declare type TimeUnit = {
     unix: number;
-    us: URLString;
+    us: number;
     iso: string;
     tz: 'UTC' | string; // add all possible values and remove | string
     full: string;
