@@ -21,4 +21,4 @@ declare type ShellHost = {
     Metrics: Metric[];
 };
 
-export default Metric;
+export default ShellHost
