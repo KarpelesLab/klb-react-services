@@ -9,15 +9,13 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 var _useBaseHooks = require('../useBaseHooks');
 
-var _useBaseHooks2 = require('../../../dist/hook/useBaseHooks');
-
 var _react = require('react');
 
 var useShells = exports.useShells = function useShells() {
 	return (0, _useBaseHooks.useResourceList)('Shell');
 };
 var useShell = exports.useShell = function useShell(shellId) {
-	return (0, _useBaseHooks2.useResource)('Shell/' + shellId);
+	return (0, _useBaseHooks.useResource)('Shell/' + shellId);
 };
 var useShellUpdate = exports.useShellUpdate = function useShellUpdate(shellId) {
 	return (0, _useBaseHooks.useAction)('Shell/' + shellId, 'PATCH', { snackMessageToken: 'shell_update_success' });

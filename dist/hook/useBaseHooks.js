@@ -34,18 +34,26 @@ var useResource = exports.useResource = function useResource(endpoint) {
 	    catchRedirect = _useApiErrorHandler2[0],
 	    handleError = _useApiErrorHandler2[1];
 
+	var _useState3 = (0, _react.useState)(false),
+	    _useState4 = _slicedToArray(_useState3, 2),
+	    loading = _useState4[0],
+	    setLoading = _useState4[1];
+
 	var refresh = (0, _react.useCallback)(function (data) {
 		if (data) {
 			setResource(_extends({}, resource ? resource : {}, { data: data }));
 			return;
 		}
 
+		setLoading(true);
 		return (0, _klbfw.rest)(endpoint, 'GET', params).then(catchRedirect).then(function (r) {
 			setResource(r);
 			return r;
 		}).catch(function (e) {
 			setResource({ error: e });
 			handleError(e);
+		}).finally(function () {
+			setLoading(false);
 		});
 	}, [resource]); //eslint-disable-line
 
@@ -53,34 +61,34 @@ var useResource = exports.useResource = function useResource(endpoint) {
 		refresh();
 	}, []); //eslint-disable-line
 
-	return [resource, refresh];
+	return [resource, refresh, loading];
 };
 
 var useResourceList = exports.useResourceList = function useResourceList(endpoint) {
-	var _useState3 = (0, _react.useState)(null),
-	    _useState4 = _slicedToArray(_useState3, 2),
-	    list = _useState4[0],
-	    setList = _useState4[1];
-
-	var _useState5 = (0, _react.useState)(false),
+	var _useState5 = (0, _react.useState)(null),
 	    _useState6 = _slicedToArray(_useState5, 2),
-	    loading = _useState6[0],
-	    setLoading = _useState6[1];
+	    list = _useState6[0],
+	    setList = _useState6[1];
+
+	var _useState7 = (0, _react.useState)(false),
+	    _useState8 = _slicedToArray(_useState7, 2),
+	    loading = _useState8[0],
+	    setLoading = _useState8[1];
 
 	var _useApiErrorHandler3 = (0, _useApiErrorHandler9.useApiErrorHandler)(),
 	    _useApiErrorHandler4 = _slicedToArray(_useApiErrorHandler3, 2),
 	    catchRedirect = _useApiErrorHandler4[0],
 	    handleError = _useApiErrorHandler4[1];
 
-	var _useState7 = (0, _react.useState)({}),
-	    _useState8 = _slicedToArray(_useState7, 2),
-	    lastFilter = _useState8[0],
-	    setLastFilter = _useState8[1];
-
 	var _useState9 = (0, _react.useState)({}),
 	    _useState10 = _slicedToArray(_useState9, 2),
-	    lastPaging = _useState10[0],
-	    setLastPaging = _useState10[1];
+	    lastFilter = _useState10[0],
+	    setLastFilter = _useState10[1];
+
+	var _useState11 = (0, _react.useState)({}),
+	    _useState12 = _slicedToArray(_useState11, 2),
+	    lastPaging = _useState12[0],
+	    setLastPaging = _useState12[1];
 
 	var fetch = (0, _react.useCallback)(function () {
 		var filters = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
@@ -122,10 +130,10 @@ var useAction = exports.useAction = function useAction(endpoint) {
 
 	var settings = _extends({}, defaultSettings, restSettings);
 
-	var _useState11 = (0, _react.useState)(false),
-	    _useState12 = _slicedToArray(_useState11, 2),
-	    loading = _useState12[0],
-	    setLoading = _useState12[1];
+	var _useState13 = (0, _react.useState)(false),
+	    _useState14 = _slicedToArray(_useState13, 2),
+	    loading = _useState14[0],
+	    setLoading = _useState14[1];
 
 	var _useApiErrorHandler5 = (0, _useApiErrorHandler9.useApiErrorHandler)(),
 	    _useApiErrorHandler6 = _slicedToArray(_useApiErrorHandler5, 2),
@@ -165,20 +173,20 @@ var useFileUploader = exports.useFileUploader = function useFileUploader() {
 
 	var settings = _extends({}, defaultSettings, restSettings);
 
-	var _useState13 = (0, _react.useState)(0),
-	    _useState14 = _slicedToArray(_useState13, 2),
-	    progress = _useState14[0],
-	    setProgress = _useState14[1];
+	var _useState15 = (0, _react.useState)(0),
+	    _useState16 = _slicedToArray(_useState15, 2),
+	    progress = _useState16[0],
+	    setProgress = _useState16[1];
 
 	var _useApiErrorHandler7 = (0, _useApiErrorHandler9.useApiErrorHandler)(),
 	    _useApiErrorHandler8 = _slicedToArray(_useApiErrorHandler7, 2),
 	    catchRedirect = _useApiErrorHandler8[0],
 	    handleError = _useApiErrorHandler8[1];
 
-	var _useState15 = (0, _react.useState)(false),
-	    _useState16 = _slicedToArray(_useState15, 2),
-	    uploading = _useState16[0],
-	    setUploading = _useState16[1];
+	var _useState17 = (0, _react.useState)(false),
+	    _useState18 = _slicedToArray(_useState17, 2),
+	    uploading = _useState18[0],
+	    setUploading = _useState18[1];
 
 	var _useContext2 = (0, _react.useContext)(_RestContext.RestContext),
 	    restContext = _useContext2.restContext;

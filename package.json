@@ -14,6 +14,7 @@
     "web-vitals": "^1.0.1"
   },
   "publishConfig": {
+    "cache": "~/.npm",
     "@karpeleslab:registry": "https://git.atonline.com/api/v4/projects/546/packages/npm/"
   },
   "scripts": {
