@@ -11,8 +11,10 @@ var _useBaseHooks = require('../useBaseHooks');
 
 var _react = require('react');
 
+var _userProfileEndpoints = require('../../enpoints/user/userProfileEndpoints');
+
 var useUserProfileUpdate = exports.useUserProfileUpdate = function useUserProfileUpdate(userId) {
-	return (0, _useBaseHooks.useAction)('User/' + userId + '/Profile', 'PATCH', { snackMessageToken: 'success_profile_updated' });
+	return (0, _useBaseHooks.useAction)((0, _userProfileEndpoints.getUserProfileEndpoint)(userId), 'PATCH', { snackMessageToken: 'success_profile_updated' });
 };
 var useUserProfileUpdateAvatar = exports.useUserProfileUpdateAvatar = function useUserProfileUpdateAvatar(userId) {
 	var _useFileUploader = (0, _useBaseHooks.useFileUploader)({ snackMessageToken: 'custom_os_image_added_success' }),
@@ -24,7 +26,7 @@ var useUserProfileUpdateAvatar = exports.useUserProfileUpdateAvatar = function u
 	var doAction = (0, _react.useCallback)(function (file, purpose) {
 		var settingsOverride = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
-		return _doUpload('User/' + userId + '/Profile:addImage', file, { purpose: purpose }, settingsOverride);
+		return _doUpload((0, _userProfileEndpoints.getUserProfileAddImageEndpoint)(userId), file, { purpose: purpose }, settingsOverride);
 	}, [userId]); //eslint-disable-line
 
 	return [doAction, uploading, progress];

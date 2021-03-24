@@ -11,17 +11,19 @@ var _useBaseHooks = require('../../useBaseHooks');
 
 var _react = require('react');
 
+var _shellOsEndpoints = require('../../../enpoints/shell/os/shellOsEndpoints');
+
 var useOperatingSystems = exports.useOperatingSystems = function useOperatingSystems() {
-	return (0, _useBaseHooks.useResourceList)('Shell/OS');
+	return (0, _useBaseHooks.useResourceList)((0, _shellOsEndpoints.getShellOsesEndpoint)());
 };
 var useOperatingSystem = exports.useOperatingSystem = function useOperatingSystem(osId) {
-	return (0, _useBaseHooks.useResource)('Shell/OS/' + osId);
+	return (0, _useBaseHooks.useResource)((0, _shellOsEndpoints.getShellOsEndpoint)(osId));
 };
 var useOperatingSystemImages = exports.useOperatingSystemImages = function useOperatingSystemImages(osId) {
-	return (0, _useBaseHooks.useResourceList)('Shell/OS/' + osId + '/Image');
+	return (0, _useBaseHooks.useResourceList)((0, _shellOsEndpoints.getShellOsImagesEndpoint)(osId));
 };
 var useOperatingSystemCreateEmpty = exports.useOperatingSystemCreateEmpty = function useOperatingSystemCreateEmpty() {
-	var _useAction = (0, _useBaseHooks.useAction)('Shell/OS:createEmpty', 'POST', { snackMessageToken: 'custom_os_create_success' }),
+	var _useAction = (0, _useBaseHooks.useAction)((0, _shellOsEndpoints.getShellOsCreateEmptyEndpoint)(), 'POST', { snackMessageToken: 'custom_os_create_success' }),
 	    _useAction2 = _slicedToArray(_useAction, 2),
 	    _doCreate = _useAction2[0],
 	    loading = _useAction2[1];
@@ -49,7 +51,7 @@ var useOperatingSystemCreateEmpty = exports.useOperatingSystemCreateEmpty = func
 
 		var settings = settingsOverride;
 		if (icon) settings = { innerThen: function innerThen(os) {
-				return icon ? _doUpload('Shell/OS/' + os.Shell_OS__ + ':uploadImage', icon, {}, settingsOverride) : os;
+				return icon ? _doUpload((0, _shellOsEndpoints.getShellOsUploadImageEndpoint)(os.Shell_OS__), icon, {}, settingsOverride) : os;
 			} };
 
 		return _doCreate(params, settings);
@@ -59,7 +61,7 @@ var useOperatingSystemCreateEmpty = exports.useOperatingSystemCreateEmpty = func
 };
 
 var useOperatingSystemCreateFromShell = exports.useOperatingSystemCreateFromShell = function useOperatingSystemCreateFromShell() {
-	var _useAction3 = (0, _useBaseHooks.useAction)('Shell/OS:import', 'POST', { snackMessageToken: 'custom_os_create_success' }),
+	var _useAction3 = (0, _useBaseHooks.useAction)((0, _shellOsEndpoints.getShellOsImportEndpoint)(), 'POST', { snackMessageToken: 'custom_os_create_success' }),
 	    _useAction4 = _slicedToArray(_useAction3, 2),
 	    _doCreate = _useAction4[0],
 	    loading = _useAction4[1];
@@ -88,7 +90,7 @@ var useOperatingSystemCreateFromShell = exports.useOperatingSystemCreateFromShel
 
 		var settings = settingsOverride;
 		if (icon) settings = { innerThen: function innerThen(os) {
-				return icon ? _doUpload('Shell/OS/' + os.Shell_OS__ + ':uploadImage', icon, {}, settingsOverride) : os;
+				return icon ? _doUpload((0, _shellOsEndpoints.getShellOsUploadImageEndpoint)(os.Shell_OS__), icon, {}, settingsOverride) : os;
 			} };
 
 		return _doCreate(params, settings);
@@ -128,17 +130,17 @@ var useOperatingSystemCreateFromFile = exports.useOperatingSystemCreateFromFile 
 		var settings = settingsOverride;
 
 		if (icon) settings = { innerThen: function innerThen(os) {
-				return icon ? _doImageUpload('Shell/OS/' + os.Shell_OS__ + ':uploadImage', icon, {}, settingsOverride) : os;
+				return icon ? _doImageUpload((0, _shellOsEndpoints.getShellOsUploadImageEndpoint)(os.Shell_OS__), icon, {}, settingsOverride) : os;
 			} };
 
-		return _doUploadMain('Shell/OS:upload', file, params, settings);
+		return _doUploadMain((0, _shellOsEndpoints.getShellOsUploadEndpoint)(), file, params, settings);
 	}, []); //eslint-disable-line
 
 	return [doAction, loadingMain || loadingImage, progress ? progress : progressImage];
 };
 
 var useUpdateOperatingSystem = exports.useUpdateOperatingSystem = function useUpdateOperatingSystem(osId) {
-	var _useAction5 = (0, _useBaseHooks.useAction)('Shell/OS/' + osId, 'PATCH', { snackMessageToken: 'custom_os_update_success' }),
+	var _useAction5 = (0, _useBaseHooks.useAction)((0, _shellOsEndpoints.getShellOsEndpoint)(osId), 'PATCH', { snackMessageToken: 'custom_os_update_success' }),
 	    _useAction6 = _slicedToArray(_useAction5, 2),
 	    _doUpdate = _useAction6[0],
 	    loading = _useAction6[1];
@@ -156,7 +158,7 @@ var useUpdateOperatingSystem = exports.useUpdateOperatingSystem = function useUp
 		var settings = settingsOverride;
 
 		if (icon) settings = { innerThen: function innerThen(os) {
-				return icon ? _doUpload('Shell/OS/' + os.Shell_OS__ + ':uploadImage', icon, {}, settingsOverride) : os;
+				return icon ? _doUpload((0, _shellOsEndpoints.getShellOsUploadImageEndpoint)(os.Shell_OS__), icon, {}, settingsOverride) : os;
 			} };
 
 		return _doUpdate(data, settings);
@@ -166,7 +168,7 @@ var useUpdateOperatingSystem = exports.useUpdateOperatingSystem = function useUp
 };
 
 var useOperatingSystemAddImageFromShell = exports.useOperatingSystemAddImageFromShell = function useOperatingSystemAddImageFromShell(osId) {
-	var _useAction7 = (0, _useBaseHooks.useAction)('Shell/OS/' + osId + '/Image:import', 'POST', { snackMessageToken: 'custom_os_image_added_success' }),
+	var _useAction7 = (0, _useBaseHooks.useAction)((0, _shellOsEndpoints.getShellOsImageImportEndpoint)(osId), 'POST', { snackMessageToken: 'custom_os_image_added_success' }),
 	    _useAction8 = _slicedToArray(_useAction7, 2),
 	    _doAction = _useAction8[0],
 	    loading = _useAction8[1];
@@ -189,11 +191,11 @@ var useOperatingSystemAddImageFromFile = exports.useOperatingSystemAddImageFromF
 	var doAction = (0, _react.useCallback)(function (file) {
 		var settingsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-		return _doUpload('Shell/OS/' + osId + '/Image:upload', file, {}, settingsOverride);
+		return _doUpload((0, _shellOsEndpoints.getOsImageUploadEndpoint)(osId), file, {}, settingsOverride);
 	}, [osId]); //eslint-disable-line
 
 	return [doAction, uploading, progress];
 };
 var useOperatingSystemDelete = exports.useOperatingSystemDelete = function useOperatingSystemDelete(osId) {
-	return (0, _useBaseHooks.useAction)('Shell/OS/' + osId, 'DELETE', { snackMessageToken: 'custom_os_delete_success' });
+	return (0, _useBaseHooks.useAction)((0, _shellOsEndpoints.getShellOsEndpoint)(osId), 'DELETE', { snackMessageToken: 'custom_os_delete_success' });
 };

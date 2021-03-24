@@ -15,14 +15,16 @@ var _react = require('react');
 
 var _useUserLocation = require('./useUserLocation');
 
+var _userBillingEndpoints = require('../../enpoints/user/userBillingEndpoints');
+
 var useUserBillings = exports.useUserBillings = function useUserBillings(userId) {
-	return (0, _useBaseHooks.useResourceList)('User/' + userId + '/Billing');
+	return (0, _useBaseHooks.useResourceList)((0, _userBillingEndpoints.getUserBillingsEndpoint)(userId));
 };
 var useUserBillingUpdate = exports.useUserBillingUpdate = function useUserBillingUpdate(billingId) {
-	return (0, _useBaseHooks.useAction)('User/Billing/' + billingId, 'PATCH');
+	return (0, _useBaseHooks.useAction)((0, _userBillingEndpoints.getUserBillingEndpoint)(billingId), 'PATCH');
 };
 var useUserBillingUpdateLocation = exports.useUserBillingUpdateLocation = function useUserBillingUpdateLocation(billingId, locationId) {
-	var _useAction = (0, _useBaseHooks.useAction)('User/Billing/' + billingId, 'PATCH'),
+	var _useAction = (0, _useBaseHooks.useAction)((0, _userBillingEndpoints.getUserBillingEndpoint)(billingId), 'PATCH'),
 	    _useAction2 = _slicedToArray(_useAction, 2),
 	    _updateBilling = _useAction2[0],
 	    updatingBilling = _useAction2[1];
@@ -49,7 +51,7 @@ var useUserBillingUpdateLocation = exports.useUserBillingUpdateLocation = functi
 };
 
 var useUserBillingCreateWithMethod = exports.useUserBillingCreateWithMethod = function useUserBillingCreateWithMethod() {
-	var _useAction3 = (0, _useBaseHooks.useAction)('User/Billing:create', 'POST', { snackMessageToken: 'user_billing_created' }),
+	var _useAction3 = (0, _useBaseHooks.useAction)((0, _userBillingEndpoints.getUserBillingCreateEndpoint)(), 'POST', { snackMessageToken: 'user_billing_created' }),
 	    _useAction4 = _slicedToArray(_useAction3, 2),
 	    _doAction = _useAction4[0],
 	    loading = _useAction4[1];

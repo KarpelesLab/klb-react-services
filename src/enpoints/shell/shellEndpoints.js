@@ -1,0 +1,10 @@
+export const getShellsEndpoint = () => 'Shell';
+export const getShellEndpoint = shellId => `Shell/${shellId}`;
+export const getShellDeleteIpAddressEndpoint = shellId => `Shell/${shellId}:deleteIpAddress`;
+export const getShellSetInitialOsEndpoint = shellId => `Shell/${shellId}:setInitialOs`;
+export const getShellReconfigureEndpoint = shellId => `Shell/${shellId}:reconfigure`;
+export const getShellCancelEndpoint = shellId => `Shell/${shellId}:cancel`;
+export const getShellStartEndpoint = shellId => `Shell/${shellId}:start`;
+export const getShellStopEndpoint = shellId => `Shell/${shellId}:stop`;
+export const getShellRebootEndpoint = shellId => `Shell/${shellId}:reboot`;
+export const getShellSetBillingEndpoint = shellId => `Shell/${shellId}:setBilling`;

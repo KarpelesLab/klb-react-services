@@ -525,3 +525,444 @@ Object.defineProperty(exports, 'defaultLoginContext', {
 		return _LoginContext.defaultLoginContext;
 	}
 });
+
+var _affiliateEndpoints = require('enpoints/affiliate/affiliateEndpoints');
+
+Object.defineProperty(exports, 'getAffiliateEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _affiliateEndpoints.getAffiliateEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getUserWalletsEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _affiliateEndpoints.getUserWalletsEndpoint;
+	}
+});
+
+var _catalogProductEndpoints = require('enpoints/catalog/product/catalogProductEndpoints');
+
+Object.defineProperty(exports, 'getCatalogProductsSearchEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _catalogProductEndpoints.getCatalogProductsSearchEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getCatalogProductEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _catalogProductEndpoints.getCatalogProductEndpoint;
+	}
+});
+
+var _countryEndpoints = require('enpoints/country/countryEndpoints');
+
+Object.defineProperty(exports, 'getCountriesEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _countryEndpoints.getCountriesEndpoint;
+	}
+});
+
+var _debugEndpoints = require('enpoints/debug/debugEndpoints');
+
+Object.defineProperty(exports, 'getDebugLogJsErrorEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _debugEndpoints.getDebugLogJsErrorEndpoint;
+	}
+});
+
+var _keychainEndpoints = require('enpoints/keychain/keychainEndpoints');
+
+Object.defineProperty(exports, 'getKeychainEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _keychainEndpoints.getKeychainEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getKeychainsEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _keychainEndpoints.getKeychainsEndpoint;
+	}
+});
+
+var _keychainKeyEndpoints = require('enpoints/keychain/keychainKeyEndpoints');
+
+Object.defineProperty(exports, 'getKeychainKeyCreateEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _keychainKeyEndpoints.getKeychainKeyCreateEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getKeychainKeyEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _keychainKeyEndpoints.getKeychainKeyEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getKeychainKeysEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _keychainKeyEndpoints.getKeychainKeysEndpoint;
+	}
+});
+
+var _moneyBankEndpoints = require('enpoints/money/bank/moneyBankEndpoints');
+
+Object.defineProperty(exports, 'getMoneyBankAccountEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _moneyBankEndpoints.getMoneyBankAccountEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getMoneyBankWithdrawsEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _moneyBankEndpoints.getMoneyBankWithdrawsEndpoint;
+	}
+});
+
+var _moneyEndpoints = require('enpoints/money/moneyEndpoints');
+
+Object.defineProperty(exports, 'getMoneySwiftEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _moneyEndpoints.getMoneySwiftEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getMoneySwiftAbaEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _moneyEndpoints.getMoneySwiftAbaEndpoint;
+	}
+});
+
+var _oauthEndpoints = require('enpoints/oauth2/oauthEndpoints');
+
+Object.defineProperty(exports, 'getOAuth2ConsumerTokenEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _oauthEndpoints.getOAuth2ConsumerTokenEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getOAuth2ConsumerLinkEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _oauthEndpoints.getOAuth2ConsumerLinkEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getOAuth2ConsumersEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _oauthEndpoints.getOAuth2ConsumersEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getOAuth2ConsumerTokensEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _oauthEndpoints.getOAuth2ConsumerTokensEndpoint;
+	}
+});
+
+var _orderPaymentEndpoints = require('enpoints/order/payment/orderPaymentEndpoints');
+
+Object.defineProperty(exports, 'getOrderPaymentMethodInfoEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _orderPaymentEndpoints.getOrderPaymentMethodInfoEndpoint;
+	}
+});
+
+var _orderEndpoints = require('enpoints/order/orderEndpoints');
+
+Object.defineProperty(exports, 'getOrdersEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _orderEndpoints.getOrdersEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getOrderEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _orderEndpoints.getOrderEndpoint;
+	}
+});
+
+var _datacenterEndpoints = require('enpoints/shell/datacenter/datacenterEndpoints');
+
+Object.defineProperty(exports, 'getShellDatacentersListEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _datacenterEndpoints.getShellDatacentersListEndpoint;
+	}
+});
+
+var _shellOsEndpoints = require('enpoints/shell/os/shellOsEndpoints');
+
+Object.defineProperty(exports, 'getShellOsEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _shellOsEndpoints.getShellOsEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getShellOsUploadImageEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _shellOsEndpoints.getShellOsUploadImageEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getShellOsUploadEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _shellOsEndpoints.getShellOsUploadEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getShellOsImagesEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _shellOsEndpoints.getShellOsImagesEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getShellOsesEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _shellOsEndpoints.getShellOsesEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getOsImageUploadEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _shellOsEndpoints.getOsImageUploadEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getShellOsCreateEmptyEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _shellOsEndpoints.getShellOsCreateEmptyEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getShellOsImageImportEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _shellOsEndpoints.getShellOsImageImportEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getShellOsImportEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _shellOsEndpoints.getShellOsImportEndpoint;
+	}
+});
+
+var _shellVolumeSnapshotEndpoints = require('enpoints/shell/volume/shellVolumeSnapshotEndpoints');
+
+Object.defineProperty(exports, 'getShellVolumeSnapshotRestoreEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _shellVolumeSnapshotEndpoints.getShellVolumeSnapshotRestoreEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getShellVolumeSnapshotsEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _shellVolumeSnapshotEndpoints.getShellVolumeSnapshotsEndpoint;
+	}
+});
+
+var _shellEndpoints = require('enpoints/shell/shellEndpoints');
+
+Object.defineProperty(exports, 'getShellStartEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _shellEndpoints.getShellStartEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getShellCancelEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _shellEndpoints.getShellCancelEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getShellReconfigureEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _shellEndpoints.getShellReconfigureEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getShellSetInitialOsEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _shellEndpoints.getShellSetInitialOsEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getShellsEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _shellEndpoints.getShellsEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getShellDeleteIpAddressEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _shellEndpoints.getShellDeleteIpAddressEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getShellEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _shellEndpoints.getShellEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getShellRebootEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _shellEndpoints.getShellRebootEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getShellSetBillingEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _shellEndpoints.getShellSetBillingEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getShellStopEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _shellEndpoints.getShellStopEndpoint;
+	}
+});
+
+var _userBillingEndpoints = require('enpoints/user/userBillingEndpoints');
+
+Object.defineProperty(exports, 'getUserBillingCreateEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _userBillingEndpoints.getUserBillingCreateEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getUserBillingEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _userBillingEndpoints.getUserBillingEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getUserBillingsEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _userBillingEndpoints.getUserBillingsEndpoint;
+	}
+});
+
+var _userBillingMethodEndpoints = require('enpoints/user/userBillingMethodEndpoints');
+
+Object.defineProperty(exports, 'getUserBillingMethodChangeEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _userBillingMethodEndpoints.getUserBillingMethodChangeEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getUserBillingMethodsEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _userBillingMethodEndpoints.getUserBillingMethodsEndpoint;
+	}
+});
+
+var _userEndpoints = require('enpoints/user/userEndpoints');
+
+Object.defineProperty(exports, 'getUserFlowEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _userEndpoints.getUserFlowEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getUserLogoutEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _userEndpoints.getUserLogoutEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getUserSetEmailEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _userEndpoints.getUserSetEmailEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getUserEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _userEndpoints.getUserEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getUserSetPasswordEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _userEndpoints.getUserSetPasswordEndpoint;
+	}
+});
+
+var _userLocationEndpoints = require('enpoints/user/userLocationEndpoints');
+
+Object.defineProperty(exports, 'getUserLocationEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _userLocationEndpoints.getUserLocationEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getUserLocationsEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _userLocationEndpoints.getUserLocationsEndpoint;
+	}
+});
+
+var _userOtpEndpoints = require('enpoints/user/userOtpEndpoints');
+
+Object.defineProperty(exports, 'getUserOTPAssociateEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _userOtpEndpoints.getUserOTPAssociateEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getUserOTPEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _userOtpEndpoints.getUserOTPEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getUserOTPsEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _userOtpEndpoints.getUserOTPsEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getUserOTPSetEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _userOtpEndpoints.getUserOTPSetEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getUserOTPUnsetEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _userOtpEndpoints.getUserOTPUnsetEndpoint;
+	}
+});
+
+var _userProfileEndpoints = require('enpoints/user/userProfileEndpoints');
+
+Object.defineProperty(exports, 'getUserProfileAddImageEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _userProfileEndpoints.getUserProfileAddImageEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getUserProfileEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _userProfileEndpoints.getUserProfileEndpoint;
+	}
+});

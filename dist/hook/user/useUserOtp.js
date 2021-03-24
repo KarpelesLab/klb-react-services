@@ -13,11 +13,13 @@ var _useBaseHooks = require('../useBaseHooks');
 
 var _react = require('react');
 
+var _userOtpEndpoints = require('../../enpoints/user/userOtpEndpoints');
+
 var useUserOTPs = exports.useUserOTPs = function useUserOTPs() {
-	return (0, _useBaseHooks.useResourceList)('User/Otp');
+	return (0, _useBaseHooks.useResourceList)((0, _userOtpEndpoints.getUserOTPsEndpoint)());
 };
 var useUserOTPCreate = exports.useUserOTPCreate = function useUserOTPCreate() {
-	var _useAction = (0, _useBaseHooks.useAction)('User/Otp', 'POST'),
+	var _useAction = (0, _useBaseHooks.useAction)((0, _userOtpEndpoints.getUserOTPsEndpoint)(), 'POST'),
 	    _useAction2 = _slicedToArray(_useAction, 2),
 	    _doAction = _useAction2[0],
 	    loading = _useAction2[1];
@@ -29,10 +31,10 @@ var useUserOTPCreate = exports.useUserOTPCreate = function useUserOTPCreate() {
 	return [doAction, loading];
 };
 var useUserOTPDelete = exports.useUserOTPDelete = function useUserOTPDelete(otpId) {
-	return (0, _useBaseHooks.useAction)('User/Otp/' + otpId, 'DELETE', { snackMessageToken: 'otp_delete_success' });
+	return (0, _useBaseHooks.useAction)((0, _userOtpEndpoints.getUserOTPEndpoint)(otpId), 'DELETE', { snackMessageToken: 'otp_delete_success' });
 };
 var useUserOTPAssociate = exports.useUserOTPAssociate = function useUserOTPAssociate(otpId) {
-	var _useAction3 = (0, _useBaseHooks.useAction)('User/Otp/' + otpId + ':associate', 'POST', { snackMessageToken: 'otp_associate_success' }),
+	var _useAction3 = (0, _useBaseHooks.useAction)((0, _userOtpEndpoints.getUserOTPAssociateEndpoint)(otpId), 'POST', { snackMessageToken: 'otp_associate_success' }),
 	    _useAction4 = _slicedToArray(_useAction3, 2),
 	    _doAction = _useAction4[0],
 	    loading = _useAction4[1];
@@ -48,7 +50,7 @@ var useUserOTPAssociate = exports.useUserOTPAssociate = function useUserOTPAssoc
 	return [doAction, loading];
 };
 var useUserOTPSetAction = exports.useUserOTPSetAction = function useUserOTPSetAction(otpId) {
-	var _useAction5 = (0, _useBaseHooks.useAction)('User/Otp/' + otpId + ':set', 'POST'),
+	var _useAction5 = (0, _useBaseHooks.useAction)((0, _userOtpEndpoints.getUserOTPSetEndpoint)(otpId), 'POST'),
 	    _useAction6 = _slicedToArray(_useAction5, 2),
 	    _doAction = _useAction6[0],
 	    loading = _useAction6[1];
@@ -61,7 +63,7 @@ var useUserOTPSetAction = exports.useUserOTPSetAction = function useUserOTPSetAc
 	return [doAction, loading];
 };
 var useUserOTPUnsetAction = exports.useUserOTPUnsetAction = function useUserOTPUnsetAction(otpId) {
-	var _useAction7 = (0, _useBaseHooks.useAction)('User/Otp/' + otpId + ':unset', 'POST'),
+	var _useAction7 = (0, _useBaseHooks.useAction)((0, _userOtpEndpoints.getUserOTPUnsetEndpoint)(otpId), 'POST'),
 	    _useAction8 = _slicedToArray(_useAction7, 2),
 	    _doAction = _useAction8[0],
 	    loading = _useAction8[1];

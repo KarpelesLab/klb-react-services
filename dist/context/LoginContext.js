@@ -23,6 +23,8 @@ var _reactRouterDom = require('react-router-dom');
 
 var _RestContext = require('./RestContext');
 
+var _userEndpoints = require('../enpoints/user/userEndpoints');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -93,7 +95,7 @@ var LoginContextContainer = exports.LoginContextContainer = function LoginContex
 			if (currentQuery.return_to) params.return_to = currentQuery.return_to;
 		}
 
-		return (0, _klbfw.rest)('User:flow', 'POST', params).then(function (res) {
+		return (0, _klbfw.rest)((0, _userEndpoints.getUserFlowEndpoint)(), 'POST', params).then(function (res) {
 			if (res.data && res.data.complete) {
 				onValidated(res.data);
 				return flowData;

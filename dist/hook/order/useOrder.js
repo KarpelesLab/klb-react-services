@@ -11,14 +11,16 @@ var _useBaseHooks = require('../useBaseHooks');
 
 var _react = require('react');
 
+var _orderEndpoints = require('../../enpoints/order/orderEndpoints');
+
 var useOrders = exports.useOrders = function useOrders() {
-	return (0, _useBaseHooks.useResourceList)('Order');
+	return (0, _useBaseHooks.useResourceList)((0, _orderEndpoints.getOrdersEndpoint)());
 };
 var useOrder = exports.useOrder = function useOrder(orderId) {
-	return (0, _useBaseHooks.useResource)('Order/' + orderId);
+	return (0, _useBaseHooks.useResource)((0, _orderEndpoints.getOrderEndpoint)(orderId));
 };
 var useOrderCreate = exports.useOrderCreate = function useOrderCreate() {
-	var _useAction = (0, _useBaseHooks.useAction)('Order', 'POST', { snackMessageToken: 'success_order_created' }),
+	var _useAction = (0, _useBaseHooks.useAction)((0, _orderEndpoints.getOrdersEndpoint)(), 'POST', { snackMessageToken: 'success_order_created' }),
 	    _useAction2 = _slicedToArray(_useAction, 2),
 	    _doAction = _useAction2[0],
 	    loading = _useAction2[1];

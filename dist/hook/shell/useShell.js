@@ -13,17 +13,19 @@ var _react = require('react');
 
 var _ = require('../..');
 
+var _shellEndpoints = require('../../enpoints/shell/shellEndpoints');
+
 var useShells = exports.useShells = function useShells() {
-	return (0, _useBaseHooks.useResourceList)('Shell');
+	return (0, _useBaseHooks.useResourceList)((0, _shellEndpoints.getShellsEndpoint)());
 };
 var useShell = exports.useShell = function useShell(shellId) {
-	return (0, _useBaseHooks.useResource)('Shell/' + shellId);
+	return (0, _useBaseHooks.useResource)((0, _shellEndpoints.getShellEndpoint)(shellId));
 };
 var useShellUpdate = exports.useShellUpdate = function useShellUpdate(shellId) {
-	return (0, _useBaseHooks.useAction)('Shell/' + shellId, 'PATCH', { snackMessageToken: 'shell_update_success' });
+	return (0, _useBaseHooks.useAction)((0, _shellEndpoints.getShellEndpoint)(shellId), 'PATCH', { snackMessageToken: 'shell_update_success' });
 };
 var useShellDeleteIp = exports.useShellDeleteIp = function useShellDeleteIp(shellId) {
-	var _useAction = (0, _useBaseHooks.useAction)('Shell/' + shellId + ':deleteIpAddress', 'POST', { snackMessageToken: 'shell_ip_delete_success' }),
+	var _useAction = (0, _useBaseHooks.useAction)((0, _shellEndpoints.getShellDeleteIpAddressEndpoint)(shellId), 'POST', { snackMessageToken: 'shell_ip_delete_success' }),
 	    _useAction2 = _slicedToArray(_useAction, 2),
 	    _doAction = _useAction2[0],
 	    loading = _useAction2[1];
@@ -36,7 +38,7 @@ var useShellDeleteIp = exports.useShellDeleteIp = function useShellDeleteIp(shel
 	return [doAction, loading];
 };
 var useShellSetInitialOS = exports.useShellSetInitialOS = function useShellSetInitialOS(shellId) {
-	var _useAction3 = (0, _useBaseHooks.useAction)('Shell/' + shellId + ':setInitialOs', 'POST', { snackMessageToken: 'shell_initial_os_set_success' }),
+	var _useAction3 = (0, _useBaseHooks.useAction)((0, _shellEndpoints.getShellSetInitialOsEndpoint)(shellId), 'POST', { snackMessageToken: 'shell_initial_os_set_success' }),
 	    _useAction4 = _slicedToArray(_useAction3, 2),
 	    _doAction = _useAction4[0],
 	    loading = _useAction4[1];
@@ -49,22 +51,22 @@ var useShellSetInitialOS = exports.useShellSetInitialOS = function useShellSetIn
 	return [doAction, loading];
 };
 var useShellReconfigure = exports.useShellReconfigure = function useShellReconfigure(shellId) {
-	return (0, _useBaseHooks.useAction)('Shell/' + shellId + ':reconfigure', 'POST');
+	return (0, _useBaseHooks.useAction)((0, _shellEndpoints.getShellReconfigureEndpoint)(shellId), 'POST');
 };
 var useShellCancelSubscription = exports.useShellCancelSubscription = function useShellCancelSubscription(shellId) {
-	return (0, _useBaseHooks.useAction)('Shell/' + shellId + ':cancel', 'POST', { snackMessageToken: 'shell_subscription_cancel_success' });
+	return (0, _useBaseHooks.useAction)((0, _shellEndpoints.getShellCancelEndpoint)(shellId), 'POST', { snackMessageToken: 'shell_subscription_cancel_success' });
 };
 var useShellStart = exports.useShellStart = function useShellStart(shellId) {
-	return (0, _useBaseHooks.useAction)('Shell/' + shellId + ':start', 'POST', { snackMessageToken: 'shell_action_start_success' });
+	return (0, _useBaseHooks.useAction)((0, _shellEndpoints.getShellStartEndpoint)(shellId), 'POST', { snackMessageToken: 'shell_action_start_success' });
 };
 var useShellStop = exports.useShellStop = function useShellStop(shellId) {
-	return (0, _useBaseHooks.useAction)('Shell/' + shellId + ':stop', 'POST', { snackMessageToken: 'shell_action_stop_success' });
+	return (0, _useBaseHooks.useAction)((0, _shellEndpoints.getShellStopEndpoint)(shellId), 'POST', { snackMessageToken: 'shell_action_stop_success' });
 };
 var useShellReboot = exports.useShellReboot = function useShellReboot(shellId) {
-	return (0, _useBaseHooks.useAction)('Shell/' + shellId + ':reboot', 'POST', { snackMessageToken: 'shell_action_reboot_success' });
+	return (0, _useBaseHooks.useAction)((0, _shellEndpoints.getShellRebootEndpoint)(shellId), 'POST', { snackMessageToken: 'shell_action_reboot_success' });
 };
 var useShellSetBilling = exports.useShellSetBilling = function useShellSetBilling(shellId) {
-	var _useAction5 = (0, _useBaseHooks.useAction)('Shell/' + shellId + ':setBilling', 'POST', { snackMessageToken: 'shell_billing_set_success' }),
+	var _useAction5 = (0, _useBaseHooks.useAction)((0, _shellEndpoints.getShellSetBillingEndpoint)(shellId), 'POST', { snackMessageToken: 'shell_billing_set_success' }),
 	    _useAction6 = _slicedToArray(_useAction5, 2),
 	    _doAction = _useAction6[0],
 	    loading = _useAction6[1];
@@ -78,7 +80,7 @@ var useShellSetBilling = exports.useShellSetBilling = function useShellSetBillin
 };
 
 var useShellCreateAndSetBilling = exports.useShellCreateAndSetBilling = function useShellCreateAndSetBilling(shellId) {
-	var _useAction7 = (0, _useBaseHooks.useAction)('Shell/' + shellId + ':setBilling', 'POST', { snackMessageToken: 'shell_billing_set_success' }),
+	var _useAction7 = (0, _useBaseHooks.useAction)((0, _shellEndpoints.getShellSetBillingEndpoint)(shellId), 'POST', { snackMessageToken: 'shell_billing_set_success' }),
 	    _useAction8 = _slicedToArray(_useAction7, 2),
 	    _setBilling = _useAction8[0],
 	    settingBilling = _useAction8[1];

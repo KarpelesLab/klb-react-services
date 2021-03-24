@@ -11,11 +11,13 @@ var _useBaseHooks = require('../../useBaseHooks');
 
 var _react = require('react');
 
+var _shellVolumeSnapshotEndpoints = require('../../../enpoints/shell/volume/shellVolumeSnapshotEndpoints');
+
 var useShellVolumeSnapshots = exports.useShellVolumeSnapshots = function useShellVolumeSnapshots(shellId) {
-	return (0, _useBaseHooks.useResourceList)('Shell/' + shellId + '/Volume/Snapshot');
+	return (0, _useBaseHooks.useResourceList)((0, _shellVolumeSnapshotEndpoints.getShellVolumeSnapshotsEndpoint)(shellId));
 };
 var useShellVolumeSnapshotRestore = exports.useShellVolumeSnapshotRestore = function useShellVolumeSnapshotRestore(shellId) {
-	var _useAction = (0, _useBaseHooks.useAction)('Shell/' + shellId + ':restoreSnapshot', 'POST', { snackMessageToken: 'snapshot_restore_success' }),
+	var _useAction = (0, _useBaseHooks.useAction)((0, _shellVolumeSnapshotEndpoints.getShellVolumeSnapshotRestoreEndpoint)(shellId), 'POST', { snackMessageToken: 'snapshot_restore_success' }),
 	    _useAction2 = _slicedToArray(_useAction, 2),
 	    _doAction = _useAction2[0],
 	    loading = _useAction2[1];

@@ -11,17 +11,19 @@ var _useBaseHooks = require('../useBaseHooks');
 
 var _react = require('react');
 
+var _keychainEndpoints = require('../../enpoints/keychain/keychainEndpoints');
+
 var useKeychains = exports.useKeychains = function useKeychains() {
-	return (0, _useBaseHooks.useResourceList)('Keychain');
+	return (0, _useBaseHooks.useResourceList)((0, _keychainEndpoints.getKeychainsEndpoint)());
 };
 var useKeychain = exports.useKeychain = function useKeychain(keychainId) {
-	return (0, _useBaseHooks.useResource)('Keychain/' + keychainId);
+	return (0, _useBaseHooks.useResource)((0, _keychainEndpoints.getKeychainEndpoint)(keychainId));
 };
 var useKeychainUpdate = exports.useKeychainUpdate = function useKeychainUpdate(keychainId) {
-	return (0, _useBaseHooks.useAction)('Keychain/' + keychainId, 'PATCH', { snackMessageToken: 'keychain_update_success' });
+	return (0, _useBaseHooks.useAction)((0, _keychainEndpoints.getKeychainEndpoint)(keychainId), 'PATCH', { snackMessageToken: 'keychain_update_success' });
 };
 var useKeychainCreate = exports.useKeychainCreate = function useKeychainCreate() {
-	var _useAction = (0, _useBaseHooks.useAction)('Keychain', 'POST', { snackMessageToken: 'keychain_create_success' }),
+	var _useAction = (0, _useBaseHooks.useAction)((0, _keychainEndpoints.getKeychainsEndpoint)(), 'POST', { snackMessageToken: 'keychain_create_success' }),
 	    _useAction2 = _slicedToArray(_useAction, 2),
 	    _doAction = _useAction2[0],
 	    loading = _useAction2[1];

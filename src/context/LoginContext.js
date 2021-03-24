@@ -3,6 +3,7 @@ import queryString                                                            fr
 import { rest }                                                               from '@karpeleslab/klbfw';
 import { useLocation }                                                        from 'react-router-dom';
 import { RestContext }                                                        from './RestContext';
+import { getUserFlowEndpoint }                                                from '../enpoints/user/userEndpoints';
 
 export const defaultLoginContext = {};
 export const LoginContext = createContext(defaultLoginContext);
@@ -33,7 +34,7 @@ export const LoginContextContainer = ({ children, onValidated }) => {
 				params.return_to = currentQuery.return_to;
 		}
 
-		return rest('User:flow', 'POST', params)
+		return rest(getUserFlowEndpoint(), 'POST', params)
 			.then(res => {
 				if (res.data && res.data.complete) {
 					onValidated(res.data);

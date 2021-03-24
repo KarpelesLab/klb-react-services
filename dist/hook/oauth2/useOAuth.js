@@ -11,8 +11,10 @@ var _useBaseHooks = require('../useBaseHooks');
 
 var _react = require('react');
 
+var _oauthEndpoints = require('../../enpoints/oauth2/oauthEndpoints');
+
 var useConsumerLink = exports.useConsumerLink = function useConsumerLink(consumerId) {
-	var _useAction = (0, _useBaseHooks.useAction)('OAuth2/Consumer/' + consumerId + ':link', 'POST', {
+	var _useAction = (0, _useBaseHooks.useAction)((0, _oauthEndpoints.getOAuth2ConsumerLinkEndpoint)(consumerId), 'POST', {
 		rawResult: true,
 		catchRedirect: false
 	}),
@@ -28,8 +30,8 @@ var useConsumerLink = exports.useConsumerLink = function useConsumerLink(consume
 	return [doAction, loading];
 };
 var useConsumerTokenUnlink = exports.useConsumerTokenUnlink = function useConsumerTokenUnlink(tokenId) {
-	return (0, _useBaseHooks.useAction)('OAuth2/Consumer/Token/' + tokenId, 'DELETE', { snackMessageToken: 'profile_oauth2_token_remove_success' });
+	return (0, _useBaseHooks.useAction)((0, _oauthEndpoints.getOAuth2ConsumerTokenEndpoint)(tokenId), 'DELETE', { snackMessageToken: 'profile_oauth2_token_remove_success' });
 };
 var useConsumerTokens = exports.useConsumerTokens = function useConsumerTokens() {
-	return (0, _useBaseHooks.useResourceList)('OAuth2/Consumer/Token');
+	return (0, _useBaseHooks.useResourceList)((0, _oauthEndpoints.getOAuth2ConsumerTokensEndpoint)());
 };

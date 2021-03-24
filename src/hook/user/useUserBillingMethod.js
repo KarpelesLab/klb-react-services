@@ -1,4 +1,8 @@
 import { useAction, useResourceList } from '../useBaseHooks';
+import {
+	getUserBillingMethodChangeEndpoint,
+	getUserBillingMethodsEndpoint
+}                                     from '../../enpoints/user/userBillingMethodEndpoints';
 
-export const useUserBillingMethods = billingId => useResourceList(`User/Billing/${billingId}/Method`);
-export const useUserBillingMethodUpdate = methodId => useAction(`User/Billing/Method/${methodId}:change`, 'POST', { snackMessageToken: 'billing_method_changed' });
+export const useUserBillingMethods = billingId => useResourceList(getUserBillingMethodsEndpoint(billingId));
+export const useUserBillingMethodUpdate = methodId => useAction(getUserBillingMethodChangeEndpoint(methodId), 'POST', { snackMessageToken: 'billing_method_changed' });

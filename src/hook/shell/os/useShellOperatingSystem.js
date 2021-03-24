@@ -1,12 +1,23 @@
 import { useAction, useFileUploader, useResource, useResourceList } from '../../useBaseHooks';
 import { useCallback }                                              from 'react';
+import {
+	getOsImageUploadEndpoint,
+	getShellOsCreateEmptyEndpoint,
+	getShellOsEndpoint,
+	getShellOsesEndpoint,
+	getShellOsImageImportEndpoint,
+	getShellOsImagesEndpoint,
+	getShellOsImportEndpoint,
+	getShellOsUploadEndpoint,
+	getShellOsUploadImageEndpoint
+}                                                                   from '../../../enpoints/shell/os/shellOsEndpoints';
 
-export const useOperatingSystems = () => useResourceList('Shell/OS');
-export const useOperatingSystem = osId => useResource(`Shell/OS/${osId}`);
-export const useOperatingSystemImages = osId => useResourceList(`Shell/OS/${osId}/Image`);
+export const useOperatingSystems = () => useResourceList(getShellOsesEndpoint());
+export const useOperatingSystem = osId => useResource(getShellOsEndpoint(osId));
+export const useOperatingSystemImages = osId => useResourceList(getShellOsImagesEndpoint(osId));
 export const useOperatingSystemCreateEmpty = () => {
 
-	const [_doCreate, loading] = useAction('Shell/OS:createEmpty', 'POST', { snackMessageToken: 'custom_os_create_success' });
+	const [_doCreate, loading] = useAction(getShellOsCreateEmptyEndpoint(), 'POST', { snackMessageToken: 'custom_os_create_success' });
 	const [_doUpload, uploading, progress] = useFileUploader();
 	const doAction = useCallback((names, family, boot, cpu, descriptions = [], shortDescriptions = [], icon = null, settingsOverride = {}) => {
 		const params = {
@@ -20,7 +31,7 @@ export const useOperatingSystemCreateEmpty = () => {
 
 		let settings = settingsOverride;
 		if (icon)
-			settings = { innerThen: os => icon ? _doUpload(`Shell/OS/${os.Shell_OS__}:uploadImage`, icon, {}, settingsOverride) : os };
+			settings = { innerThen: os => icon ? _doUpload(getShellOsUploadImageEndpoint(os.Shell_OS__), icon, {}, settingsOverride) : os };
 
 		return _doCreate(params, settings);
 
@@ -30,7 +41,7 @@ export const useOperatingSystemCreateEmpty = () => {
 };
 
 export const useOperatingSystemCreateFromShell = () => {
-	const [_doCreate, loading] = useAction('Shell/OS:import', 'POST', { snackMessageToken: 'custom_os_create_success' });
+	const [_doCreate, loading] = useAction(getShellOsImportEndpoint(), 'POST', { snackMessageToken: 'custom_os_create_success' });
 	const [_doUpload, uploading, progress] = useFileUploader();
 	const doAction = useCallback((shellVolumeId, names, family, boot, cpu, descriptions = [], shortDescriptions = [], icon = null, settingsOverride = {}) => {
 		const params = {
@@ -45,7 +56,7 @@ export const useOperatingSystemCreateFromShell = () => {
 
 		let settings = settingsOverride;
 		if (icon)
-			settings = { innerThen: os => icon ? _doUpload(`Shell/OS/${os.Shell_OS__}:uploadImage`, icon, {}, settingsOverride) : os };
+			settings = { innerThen: os => icon ? _doUpload(getShellOsUploadImageEndpoint(os.Shell_OS__), icon, {}, settingsOverride) : os };
 
 		return _doCreate(params, settings);
 
@@ -71,9 +82,9 @@ export const useOperatingSystemCreateFromFile = () => {
 		let settings = settingsOverride;
 
 		if (icon)
-			settings = { innerThen: os => icon ? _doImageUpload(`Shell/OS/${os.Shell_OS__}:uploadImage`, icon, {}, settingsOverride) : os };
+			settings = { innerThen: os => icon ? _doImageUpload(getShellOsUploadImageEndpoint(os.Shell_OS__), icon, {}, settingsOverride) : os };
 
-		return _doUploadMain('Shell/OS:upload', file, params, settings);
+		return _doUploadMain(getShellOsUploadEndpoint(), file, params, settings);
 
 	}, []);  //eslint-disable-line
 
@@ -82,13 +93,13 @@ export const useOperatingSystemCreateFromFile = () => {
 
 
 export const useUpdateOperatingSystem = osId => {
-	const [_doUpdate, loading] = useAction(`Shell/OS/${osId}`, 'PATCH', { snackMessageToken: 'custom_os_update_success' });
+	const [_doUpdate, loading] = useAction(getShellOsEndpoint(osId), 'PATCH', { snackMessageToken: 'custom_os_update_success' });
 	const [_doUpload, uploading, progress] = useFileUploader();
 	const doAction = useCallback((data, icon = null, settingsOverride = {}) => {
 		let settings = settingsOverride;
 
 		if (icon)
-			settings = { innerThen: os => icon ? _doUpload(`Shell/OS/${os.Shell_OS__}:uploadImage`, icon, {}, settingsOverride) : os };
+			settings = { innerThen: os => icon ? _doUpload(getShellOsUploadImageEndpoint(os.Shell_OS__), icon, {}, settingsOverride) : os };
 
 		return _doUpdate(data, settings);
 
@@ -98,7 +109,7 @@ export const useUpdateOperatingSystem = osId => {
 };
 
 export const useOperatingSystemAddImageFromShell = osId => {
-	const [_doAction, loading] = useAction(`Shell/OS/${osId}/Image:import`, 'POST', { snackMessageToken: 'custom_os_image_added_success' });
+	const [_doAction, loading] = useAction(getShellOsImageImportEndpoint(osId), 'POST', { snackMessageToken: 'custom_os_image_added_success' });
 
 	const doAction = useCallback((shellVolumeId, settingsOverride = {}) => _doAction({ Shell_Volume__: shellVolumeId }, settingsOverride), []); //eslint-disable-line
 
@@ -109,10 +120,10 @@ export const useOperatingSystemAddImageFromShell = osId => {
 export const useOperatingSystemAddImageFromFile = osId => {
 	const [_doUpload, uploading, progress] = useFileUploader({ snackMessageToken: 'custom_os_image_added_success' });
 	const doAction = useCallback((file, settingsOverride = {}) => {
-		return _doUpload(`Shell/OS/${osId}/Image:upload`, file, {}, settingsOverride);
+		return _doUpload(getOsImageUploadEndpoint(osId), file, {}, settingsOverride);
 
 	}, [osId]); //eslint-disable-line
 
 	return [doAction, uploading, progress];
 };
-export const useOperatingSystemDelete = osId => useAction(`Shell/OS/${osId}`, 'DELETE', { snackMessageToken: 'custom_os_delete_success' });
+export const useOperatingSystemDelete = osId => useAction(getShellOsEndpoint(osId), 'DELETE', { snackMessageToken: 'custom_os_delete_success' });

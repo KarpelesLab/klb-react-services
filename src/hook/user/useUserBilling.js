@@ -1,11 +1,16 @@
 import { useAction, useResourceList } from '../useBaseHooks';
 import { useCallback }                from 'react';
 import { useUserLocationUpdate }      from './useUserLocation';
+import {
+	getUserBillingCreateEndpoint,
+	getUserBillingEndpoint,
+	getUserBillingsEndpoint
+}                                     from '../../enpoints/user/userBillingEndpoints';
 
-export const useUserBillings = userId => useResourceList(`User/${userId}/Billing`);
-export const useUserBillingUpdate = billingId => useAction(`User/Billing/${billingId}`, 'PATCH');
+export const useUserBillings = userId => useResourceList(getUserBillingsEndpoint(userId));
+export const useUserBillingUpdate = billingId => useAction(getUserBillingEndpoint(billingId), 'PATCH');
 export const useUserBillingUpdateLocation = (billingId, locationId) => {
-	const [_updateBilling, updatingBilling] = useAction(`User/Billing/${billingId}`, 'PATCH');
+	const [_updateBilling, updatingBilling] = useAction(getUserBillingEndpoint(billingId), 'PATCH');
 	const [_updateLocation, updatingLocation] = useUserLocationUpdate(locationId);
 
 	const doAction = useCallback((data, settingsOverride = {}) => {
@@ -24,7 +29,7 @@ export const useUserBillingUpdateLocation = (billingId, locationId) => {
 };
 
 export const useUserBillingCreateWithMethod = () => {
-	const [_doAction, loading] = useAction('User/Billing:create', 'POST', { snackMessageToken: 'user_billing_created' });
+	const [_doAction, loading] = useAction(getUserBillingCreateEndpoint(), 'POST', { snackMessageToken: 'user_billing_created' });
 
 	const doAction = useCallback((label, userLocationId, method, methodData = {}, settingsOverride = {}) => _doAction({
 		Label: label,

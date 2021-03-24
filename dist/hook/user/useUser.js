@@ -11,8 +11,10 @@ var _useBaseHooks = require('../useBaseHooks');
 
 var _react = require('react');
 
+var _userEndpoints = require('../../enpoints/user/userEndpoints');
+
 var useUserChangePassword = exports.useUserChangePassword = function useUserChangePassword(userId) {
-	var _useAction = (0, _useBaseHooks.useAction)('User/' + userId + ':setPassword', 'POST', { snackMessageToken: 'success_password_changed' }),
+	var _useAction = (0, _useBaseHooks.useAction)((0, _userEndpoints.getUserSetPasswordEndpoint)(userId), 'POST', { snackMessageToken: 'success_password_changed' }),
 	    _useAction2 = _slicedToArray(_useAction, 2),
 	    _doAction = _useAction2[0],
 	    loading = _useAction2[1];
@@ -29,7 +31,7 @@ var useUserChangePassword = exports.useUserChangePassword = function useUserChan
 };
 
 var useUserSetEmail = exports.useUserSetEmail = function useUserSetEmail(userId) {
-	var _useAction3 = (0, _useBaseHooks.useAction)('User/' + userId + ':setEmail', 'POST', { snackMessageToken: 'success_email_changed' }),
+	var _useAction3 = (0, _useBaseHooks.useAction)((0, _userEndpoints.getUserSetEmailEndpoint)(userId), 'POST', { snackMessageToken: 'success_email_changed' }),
 	    _useAction4 = _slicedToArray(_useAction3, 2),
 	    _doAction = _useAction4[0],
 	    loading = _useAction4[1];
@@ -48,5 +50,5 @@ var useUserSetEmail = exports.useUserSetEmail = function useUserSetEmail(userId)
 };
 
 var useUserLogout = exports.useUserLogout = function useUserLogout() {
-	return (0, _useBaseHooks.useAction)('User/@:logout', 'POST');
+	return (0, _useBaseHooks.useAction)((0, _userEndpoints.getUserLogoutEndpoint)(), 'POST');
 };

@@ -1,8 +1,13 @@
 import { useAction, useResourceList } from '../useBaseHooks';
 import { useCallback }                from 'react';
+import {
+	getOAuth2ConsumerLinkEndpoint,
+	getOAuth2ConsumerTokenEndpoint,
+	getOAuth2ConsumerTokensEndpoint
+}                                     from '../../enpoints/oauth2/oauthEndpoints';
 
 export const useConsumerLink = consumerId => {
-	const [_doAction, loading] = useAction(`OAuth2/Consumer/${consumerId}:link`, 'POST', {
+	const [_doAction, loading] = useAction(getOAuth2ConsumerLinkEndpoint(consumerId), 'POST', {
 		rawResult: true,
 		catchRedirect: false
 	});
@@ -11,5 +16,5 @@ export const useConsumerLink = consumerId => {
 
 	return [doAction, loading];
 };
-export const useConsumerTokenUnlink = tokenId => useAction(`OAuth2/Consumer/Token/${tokenId}`, 'DELETE', { snackMessageToken: 'profile_oauth2_token_remove_success' });
-export const useConsumerTokens = () => useResourceList('OAuth2/Consumer/Token');
+export const useConsumerTokenUnlink = tokenId => useAction(getOAuth2ConsumerTokenEndpoint(tokenId), 'DELETE', { snackMessageToken: 'profile_oauth2_token_remove_success' });
+export const useConsumerTokens = () => useResourceList(getOAuth2ConsumerTokensEndpoint());

@@ -1,0 +1,9 @@
+export const getShellOsesEndpoint = () => 'Shell/OS';
+export const getShellOsEndpoint = osId => `Shell/OS/${osId}`;
+export const getShellOsImagesEndpoint = osId => `Shell/OS/${osId}/Image`;
+export const getShellOsCreateEmptyEndpoint = () => 'Shell/OS:createEmpty';
+export const getShellOsUploadImageEndpoint = osId => `Shell/OS/${osId}:uploadImage`;
+export const getShellOsImportEndpoint = () => 'Shell/OS:import';
+export const getShellOsUploadEndpoint = () => 'Shell/OS:upload';
+export const getShellOsImageImportEndpoint = osId => `Shell/OS/${osId}/Image:import`;
+export const getOsImageUploadEndpoint = osId => `Shell/OS/${osId}/Image:upload`;

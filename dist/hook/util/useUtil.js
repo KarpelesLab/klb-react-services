@@ -11,8 +11,10 @@ var _useBaseHooks = require('../useBaseHooks');
 
 var _react = require('react');
 
+var _utilEndpoints = require('../../enpoints/util/utilEndpoints');
+
 var useTwoStepValidation = exports.useTwoStepValidation = function useTwoStepValidation() {
-	var _useAction = (0, _useBaseHooks.useAction)('Util/TwoStep:validate', 'POST'),
+	var _useAction = (0, _useBaseHooks.useAction)((0, _utilEndpoints.getUtilTwoStepValidateEndpoint)(), 'POST'),
 	    _useAction2 = _slicedToArray(_useAction, 2),
 	    _doAction = _useAction2[0],
 	    loading = _useAction2[1];

@@ -1,8 +1,13 @@
 import { useAction }   from '../useBaseHooks';
 import { useCallback } from 'react';
+import {
+	getUserLogoutEndpoint,
+	getUserSetEmailEndpoint,
+	getUserSetPasswordEndpoint
+}                      from '../../enpoints/user/userEndpoints';
 
 export const useUserChangePassword = userId => {
-	const [_doAction, loading] = useAction(`User/${userId}:setPassword`, 'POST', { snackMessageToken: 'success_password_changed' });
+	const [_doAction, loading] = useAction(getUserSetPasswordEndpoint(userId), 'POST', { snackMessageToken: 'success_password_changed' });
 
 	const doAction = useCallback((old_password, password, settingsOverride = {}) => _doAction({
 		old_password: old_password,
@@ -13,7 +18,7 @@ export const useUserChangePassword = userId => {
 };
 
 export const useUserSetEmail = userId => {
-	const [_doAction, loading] = useAction(`User/${userId}:setEmail`, 'POST', { snackMessageToken: 'success_email_changed' });
+	const [_doAction, loading] = useAction(getUserSetEmailEndpoint(userId), 'POST', { snackMessageToken: 'success_email_changed' });
 
 	const doAction = useCallback((email, password = null, settingsOverride = {}) => {
 		const params = { email };
@@ -26,4 +31,4 @@ export const useUserSetEmail = userId => {
 	return [doAction, loading];
 };
 
-export const useUserLogout = () => useAction('User/@:logout', 'POST');
+export const useUserLogout = () => useAction(getUserLogoutEndpoint(), 'POST');
