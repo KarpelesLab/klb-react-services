@@ -3,13 +3,15 @@
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.useShellReboot = exports.useShellStop = exports.useShellStart = exports.useShellCancelSubscription = exports.useShellReconfigure = exports.useShellSetInitialOS = exports.useShellDeleteIp = exports.useShellUpdate = exports.useShell = exports.useShells = undefined;
+exports.useShellCreateAndSetBilling = exports.useShellSetBilling = exports.useShellReboot = exports.useShellStop = exports.useShellStart = exports.useShellCancelSubscription = exports.useShellReconfigure = exports.useShellSetInitialOS = exports.useShellDeleteIp = exports.useShellUpdate = exports.useShell = exports.useShells = undefined;
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 var _useBaseHooks = require('../useBaseHooks');
 
 var _react = require('react');
+
+var _ = require('../..');
 
 var useShells = exports.useShells = function useShells() {
 	return (0, _useBaseHooks.useResourceList)('Shell');
@@ -27,7 +29,8 @@ var useShellDeleteIp = exports.useShellDeleteIp = function useShellDeleteIp(shel
 	    loading = _useAction2[1];
 
 	var doAction = (0, _react.useCallback)(function (shellIp) {
-		return _doAction({ shellIp: shellIp });
+		var settingsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+		return _doAction({ shellIp: shellIp }, settingsOverride);
 	}, []); //eslint-disable-line
 
 	return [doAction, loading];
@@ -39,7 +42,8 @@ var useShellSetInitialOS = exports.useShellSetInitialOS = function useShellSetIn
 	    loading = _useAction4[1];
 
 	var doAction = (0, _react.useCallback)(function (osId) {
-		return _doAction({ Shell_OS__: osId });
+		var settingsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+		return _doAction({ Shell_OS__: osId }, settingsOverride);
 	}, []); //eslint-disable-line
 
 	return [doAction, loading];
@@ -58,4 +62,55 @@ var useShellStop = exports.useShellStop = function useShellStop(shellId) {
 };
 var useShellReboot = exports.useShellReboot = function useShellReboot(shellId) {
 	return (0, _useBaseHooks.useAction)('Shell/' + shellId + ':reboot', 'POST', { snackMessageToken: 'shell_action_reboot_success' });
+};
+var useShellSetBilling = exports.useShellSetBilling = function useShellSetBilling(shellId) {
+	var _useAction5 = (0, _useBaseHooks.useAction)('Shell/' + shellId + ':setBilling', 'POST', { snackMessageToken: 'shell_billing_set_success' }),
+	    _useAction6 = _slicedToArray(_useAction5, 2),
+	    _doAction = _useAction6[0],
+	    loading = _useAction6[1];
+
+	var doAction = (0, _react.useCallback)(function (billingId) {
+		var settingsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+		return _doAction({ User_Billing__: billingId }, settingsOverride);
+	}, []); //eslint-disable-line
+
+	return [doAction, loading];
+};
+
+var useShellCreateAndSetBilling = exports.useShellCreateAndSetBilling = function useShellCreateAndSetBilling(shellId) {
+	var _useAction7 = (0, _useBaseHooks.useAction)('Shell/' + shellId + ':setBilling', 'POST', { snackMessageToken: 'shell_billing_set_success' }),
+	    _useAction8 = _slicedToArray(_useAction7, 2),
+	    _setBilling = _useAction8[0],
+	    settingBilling = _useAction8[1];
+
+	var _useUserLocationCreat = (0, _.useUserLocationCreate)('@'),
+	    _useUserLocationCreat2 = _slicedToArray(_useUserLocationCreat, 2),
+	    _createLocation = _useUserLocationCreat2[0],
+	    creatingLocation = _useUserLocationCreat2[1];
+
+	var _useUserBillingCreate = (0, _.useUserBillingCreateWithMethod)('@'),
+	    _useUserBillingCreate2 = _slicedToArray(_useUserBillingCreate, 2),
+	    _createBilling = _useUserBillingCreate2[0],
+	    creatingBilling = _useUserBillingCreate2[1];
+
+	var doAction = (0, _react.useCallback)(function (locationData, _ref) {
+		var billingLabel = _ref.billingLabel,
+		    billingMethod = _ref.billingMethod,
+		    billingMethodData = _ref.billingMethodData;
+		var settingsOverride = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+		return _createLocation(locationData, {
+			snackMessageToken: null,
+			innerThen: function innerThen(location) {
+				return _createBilling(billingLabel, location.User_Location__, billingMethod, billingMethodData, {
+					snackMessageToken: null,
+					innerThen: function innerThen(billing) {
+						return _setBilling({ User_Billing__: billing.User_Billing__ }, settingsOverride);
+					}
+				});
+			}
+		});
+	}, []); //eslint-disable-line
+
+	return [doAction, settingBilling | creatingLocation | creatingBilling];
 };

@@ -7,7 +7,7 @@ export const useConsumerLink = consumerId => {
 		catchRedirect: false
 	});
 
-	const doAction = useCallback(return_to => _doAction({ return_to: return_to, }), []); //eslint-disable-line
+	const doAction = useCallback((return_to, settingsOverride = {}) => _doAction({ return_to: return_to, }, settingsOverride), []); //eslint-disable-line
 
 	return [doAction, loading];
 };

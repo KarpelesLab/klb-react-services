@@ -6,11 +6,11 @@ export const useKeychainKeyDelete = keychainKeyId => useAction(`Keychain/Key/${k
 export const useKeychainKeyCreate = keychainId => {
 	const [_doAction, loading] = useAction(`Keychain/${keychainId}/Key:create`, 'POST', { snackMessageToken: 'key_create_success' });
 
-	const doAction = useCallback((label, publicKey, expires) => _doAction({
+	const doAction = useCallback((label, publicKey, expires, settingsOverride = {}) => _doAction({
 		label: label,
 		publicKey: publicKey,
 		expires: expires
-	}), []); //eslint-disable-line
+	}, settingsOverride), []); //eslint-disable-line
 
 	return [doAction, loading];
 };

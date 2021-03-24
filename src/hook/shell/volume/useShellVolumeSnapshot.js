@@ -5,7 +5,7 @@ export const useShellVolumeSnapshots = shellId => useResourceList(`Shell/${shell
 export const useShellVolumeSnapshotRestore = shellId => {
 	const [_doAction, loading] = useAction(`Shell/${shellId}:restoreSnapshot`, 'POST', { snackMessageToken: 'snapshot_restore_success' });
 
-	const doAction = useCallback(snapshotId => _doAction({ Shell_Volume_Snapshot__: snapshotId }), []); //eslint-disable-line
+	const doAction = useCallback((snapshotId, settingsOverride = {}) => _doAction({ Shell_Volume_Snapshot__: snapshotId }, settingsOverride), []); //eslint-disable-line
 
 	return [doAction, loading];
 };

@@ -18,10 +18,11 @@ var useUserChangePassword = exports.useUserChangePassword = function useUserChan
 	    loading = _useAction2[1];
 
 	var doAction = (0, _react.useCallback)(function (old_password, password) {
+		var settingsOverride = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 		return _doAction({
 			old_password: old_password,
 			password: password
-		});
+		}, settingsOverride);
 	}, []); //eslint-disable-line
 
 	return [doAction, loading];
@@ -35,11 +36,12 @@ var useUserSetEmail = exports.useUserSetEmail = function useUserSetEmail(userId)
 
 	var doAction = (0, _react.useCallback)(function (email) {
 		var password = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+		var settingsOverride = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
 		var params = { email: email };
 		if (password) params.current_password = password;
 
-		return _doAction(params);
+		return _doAction(params, settingsOverride);
 	}, []); //eslint-disable-line
 
 	return [doAction, loading];

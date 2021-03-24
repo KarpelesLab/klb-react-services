@@ -165,6 +165,12 @@ Object.defineProperty(exports, 'useUserBillingUpdate', {
 		return _useUserBilling.useUserBillingUpdate;
 	}
 });
+Object.defineProperty(exports, 'useUserBillingCreateWithMethod', {
+	enumerable: true,
+	get: function get() {
+		return _useUserBilling.useUserBillingCreateWithMethod;
+	}
+});
 
 var _useUserBillingMethod = require('./hook/user/useUserBillingMethod');
 
@@ -291,6 +297,18 @@ Object.defineProperty(exports, 'useShellReboot', {
 		return _useShell.useShellReboot;
 	}
 });
+Object.defineProperty(exports, 'useShellSetBilling', {
+	enumerable: true,
+	get: function get() {
+		return _useShell.useShellSetBilling;
+	}
+});
+Object.defineProperty(exports, 'useShellCreateAndSetBilling', {
+	enumerable: true,
+	get: function get() {
+		return _useShell.useShellCreateAndSetBilling;
+	}
+});
 
 var _useShellVolumeSnapshot = require('./hook/shell/volume/useShellVolumeSnapshot');
 
@@ -319,6 +337,12 @@ Object.defineProperty(exports, 'useUserLocation', {
 	enumerable: true,
 	get: function get() {
 		return _useUserLocation.useUserLocation;
+	}
+});
+Object.defineProperty(exports, 'useUserLocationCreate', {
+	enumerable: true,
+	get: function get() {
+		return _useUserLocation.useUserLocationCreate;
 	}
 });
 

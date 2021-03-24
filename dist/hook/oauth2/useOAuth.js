@@ -21,7 +21,8 @@ var useConsumerLink = exports.useConsumerLink = function useConsumerLink(consume
 	    loading = _useAction2[1];
 
 	var doAction = (0, _react.useCallback)(function (return_to) {
-		return _doAction({ return_to: return_to });
+		var settingsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+		return _doAction({ return_to: return_to }, settingsOverride);
 	}, []); //eslint-disable-line
 
 	return [doAction, loading];

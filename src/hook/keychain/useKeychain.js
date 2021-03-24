@@ -7,7 +7,7 @@ export const useKeychainUpdate = keychainId => useAction(`Keychain/${keychainId}
 export const useKeychainCreate = () => {
 	const [_doAction, loading] = useAction('Keychain', 'POST', { snackMessageToken: 'keychain_create_success' });
 
-	const doAction = useCallback(label => _doAction({ Label: label }), []); //eslint-disable-line
+	const doAction = useCallback((label, settingsOverride = {}) => _doAction({ Label: label }, settingsOverride), []); //eslint-disable-line
 
 	return [doAction, loading];
 };

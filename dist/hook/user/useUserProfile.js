@@ -22,7 +22,9 @@ var useUserProfileUpdateAvatar = exports.useUserProfileUpdateAvatar = function u
 	    progress = _useFileUploader2[2];
 
 	var doAction = (0, _react.useCallback)(function (file, purpose) {
-		return _doUpload('User/' + userId + '/Profile:addImage', file, { purpose: purpose });
+		var settingsOverride = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+		return _doUpload('User/' + userId + '/Profile:addImage', file, { purpose: purpose }, settingsOverride);
 	}, [userId]); //eslint-disable-line
 
 	return [doAction, uploading, progress];

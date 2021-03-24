@@ -36,6 +36,7 @@ var useOperatingSystemCreateEmpty = exports.useOperatingSystemCreateEmpty = func
 		var descriptions = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : [];
 		var shortDescriptions = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : [];
 		var icon = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : null;
+		var settingsOverride = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : {};
 
 		var params = {
 			names: names,
@@ -46,11 +47,12 @@ var useOperatingSystemCreateEmpty = exports.useOperatingSystemCreateEmpty = func
 			cpu: cpu
 		};
 
-		return _doCreate(params, {
-			innerThen: function innerThen(os) {
-				return icon ? _doUpload('Shell/OS/' + os.Shell_OS__ + ':uploadImage', icon) : os;
-			}
-		});
+		var settings = settingsOverride;
+		if (icon) settings = { innerThen: function innerThen(os) {
+				return icon ? _doUpload('Shell/OS/' + os.Shell_OS__ + ':uploadImage', icon, {}, settingsOverride) : os;
+			} };
+
+		return _doCreate(params, settings);
 	}, []); //eslint-disable-line
 
 	return [doAction, loading || uploading, progress];
@@ -72,6 +74,7 @@ var useOperatingSystemCreateFromShell = exports.useOperatingSystemCreateFromShel
 		var descriptions = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : [];
 		var shortDescriptions = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : [];
 		var icon = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : null;
+		var settingsOverride = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : {};
 
 		var params = {
 			names: names,
@@ -83,11 +86,12 @@ var useOperatingSystemCreateFromShell = exports.useOperatingSystemCreateFromShel
 			cpu: cpu
 		};
 
-		return _doCreate(params, {
-			innerThen: function innerThen(os) {
-				return icon ? _doUpload('Shell/OS/' + os.Shell_OS__ + ':uploadImage', icon) : os;
-			}
-		});
+		var settings = settingsOverride;
+		if (icon) settings = { innerThen: function innerThen(os) {
+				return icon ? _doUpload('Shell/OS/' + os.Shell_OS__ + ':uploadImage', icon, {}, settingsOverride) : os;
+			} };
+
+		return _doCreate(params, settings);
 	}, []); //eslint-disable-line
 
 	return [doAction, loading || uploading, progress];
@@ -110,6 +114,7 @@ var useOperatingSystemCreateFromFile = exports.useOperatingSystemCreateFromFile 
 		var descriptions = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : [];
 		var shortDescriptions = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : [];
 		var icon = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : null;
+		var settingsOverride = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : {};
 
 		var params = {
 			names: names,
@@ -120,11 +125,13 @@ var useOperatingSystemCreateFromFile = exports.useOperatingSystemCreateFromFile 
 			cpu: cpu
 		};
 
-		return _doUploadMain('Shell/OS:upload', file, params, {
-			innerThen: function innerThen(os) {
-				return icon ? _doImageUpload('Shell/OS/' + os.Shell_OS__ + ':uploadImage', icon) : os;
-			}
-		});
+		var settings = settingsOverride;
+
+		if (icon) settings = { innerThen: function innerThen(os) {
+				return icon ? _doImageUpload('Shell/OS/' + os.Shell_OS__ + ':uploadImage', icon, {}, settingsOverride) : os;
+			} };
+
+		return _doUploadMain('Shell/OS:upload', file, params, settings);
 	}, []); //eslint-disable-line
 
 	return [doAction, loadingMain || loadingImage, progress ? progress : progressImage];
@@ -144,12 +151,15 @@ var useUpdateOperatingSystem = exports.useUpdateOperatingSystem = function useUp
 
 	var doAction = (0, _react.useCallback)(function (data) {
 		var icon = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+		var settingsOverride = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
-		return _doUpdate(data, {
-			innerThen: function innerThen(os) {
-				return icon ? _doUpload('Shell/OS/' + os.Shell_OS__ + ':uploadImage', icon) : os;
-			}
-		});
+		var settings = settingsOverride;
+
+		if (icon) settings = { innerThen: function innerThen(os) {
+				return icon ? _doUpload('Shell/OS/' + os.Shell_OS__ + ':uploadImage', icon, {}, settingsOverride) : os;
+			} };
+
+		return _doUpdate(data, settings);
 	}, []); //eslint-disable-line
 
 	return [doAction, loading || uploading, progress];
@@ -162,7 +172,8 @@ var useOperatingSystemAddImageFromShell = exports.useOperatingSystemAddImageFrom
 	    loading = _useAction8[1];
 
 	var doAction = (0, _react.useCallback)(function (shellVolumeId) {
-		return _doAction({ Shell_Volume__: shellVolumeId });
+		var settingsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+		return _doAction({ Shell_Volume__: shellVolumeId }, settingsOverride);
 	}, []); //eslint-disable-line
 
 	return [doAction, loading];
@@ -176,7 +187,9 @@ var useOperatingSystemAddImageFromFile = exports.useOperatingSystemAddImageFromF
 	    progress = _useFileUploader12[2];
 
 	var doAction = (0, _react.useCallback)(function (file) {
-		return _doUpload('Shell/OS/' + osId + '/Image:upload', file);
+		var settingsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+		return _doUpload('Shell/OS/' + osId + '/Image:upload', file, {}, settingsOverride);
 	}, [osId]); //eslint-disable-line
 
 	return [doAction, uploading, progress];

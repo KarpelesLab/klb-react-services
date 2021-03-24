@@ -24,11 +24,12 @@ var useKeychainKeyCreate = exports.useKeychainKeyCreate = function useKeychainKe
 	    loading = _useAction2[1];
 
 	var doAction = (0, _react.useCallback)(function (label, publicKey, expires) {
+		var settingsOverride = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
 		return _doAction({
 			label: label,
 			publicKey: publicKey,
 			expires: expires
-		});
+		}, settingsOverride);
 	}, []); //eslint-disable-line
 
 	return [doAction, loading];

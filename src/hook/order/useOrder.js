@@ -6,7 +6,7 @@ export const useOrder = orderId => useResource(`Order/${orderId}`);
 export const useOrderCreate = () => {
 	const [_doAction, loading] = useAction('Order', 'POST', { snackMessageToken: 'success_order_created' });
 
-	const doAction = useCallback(request => _doAction({ request: request, }), []); //eslint-disable-line
+	const doAction = useCallback((request, settingsOverride = {}) => _doAction({ request: request, }, settingsOverride), []); //eslint-disable-line
 
 	return [doAction, loading];
 };

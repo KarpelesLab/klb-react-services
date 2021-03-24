@@ -18,7 +18,11 @@ var useTwoStepValidation = exports.useTwoStepValidation = function useTwoStepVal
 	    loading = _useAction2[1];
 
 	var doAction = (0, _react.useCallback)(function (session, code) {
-		return _doAction({ session: session, code: code });
+		var settingsOverride = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+		return _doAction({
+			session: session,
+			code: code
+		}, settingsOverride);
 	}, []); //eslint-disable-line
 
 	return [doAction, loading];

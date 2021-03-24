@@ -5,8 +5,8 @@ export const useUserProfileUpdate = userId => useAction(`User/${userId}/Profile`
 export const useUserProfileUpdateAvatar = userId => {
 	const [_doUpload, uploading, progress] = useFileUploader({ snackMessageToken: 'custom_os_image_added_success' });
 
-	const doAction = useCallback((file, purpose) => {
-		return _doUpload(`User/${userId}/Profile:addImage`, file, { purpose: purpose });
+	const doAction = useCallback((file, purpose, settingsOverride = {}) => {
+		return _doUpload(`User/${userId}/Profile:addImage`, file, { purpose: purpose }, settingsOverride);
 
 	}, [userId]); //eslint-disable-line
 
