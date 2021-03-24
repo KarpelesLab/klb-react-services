@@ -73,33 +73,33 @@ export { LoginContextContainer, LoginContext, defaultLoginContext } from './cont
 
 /** ENDPOINTS **/
 
-export { getAffiliateEndpoint, getUserWalletsEndpoint }    from 'enpoints/affiliate/affiliateEndpoints';
+export { getAffiliateEndpoint, getUserWalletsEndpoint }    from './enpoints/affiliate/affiliateEndpoints';
 export {
 	getCatalogProductsSearchEndpoint,
 	getCatalogProductEndpoint
-}                                                          from 'enpoints/catalog/product/catalogProductEndpoints';
-export { getCountriesEndpoint }                            from 'enpoints/country/countryEndpoints';
-export { getDebugLogJsErrorEndpoint }                      from 'enpoints/debug/debugEndpoints';
-export { getKeychainEndpoint, getKeychainsEndpoint }       from 'enpoints/keychain/keychainEndpoints';
+}                                                          from './enpoints/catalog/product/catalogProductEndpoints';
+export { getCountriesEndpoint }                            from './enpoints/country/countryEndpoints';
+export { getDebugLogJsErrorEndpoint }                      from './enpoints/debug/debugEndpoints';
+export { getKeychainEndpoint, getKeychainsEndpoint }       from './enpoints/keychain/keychainEndpoints';
 export {
 	getKeychainKeyCreateEndpoint,
 	getKeychainKeyEndpoint,
 	getKeychainKeysEndpoint
-}                                                          from 'enpoints/keychain/keychainKeyEndpoints';
+}                                                          from './enpoints/keychain/keychainKeyEndpoints';
 export {
 	getMoneyBankAccountEndpoint,
 	getMoneyBankWithdrawsEndpoint
-}                                                          from 'enpoints/money/bank/moneyBankEndpoints';
-export { getMoneySwiftEndpoint, getMoneySwiftAbaEndpoint } from 'enpoints/money/moneyEndpoints';
+}                                                          from './enpoints/money/bank/moneyBankEndpoints';
+export { getMoneySwiftEndpoint, getMoneySwiftAbaEndpoint } from './enpoints/money/moneyEndpoints';
 export {
 	getOAuth2ConsumerTokenEndpoint,
 	getOAuth2ConsumerLinkEndpoint,
 	getOAuth2ConsumersEndpoint,
 	getOAuth2ConsumerTokensEndpoint
-}                                                          from 'enpoints/oauth2/oauthEndpoints';
-export { getOrderPaymentMethodInfoEndpoint }               from 'enpoints/order/payment/orderPaymentEndpoints';
-export { getOrdersEndpoint, getOrderEndpoint }             from 'enpoints/order/orderEndpoints';
-export { getShellDatacentersListEndpoint }                 from 'enpoints/shell/datacenter/datacenterEndpoints';
+}                                                          from './enpoints/oauth2/oauthEndpoints';
+export { getOrderPaymentMethodInfoEndpoint }               from './enpoints/order/payment/orderPaymentEndpoints';
+export { getOrdersEndpoint, getOrderEndpoint }             from './enpoints/order/orderEndpoints';
+export { getShellDatacentersListEndpoint }                 from './enpoints/shell/datacenter/datacenterEndpoints';
 export {
 	getShellOsEndpoint,
 	getShellOsUploadImageEndpoint,
@@ -110,11 +110,11 @@ export {
 	getShellOsCreateEmptyEndpoint,
 	getShellOsImageImportEndpoint,
 	getShellOsImportEndpoint
-}                                                          from 'enpoints/shell/os/shellOsEndpoints';
+}                                                          from './enpoints/shell/os/shellOsEndpoints';
 export {
 	getShellVolumeSnapshotRestoreEndpoint,
 	getShellVolumeSnapshotsEndpoint
-}                                                          from 'enpoints/shell/volume/shellVolumeSnapshotEndpoints';
+}                                                          from './enpoints/shell/volume/shellVolumeSnapshotEndpoints';
 
 export {
 	getShellStartEndpoint,
@@ -127,29 +127,29 @@ export {
 	getShellRebootEndpoint,
 	getShellSetBillingEndpoint,
 	getShellStopEndpoint
-}                                                                 from 'enpoints/shell/shellEndpoints';
+}                                                                 from './enpoints/shell/shellEndpoints';
 export {
 	getUserBillingCreateEndpoint,
 	getUserBillingEndpoint,
 	getUserBillingsEndpoint
-}                                                                 from 'enpoints/user/userBillingEndpoints';
+}                                                                 from './enpoints/user/userBillingEndpoints';
 export {
 	getUserBillingMethodChangeEndpoint,
 	getUserBillingMethodsEndpoint
-}                                                                 from 'enpoints/user/userBillingMethodEndpoints';
+}                                                                 from './enpoints/user/userBillingMethodEndpoints';
 export {
 	getUserFlowEndpoint,
 	getUserLogoutEndpoint,
 	getUserSetEmailEndpoint,
 	getUserEndpoint,
 	getUserSetPasswordEndpoint
-}                                                                 from 'enpoints/user/userEndpoints';
-export { getUserLocationEndpoint, getUserLocationsEndpoint }      from 'enpoints/user/userLocationEndpoints';
+}                                                                 from './enpoints/user/userEndpoints';
+export { getUserLocationEndpoint, getUserLocationsEndpoint }      from './enpoints/user/userLocationEndpoints';
 export {
 	getUserOTPAssociateEndpoint,
 	getUserOTPEndpoint,
 	getUserOTPsEndpoint,
 	getUserOTPSetEndpoint,
 	getUserOTPUnsetEndpoint
-}                                                                 from 'enpoints/user/userOtpEndpoints';
-export { getUserProfileAddImageEndpoint, getUserProfileEndpoint } from 'enpoints/user/userProfileEndpoints';
+}                                                                 from './enpoints/user/userOtpEndpoints';
+export { getUserProfileAddImageEndpoint, getUserProfileEndpoint } from './enpoints/user/userProfileEndpoints';

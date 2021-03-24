@@ -526,7 +526,7 @@ Object.defineProperty(exports, 'defaultLoginContext', {
 	}
 });
 
-var _affiliateEndpoints = require('enpoints/affiliate/affiliateEndpoints');
+var _affiliateEndpoints = require('./enpoints/affiliate/affiliateEndpoints');
 
 Object.defineProperty(exports, 'getAffiliateEndpoint', {
 	enumerable: true,
@@ -541,7 +541,7 @@ Object.defineProperty(exports, 'getUserWalletsEndpoint', {
 	}
 });
 
-var _catalogProductEndpoints = require('enpoints/catalog/product/catalogProductEndpoints');
+var _catalogProductEndpoints = require('./enpoints/catalog/product/catalogProductEndpoints');
 
 Object.defineProperty(exports, 'getCatalogProductsSearchEndpoint', {
 	enumerable: true,
@@ -556,7 +556,7 @@ Object.defineProperty(exports, 'getCatalogProductEndpoint', {
 	}
 });
 
-var _countryEndpoints = require('enpoints/country/countryEndpoints');
+var _countryEndpoints = require('./enpoints/country/countryEndpoints');
 
 Object.defineProperty(exports, 'getCountriesEndpoint', {
 	enumerable: true,
@@ -565,7 +565,7 @@ Object.defineProperty(exports, 'getCountriesEndpoint', {
 	}
 });
 
-var _debugEndpoints = require('enpoints/debug/debugEndpoints');
+var _debugEndpoints = require('./enpoints/debug/debugEndpoints');
 
 Object.defineProperty(exports, 'getDebugLogJsErrorEndpoint', {
 	enumerable: true,
@@ -574,7 +574,7 @@ Object.defineProperty(exports, 'getDebugLogJsErrorEndpoint', {
 	}
 });
 
-var _keychainEndpoints = require('enpoints/keychain/keychainEndpoints');
+var _keychainEndpoints = require('./enpoints/keychain/keychainEndpoints');
 
 Object.defineProperty(exports, 'getKeychainEndpoint', {
 	enumerable: true,
@@ -589,7 +589,7 @@ Object.defineProperty(exports, 'getKeychainsEndpoint', {
 	}
 });
 
-var _keychainKeyEndpoints = require('enpoints/keychain/keychainKeyEndpoints');
+var _keychainKeyEndpoints = require('./enpoints/keychain/keychainKeyEndpoints');
 
 Object.defineProperty(exports, 'getKeychainKeyCreateEndpoint', {
 	enumerable: true,
@@ -610,7 +610,7 @@ Object.defineProperty(exports, 'getKeychainKeysEndpoint', {
 	}
 });
 
-var _moneyBankEndpoints = require('enpoints/money/bank/moneyBankEndpoints');
+var _moneyBankEndpoints = require('./enpoints/money/bank/moneyBankEndpoints');
 
 Object.defineProperty(exports, 'getMoneyBankAccountEndpoint', {
 	enumerable: true,
@@ -625,7 +625,7 @@ Object.defineProperty(exports, 'getMoneyBankWithdrawsEndpoint', {
 	}
 });
 
-var _moneyEndpoints = require('enpoints/money/moneyEndpoints');
+var _moneyEndpoints = require('./enpoints/money/moneyEndpoints');
 
 Object.defineProperty(exports, 'getMoneySwiftEndpoint', {
 	enumerable: true,
@@ -640,7 +640,7 @@ Object.defineProperty(exports, 'getMoneySwiftAbaEndpoint', {
 	}
 });
 
-var _oauthEndpoints = require('enpoints/oauth2/oauthEndpoints');
+var _oauthEndpoints = require('./enpoints/oauth2/oauthEndpoints');
 
 Object.defineProperty(exports, 'getOAuth2ConsumerTokenEndpoint', {
 	enumerable: true,
@@ -667,7 +667,7 @@ Object.defineProperty(exports, 'getOAuth2ConsumerTokensEndpoint', {
 	}
 });
 
-var _orderPaymentEndpoints = require('enpoints/order/payment/orderPaymentEndpoints');
+var _orderPaymentEndpoints = require('./enpoints/order/payment/orderPaymentEndpoints');
 
 Object.defineProperty(exports, 'getOrderPaymentMethodInfoEndpoint', {
 	enumerable: true,
@@ -676,7 +676,7 @@ Object.defineProperty(exports, 'getOrderPaymentMethodInfoEndpoint', {
 	}
 });
 
-var _orderEndpoints = require('enpoints/order/orderEndpoints');
+var _orderEndpoints = require('./enpoints/order/orderEndpoints');
 
 Object.defineProperty(exports, 'getOrdersEndpoint', {
 	enumerable: true,
@@ -691,7 +691,7 @@ Object.defineProperty(exports, 'getOrderEndpoint', {
 	}
 });
 
-var _datacenterEndpoints = require('enpoints/shell/datacenter/datacenterEndpoints');
+var _datacenterEndpoints = require('./enpoints/shell/datacenter/datacenterEndpoints');
 
 Object.defineProperty(exports, 'getShellDatacentersListEndpoint', {
 	enumerable: true,
@@ -700,7 +700,7 @@ Object.defineProperty(exports, 'getShellDatacentersListEndpoint', {
 	}
 });
 
-var _shellOsEndpoints = require('enpoints/shell/os/shellOsEndpoints');
+var _shellOsEndpoints = require('./enpoints/shell/os/shellOsEndpoints');
 
 Object.defineProperty(exports, 'getShellOsEndpoint', {
 	enumerable: true,
@@ -757,7 +757,7 @@ Object.defineProperty(exports, 'getShellOsImportEndpoint', {
 	}
 });
 
-var _shellVolumeSnapshotEndpoints = require('enpoints/shell/volume/shellVolumeSnapshotEndpoints');
+var _shellVolumeSnapshotEndpoints = require('./enpoints/shell/volume/shellVolumeSnapshotEndpoints');
 
 Object.defineProperty(exports, 'getShellVolumeSnapshotRestoreEndpoint', {
 	enumerable: true,
@@ -772,7 +772,7 @@ Object.defineProperty(exports, 'getShellVolumeSnapshotsEndpoint', {
 	}
 });
 
-var _shellEndpoints = require('enpoints/shell/shellEndpoints');
+var _shellEndpoints = require('./enpoints/shell/shellEndpoints');
 
 Object.defineProperty(exports, 'getShellStartEndpoint', {
 	enumerable: true,
@@ -835,7 +835,7 @@ Object.defineProperty(exports, 'getShellStopEndpoint', {
 	}
 });
 
-var _userBillingEndpoints = require('enpoints/user/userBillingEndpoints');
+var _userBillingEndpoints = require('./enpoints/user/userBillingEndpoints');
 
 Object.defineProperty(exports, 'getUserBillingCreateEndpoint', {
 	enumerable: true,
@@ -856,7 +856,7 @@ Object.defineProperty(exports, 'getUserBillingsEndpoint', {
 	}
 });
 
-var _userBillingMethodEndpoints = require('enpoints/user/userBillingMethodEndpoints');
+var _userBillingMethodEndpoints = require('./enpoints/user/userBillingMethodEndpoints');
 
 Object.defineProperty(exports, 'getUserBillingMethodChangeEndpoint', {
 	enumerable: true,
@@ -871,7 +871,7 @@ Object.defineProperty(exports, 'getUserBillingMethodsEndpoint', {
 	}
 });
 
-var _userEndpoints = require('enpoints/user/userEndpoints');
+var _userEndpoints = require('./enpoints/user/userEndpoints');
 
 Object.defineProperty(exports, 'getUserFlowEndpoint', {
 	enumerable: true,
@@ -904,7 +904,7 @@ Object.defineProperty(exports, 'getUserSetPasswordEndpoint', {
 	}
 });
 
-var _userLocationEndpoints = require('enpoints/user/userLocationEndpoints');
+var _userLocationEndpoints = require('./enpoints/user/userLocationEndpoints');
 
 Object.defineProperty(exports, 'getUserLocationEndpoint', {
 	enumerable: true,
@@ -919,7 +919,7 @@ Object.defineProperty(exports, 'getUserLocationsEndpoint', {
 	}
 });
 
-var _userOtpEndpoints = require('enpoints/user/userOtpEndpoints');
+var _userOtpEndpoints = require('./enpoints/user/userOtpEndpoints');
 
 Object.defineProperty(exports, 'getUserOTPAssociateEndpoint', {
 	enumerable: true,
@@ -952,7 +952,7 @@ Object.defineProperty(exports, 'getUserOTPUnsetEndpoint', {
 	}
 });
 
-var _userProfileEndpoints = require('enpoints/user/userProfileEndpoints');
+var _userProfileEndpoints = require('./enpoints/user/userProfileEndpoints');
 
 Object.defineProperty(exports, 'getUserProfileAddImageEndpoint', {
 	enumerable: true,
