@@ -3,3 +3,4 @@ export const getUserSetEmailEndpoint = userId => `User/${userId}:setEmail`;
 export const getUserLogoutEndpoint = () => 'User/@:logout';
 export const getUserFlowEndpoint = () => 'User:flow';
 export const getUserEndpoint = userId => `User/${userId}`;
+export const getUserSetDefaultEndpoint = userId => `User/${userId}:setDefaultLocation`;

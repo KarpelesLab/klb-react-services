@@ -2,6 +2,7 @@ import { useAction }   from '../useBaseHooks';
 import { useCallback } from 'react';
 import {
 	getUserLogoutEndpoint,
+	getUserSetDefaultEndpoint,
 	getUserSetEmailEndpoint,
 	getUserSetPasswordEndpoint
 }                      from '../../enpoints/user/userEndpoints';
@@ -32,3 +33,14 @@ export const useUserSetEmail = userId => {
 };
 
 export const useUserLogout = () => useAction(getUserLogoutEndpoint(), 'POST');
+
+export const useUserSetDefaultLocation = userId => {
+	const [_doAction, loading] = useAction(getUserSetDefaultEndpoint(userId), 'POST', { snackMessageToken: 'user_default_location_set_success' });
+
+	const doAction = useCallback((userLocationId, type, settingsOverride = {}) => _doAction({
+		User_Location__: userLocationId,
+		type: type
+	}, settingsOverride), []); //eslint-disable-line
+
+	return [doAction, loading];
+};

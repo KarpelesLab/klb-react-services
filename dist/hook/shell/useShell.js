@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.useShellCreateAndSetBilling = exports.useShellSetBilling = exports.useShellReboot = exports.useShellStop = exports.useShellStart = exports.useShellCancelSubscription = exports.useShellReconfigure = exports.useShellSetInitialOS = exports.useShellDeleteIp = exports.useShellUpdate = exports.useShell = exports.useShells = undefined;
+exports.useShellCreate = exports.useShellCreateAndSetBilling = exports.useShellSetBilling = exports.useShellReboot = exports.useShellStop = exports.useShellStart = exports.useShellCancelSubscription = exports.useShellReconfigure = exports.useShellSetInitialOS = exports.useShellDeleteIp = exports.useShellUpdate = exports.useShell = exports.useShells = undefined;
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
@@ -115,4 +115,32 @@ var useShellCreateAndSetBilling = exports.useShellCreateAndSetBilling = function
 	}, []); //eslint-disable-line
 
 	return [doAction, settingBilling | creatingLocation | creatingBilling];
+};
+
+var useShellCreate = exports.useShellCreate = function useShellCreate() {
+	var _useAction9 = (0, _useBaseHooks.useAction)((0, _shellEndpoints.getShellsEndpoint)(), 'POST', { snackMessageToken: 'shell_create_success' }),
+	    _useAction10 = _slicedToArray(_useAction9, 2),
+	    _doAction = _useAction10[0],
+	    loading = _useAction10[1];
+
+	var doAction = (0, _react.useCallback)(function (productId, label, userBilling) {
+		var preferences = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+		var osId = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
+		var size = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
+		var settingsOverride = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : {};
+
+		var params = {
+			Catalog_Product__: productId,
+			Label: label
+		};
+
+		if (preferences) params['Preferences'] = preferences;
+		if (osId) params['Shell_OS__'] = osId;
+		if (size) params['Size'] = size;
+		if (typeof userBilling === 'string' || userBilling instanceof String) params['User_Billing__'] = userBilling;else params['User_Billing'] = userBilling;
+
+		return _doAction(params, settingsOverride);
+	}, []); //eslint-disable-line
+
+	return [doAction, loading];
 };

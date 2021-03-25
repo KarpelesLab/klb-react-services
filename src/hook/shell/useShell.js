@@ -65,3 +65,26 @@ export const useShellCreateAndSetBilling = shellId => {
 
 	return [doAction, settingBilling | creatingLocation | creatingBilling];
 };
+
+export const useShellCreate = () => {
+	const [_doAction, loading] = useAction(getShellsEndpoint(), 'POST', { snackMessageToken: 'shell_create_success' });
+
+	const doAction = useCallback((productId, label, userBilling, preferences = null, osId = null, size = null, settingsOverride = {}) => {
+		const params = {
+			Catalog_Product__: productId,
+			Label: label,
+		};
+
+		if (preferences) params['Preferences'] = preferences;
+		if (osId) params['Shell_OS__'] = osId;
+		if (size) params['Size'] = size;
+		if (typeof userBilling === 'string' || userBilling instanceof String)
+			params['User_Billing__'] = userBilling;
+		else
+			params['User_Billing'] = userBilling;
+
+		return _doAction(params, settingsOverride);
+	}, []); //eslint-disable-line
+
+	return [doAction, loading];
+};

@@ -18,3 +18,6 @@ var getUserFlowEndpoint = exports.getUserFlowEndpoint = function getUserFlowEndp
 var getUserEndpoint = exports.getUserEndpoint = function getUserEndpoint(userId) {
   return 'User/' + userId;
 };
+var getUserSetDefaultEndpoint = exports.getUserSetDefaultEndpoint = function getUserSetDefaultEndpoint(userId) {
+  return 'User/' + userId + ':setDefaultLocation';
+};

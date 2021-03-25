@@ -4,8 +4,13 @@ export { useAffiliate, useUserWallets }                                    from 
 export { useConsumerLink, useConsumerTokenUnlink, useConsumerTokens }      from './hook/oauth2/useOAuth';
 export { useKeychainKeys, useKeychainKeyDelete, useKeychainKeyCreate }     from './hook/keychain/useKeychainKey';
 export { useKeychains, useKeychain, useKeychainUpdate, useKeychainCreate } from './hook/keychain/useKeychain';
-export { useOrder, useOrders, useOrderCreate }                             from './hook/order/useOrder';
-export { useUserChangePassword, useUserSetEmail, useUserLogout }           from './hook/user/useUser';
+export { useOrder, useOrders, useOrderCreate, useOrderProcess }            from './hook/order/useOrder';
+export {
+	useUserChangePassword,
+	useUserSetEmail,
+	useUserLogout,
+	useUserSetDefaultLocation
+}                                                                          from './hook/user/useUser';
 export { useUserProfileUpdate, useUserProfileUpdateAvatar }                from './hook/user/useUserProfile';
 export {
 	useUserBillings,
@@ -33,7 +38,8 @@ export {
 	useShellStop,
 	useShellReboot,
 	useShellSetBilling,
-	useShellCreateAndSetBilling
+	useShellCreateAndSetBilling,
+	useShellCreate
 }                                                                          from './hook/shell/useShell';
 export {
 	useShellVolumeSnapshotRestore, useShellVolumeSnapshots
@@ -46,7 +52,7 @@ export {
 	useUserOTPDelete,
 	useUserOTPAssociate,
 	useUserOTPSetAction,
-	useUserOTPUnsetAction
+	useUserOTPUnsetAction,
 }                                                                          from './hook/user/useUserOtp';
 export {
 	useOperatingSystems,
@@ -61,6 +67,11 @@ export {
 	useOperatingSystemDelete
 }
                                                                            from './hook/shell/os/useShellOperatingSystem';
+export {
+	useCatalogCart,
+	useCatalogCartProcess,
+	useCatalogCartCreateOrder
+}                                                                          from './hook/catalog/cart/useCatalogCart';
 export { useResource, useResourceList, useAction, useFileUploader }        from './hook/useBaseHooks';
 export {
 	useApiErrorHandler
@@ -98,7 +109,11 @@ export {
 	getOAuth2ConsumerTokensEndpoint
 }                                                          from './enpoints/oauth2/oauthEndpoints';
 export { getOrderPaymentMethodInfoEndpoint }               from './enpoints/order/payment/orderPaymentEndpoints';
-export { getOrdersEndpoint, getOrderEndpoint }             from './enpoints/order/orderEndpoints';
+export {
+	getOrdersEndpoint,
+	getOrderEndpoint,
+	getOrderProcessEndpoint
+}                                                          from './enpoints/order/orderEndpoints';
 export { getShellDatacentersListEndpoint }                 from './enpoints/shell/datacenter/datacenterEndpoints';
 export {
 	getShellOsEndpoint,
@@ -126,7 +141,7 @@ export {
 	getShellEndpoint,
 	getShellRebootEndpoint,
 	getShellSetBillingEndpoint,
-	getShellStopEndpoint
+	getShellStopEndpoint,
 }                                                                 from './enpoints/shell/shellEndpoints';
 export {
 	getUserBillingCreateEndpoint,
@@ -142,7 +157,8 @@ export {
 	getUserLogoutEndpoint,
 	getUserSetEmailEndpoint,
 	getUserEndpoint,
-	getUserSetPasswordEndpoint
+	getUserSetPasswordEndpoint,
+	getUserSetDefaultEndpoint,
 }                                                                 from './enpoints/user/userEndpoints';
 export { getUserLocationEndpoint, getUserLocationsEndpoint }      from './enpoints/user/userLocationEndpoints';
 export {
@@ -153,3 +169,8 @@ export {
 	getUserOTPUnsetEndpoint
 }                                                                 from './enpoints/user/userOtpEndpoints';
 export { getUserProfileAddImageEndpoint, getUserProfileEndpoint } from './enpoints/user/userProfileEndpoints';
+export {
+	getCatalogCartEndpoint,
+	getCatalogCartProcessEndpoint,
+	getCatalogCartCreateOrderEndpoint
+}                                                                 from './enpoints/catalog/cart/catalogCartEndpoints';

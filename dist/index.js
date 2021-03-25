@@ -108,6 +108,12 @@ Object.defineProperty(exports, 'useOrderCreate', {
 		return _useOrder.useOrderCreate;
 	}
 });
+Object.defineProperty(exports, 'useOrderProcess', {
+	enumerable: true,
+	get: function get() {
+		return _useOrder.useOrderProcess;
+	}
+});
 
 var _useUser = require('./hook/user/useUser');
 
@@ -127,6 +133,12 @@ Object.defineProperty(exports, 'useUserLogout', {
 	enumerable: true,
 	get: function get() {
 		return _useUser.useUserLogout;
+	}
+});
+Object.defineProperty(exports, 'useUserSetDefaultLocation', {
+	enumerable: true,
+	get: function get() {
+		return _useUser.useUserSetDefaultLocation;
 	}
 });
 
@@ -309,6 +321,12 @@ Object.defineProperty(exports, 'useShellCreateAndSetBilling', {
 		return _useShell.useShellCreateAndSetBilling;
 	}
 });
+Object.defineProperty(exports, 'useShellCreate', {
+	enumerable: true,
+	get: function get() {
+		return _useShell.useShellCreate;
+	}
+});
 
 var _useShellVolumeSnapshot = require('./hook/shell/volume/useShellVolumeSnapshot');
 
@@ -445,6 +463,27 @@ Object.defineProperty(exports, 'useOperatingSystemDelete', {
 	enumerable: true,
 	get: function get() {
 		return _useShellOperatingSystem.useOperatingSystemDelete;
+	}
+});
+
+var _useCatalogCart = require('./hook/catalog/cart/useCatalogCart');
+
+Object.defineProperty(exports, 'useCatalogCart', {
+	enumerable: true,
+	get: function get() {
+		return _useCatalogCart.useCatalogCart;
+	}
+});
+Object.defineProperty(exports, 'useCatalogCartProcess', {
+	enumerable: true,
+	get: function get() {
+		return _useCatalogCart.useCatalogCartProcess;
+	}
+});
+Object.defineProperty(exports, 'useCatalogCartCreateOrder', {
+	enumerable: true,
+	get: function get() {
+		return _useCatalogCart.useCatalogCartCreateOrder;
 	}
 });
 
@@ -690,6 +729,12 @@ Object.defineProperty(exports, 'getOrderEndpoint', {
 		return _orderEndpoints.getOrderEndpoint;
 	}
 });
+Object.defineProperty(exports, 'getOrderProcessEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _orderEndpoints.getOrderProcessEndpoint;
+	}
+});
 
 var _datacenterEndpoints = require('./enpoints/shell/datacenter/datacenterEndpoints');
 
@@ -903,6 +948,12 @@ Object.defineProperty(exports, 'getUserSetPasswordEndpoint', {
 		return _userEndpoints.getUserSetPasswordEndpoint;
 	}
 });
+Object.defineProperty(exports, 'getUserSetDefaultEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _userEndpoints.getUserSetDefaultEndpoint;
+	}
+});
 
 var _userLocationEndpoints = require('./enpoints/user/userLocationEndpoints');
 
@@ -964,5 +1015,26 @@ Object.defineProperty(exports, 'getUserProfileEndpoint', {
 	enumerable: true,
 	get: function get() {
 		return _userProfileEndpoints.getUserProfileEndpoint;
+	}
+});
+
+var _catalogCartEndpoints = require('./enpoints/catalog/cart/catalogCartEndpoints');
+
+Object.defineProperty(exports, 'getCatalogCartEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _catalogCartEndpoints.getCatalogCartEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getCatalogCartProcessEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _catalogCartEndpoints.getCatalogCartProcessEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getCatalogCartCreateOrderEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _catalogCartEndpoints.getCatalogCartCreateOrderEndpoint;
 	}
 });
