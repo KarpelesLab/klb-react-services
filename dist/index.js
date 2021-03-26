@@ -327,6 +327,18 @@ Object.defineProperty(exports, 'useShellCreate', {
 		return _useShell.useShellCreate;
 	}
 });
+Object.defineProperty(exports, 'useShellAddTag', {
+	enumerable: true,
+	get: function get() {
+		return _useShell.useShellAddTag;
+	}
+});
+Object.defineProperty(exports, 'useShellRemoveTag', {
+	enumerable: true,
+	get: function get() {
+		return _useShell.useShellRemoveTag;
+	}
+});
 
 var _useShellVolumeSnapshot = require('./hook/shell/volume/useShellVolumeSnapshot');
 
@@ -877,6 +889,18 @@ Object.defineProperty(exports, 'getShellStopEndpoint', {
 	enumerable: true,
 	get: function get() {
 		return _shellEndpoints.getShellStopEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getShellAddTag', {
+	enumerable: true,
+	get: function get() {
+		return _shellEndpoints.getShellAddTag;
+	}
+});
+Object.defineProperty(exports, 'getShellRemoveTag', {
+	enumerable: true,
+	get: function get() {
+		return _shellEndpoints.getShellRemoveTag;
 	}
 });
 

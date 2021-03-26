@@ -33,3 +33,9 @@ var getShellRebootEndpoint = exports.getShellRebootEndpoint = function getShellR
 var getShellSetBillingEndpoint = exports.getShellSetBillingEndpoint = function getShellSetBillingEndpoint(shellId) {
   return 'Shell/' + shellId + ':setBilling';
 };
+var getShellAddTag = exports.getShellAddTag = function getShellAddTag(shellId) {
+  return 'Shell/' + shellId + ':addTag';
+};
+var getShellRemoveTag = exports.getShellRemoveTag = function getShellRemoveTag(shellId) {
+  return 'Shell/' + shellId + ':delTag';
+};

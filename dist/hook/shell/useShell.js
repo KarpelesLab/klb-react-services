@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.useShellCreate = exports.useShellCreateAndSetBilling = exports.useShellSetBilling = exports.useShellReboot = exports.useShellStop = exports.useShellStart = exports.useShellCancelSubscription = exports.useShellReconfigure = exports.useShellSetInitialOS = exports.useShellDeleteIp = exports.useShellUpdate = exports.useShell = exports.useShells = undefined;
+exports.useShellRemoveTag = exports.useShellAddTag = exports.useShellCreate = exports.useShellCreateAndSetBilling = exports.useShellSetBilling = exports.useShellReboot = exports.useShellStop = exports.useShellStart = exports.useShellCancelSubscription = exports.useShellReconfigure = exports.useShellSetInitialOS = exports.useShellDeleteIp = exports.useShellUpdate = exports.useShell = exports.useShells = undefined;
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
@@ -140,6 +140,32 @@ var useShellCreate = exports.useShellCreate = function useShellCreate() {
 		if (typeof userBilling === 'string' || userBilling instanceof String) params['User_Billing__'] = userBilling;else params['User_Billing'] = userBilling;
 
 		return _doAction(params, settingsOverride);
+	}, []); //eslint-disable-line
+
+	return [doAction, loading];
+};
+var useShellAddTag = exports.useShellAddTag = function useShellAddTag(shellId) {
+	var _useAction11 = (0, _useBaseHooks.useAction)((0, _.getShellAddTag)(shellId), 'POST', { snackMessageToken: 'shell_add_tag_success' }),
+	    _useAction12 = _slicedToArray(_useAction11, 2),
+	    _doAction = _useAction12[0],
+	    loading = _useAction12[1];
+
+	var doAction = (0, _react.useCallback)(function (tag) {
+		var settingsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+		return _doAction({ tag: tag }, settingsOverride);
+	}, []); //eslint-disable-line
+
+	return [doAction, loading];
+};
+var useShellRemoveTag = exports.useShellRemoveTag = function useShellRemoveTag(shellId) {
+	var _useAction13 = (0, _useBaseHooks.useAction)((0, _.getShellRemoveTag)(shellId), 'POST', { snackMessageToken: 'shell_remove_tag_success' }),
+	    _useAction14 = _slicedToArray(_useAction13, 2),
+	    _doAction = _useAction14[0],
+	    loading = _useAction14[1];
+
+	var doAction = (0, _react.useCallback)(function (tag) {
+		var settingsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+		return _doAction({ tag: tag }, settingsOverride);
 	}, []); //eslint-disable-line
 
 	return [doAction, loading];

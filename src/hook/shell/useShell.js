@@ -1,6 +1,6 @@
-import { useAction, useResource, useResourceList }               from '../useBaseHooks';
-import { useCallback }                                           from 'react';
-import { useUserBillingCreateWithMethod, useUserLocationCreate } from '../..';
+import { useAction, useResource, useResourceList }                                                  from '../useBaseHooks';
+import { useCallback }                                                                              from 'react';
+import { getShellAddTag, getShellRemoveTag, useUserBillingCreateWithMethod, useUserLocationCreate } from '../..';
 import {
 	getShellCancelEndpoint,
 	getShellDeleteIpAddressEndpoint,
@@ -12,7 +12,7 @@ import {
 	getShellSetInitialOsEndpoint,
 	getShellStartEndpoint,
 	getShellStopEndpoint
-}                                                                from '../../enpoints/shell/shellEndpoints';
+}                                                                                                   from '../../enpoints/shell/shellEndpoints';
 
 export const useShells = () => useResourceList(getShellsEndpoint());
 export const useShell = shellId => useResource(getShellEndpoint(shellId));
@@ -85,6 +85,20 @@ export const useShellCreate = () => {
 
 		return _doAction(params, settingsOverride);
 	}, []); //eslint-disable-line
+
+	return [doAction, loading];
+};
+export const useShellAddTag = shellId => {
+	const [_doAction, loading] = useAction(getShellAddTag(shellId), 'POST', { snackMessageToken: 'shell_add_tag_success' });
+
+	const doAction = useCallback((tag, settingsOverride = {}) => _doAction({ tag: tag }, settingsOverride), []); //eslint-disable-line
+
+	return [doAction, loading];
+};
+export const useShellRemoveTag = shellId => {
+	const [_doAction, loading] = useAction(getShellRemoveTag(shellId), 'POST', { snackMessageToken: 'shell_remove_tag_success' });
+
+	const doAction = useCallback((tag, settingsOverride = {}) => _doAction({ tag: tag }, settingsOverride), []); //eslint-disable-line
 
 	return [doAction, loading];
 };

@@ -8,3 +8,5 @@ export const getShellStartEndpoint = shellId => `Shell/${shellId}:start`;
 export const getShellStopEndpoint = shellId => `Shell/${shellId}:stop`;
 export const getShellRebootEndpoint = shellId => `Shell/${shellId}:reboot`;
 export const getShellSetBillingEndpoint = shellId => `Shell/${shellId}:setBilling`;
+export const getShellAddTag = shellId => `Shell/${shellId}:addTag`;
+export const getShellRemoveTag = shellId => `Shell/${shellId}:delTag`;
