@@ -2,8 +2,8 @@ import { useAction, useFileUploader, useResource, useResourceList } from '../../
 import {
 	getShellISOEndpoint,
 	getShellISOsEndpoint,
-	getShellMountISOEndpoint,
-	getShellOsUploadEndpoint
+	getShellISOUploadEndpoint,
+	getShellMountISOEndpoint
 }                                                                   from '../../..';
 import { useCallback }                                              from 'react';
 
@@ -13,7 +13,7 @@ export const useShellISOUpload = () => {
 	const [_doUploadMain, loadingMain, progress] = useFileUploader({ snackMessageToken: 'shell_iso_create_success' });
 
 	const doAction = useCallback((file, settingsOverride = {}) => {
-		return _doUploadMain(getShellOsUploadEndpoint(), file, {}, settingsOverride);
+		return _doUploadMain(getShellISOUploadEndpoint(), file, {}, settingsOverride);
 
 	}, []);  //eslint-disable-line
 

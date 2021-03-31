@@ -29,7 +29,7 @@ var useShellISOUpload = exports.useShellISOUpload = function useShellISOUpload()
 	var doAction = (0, _react.useCallback)(function (file) {
 		var settingsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-		return _doUploadMain((0, _.getShellOsUploadEndpoint)(), file, {}, settingsOverride);
+		return _doUploadMain((0, _.getShellISOUploadEndpoint)(), file, {}, settingsOverride);
 	}, []); //eslint-disable-line
 
 	return [doAction, loadingMain, progress];
