@@ -46,7 +46,7 @@ var useShellMountISO = exports.useShellMountISO = function useShellMountISO(isoI
 	var doAction = (0, _react.useCallback)(function (shellId) {
 		var settingsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 		return _doAction({ Shell__: shellId }, settingsOverride);
-	}, []); //eslint-disable-line
+	}, [_doAction]); //eslint-disable-line
 
 	return [doAction, loading];
 };

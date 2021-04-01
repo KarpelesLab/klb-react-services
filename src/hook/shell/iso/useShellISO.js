@@ -23,7 +23,7 @@ export const useShellISODelete = isoId => useAction(getShellISOEndpoint(isoId), 
 export const useShellMountISO = isoId => {
 	const [_doAction, loading] = useAction(getShellMountISOEndpoint(isoId), 'POST', { snackMessageToken: 'shell_iso_mount_success' });
 
-	const doAction = useCallback((shellId, settingsOverride = {}) => _doAction({ Shell__: shellId }, settingsOverride), []); //eslint-disable-line
+	const doAction = useCallback((shellId, settingsOverride = {}) => _doAction({ Shell__: shellId }, settingsOverride), [_doAction]); //eslint-disable-line
 
 	return [doAction, loading];
 };
