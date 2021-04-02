@@ -19,7 +19,7 @@ export const useOperatingSystemCreateEmpty = () => {
 
 	const [_doCreate, loading] = useAction(getShellOsCreateEmptyEndpoint(), 'POST', { snackMessageToken: 'custom_os_create_success' });
 	const [_doUpload, uploading, progress] = useFileUploader();
-	const doAction = useCallback((names, family, boot, cpu, descriptions = [], shortDescriptions = [], icon = null, settingsOverride = {}) => {
+	const doAction = useCallback((names, family, boot, cpu, isPublic, descriptions = [], shortDescriptions = [], icon = null, settingsOverride = {}) => {
 		const params = {
 			names: names,
 			descriptions: descriptions,
@@ -27,6 +27,7 @@ export const useOperatingSystemCreateEmpty = () => {
 			family: family,
 			boot: boot,
 			cpu: cpu,
+			isPublic: isPublic,
 		};
 
 		let settings = settingsOverride;
@@ -43,7 +44,7 @@ export const useOperatingSystemCreateEmpty = () => {
 export const useOperatingSystemCreateFromShell = () => {
 	const [_doCreate, loading] = useAction(getShellOsImportEndpoint(), 'POST', { snackMessageToken: 'custom_os_create_success' });
 	const [_doUpload, uploading, progress] = useFileUploader();
-	const doAction = useCallback((shellVolumeId, names, family, boot, cpu, descriptions = [], shortDescriptions = [], icon = null, settingsOverride = {}) => {
+	const doAction = useCallback((shellVolumeId, names, family, boot, cpu, isPublic, descriptions = [], shortDescriptions = [], icon = null, settingsOverride = {}) => {
 		const params = {
 			names: names,
 			descriptions: descriptions,
@@ -51,7 +52,8 @@ export const useOperatingSystemCreateFromShell = () => {
 			family: family,
 			boot: boot,
 			Shell_Volume__: shellVolumeId,
-			cpu: cpu
+			cpu: cpu,
+			isPublic: isPublic,
 		};
 
 		let settings = settingsOverride;
@@ -69,14 +71,15 @@ export const useOperatingSystemCreateFromFile = () => {
 	const [_doUploadMain, loadingMain, progress] = useFileUploader({ snackMessageToken: 'custom_os_create_success' });
 	const [_doImageUpload, loadingImage, progressImage] = useFileUploader();
 
-	const doAction = useCallback((file, names, family, boot, cpu, descriptions = [], shortDescriptions = [], icon = null, settingsOverride = {}) => {
+	const doAction = useCallback((file, names, family, boot, cpu, isPublic, descriptions = [], shortDescriptions = [], icon = null, settingsOverride = {}) => {
 		const params = {
 			names: names,
 			descriptions: descriptions,
 			shortDescriptions: shortDescriptions,
 			family: family,
 			boot: boot,
-			cpu: cpu
+			cpu: cpu,
+			isPublic: isPublic,
 		};
 
 		let settings = settingsOverride;

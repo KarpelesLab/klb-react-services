@@ -34,11 +34,11 @@ var useOperatingSystemCreateEmpty = exports.useOperatingSystemCreateEmpty = func
 	    uploading = _useFileUploader2[1],
 	    progress = _useFileUploader2[2];
 
-	var doAction = (0, _react.useCallback)(function (names, family, boot, cpu) {
-		var descriptions = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : [];
-		var shortDescriptions = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : [];
-		var icon = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : null;
-		var settingsOverride = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : {};
+	var doAction = (0, _react.useCallback)(function (names, family, boot, cpu, isPublic) {
+		var descriptions = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : [];
+		var shortDescriptions = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : [];
+		var icon = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : null;
+		var settingsOverride = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : {};
 
 		var params = {
 			names: names,
@@ -46,7 +46,8 @@ var useOperatingSystemCreateEmpty = exports.useOperatingSystemCreateEmpty = func
 			shortDescriptions: shortDescriptions,
 			family: family,
 			boot: boot,
-			cpu: cpu
+			cpu: cpu,
+			isPublic: isPublic
 		};
 
 		var settings = settingsOverride;
@@ -72,11 +73,11 @@ var useOperatingSystemCreateFromShell = exports.useOperatingSystemCreateFromShel
 	    uploading = _useFileUploader4[1],
 	    progress = _useFileUploader4[2];
 
-	var doAction = (0, _react.useCallback)(function (shellVolumeId, names, family, boot, cpu) {
-		var descriptions = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : [];
-		var shortDescriptions = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : [];
-		var icon = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : null;
-		var settingsOverride = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : {};
+	var doAction = (0, _react.useCallback)(function (shellVolumeId, names, family, boot, cpu, isPublic) {
+		var descriptions = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : [];
+		var shortDescriptions = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : [];
+		var icon = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : null;
+		var settingsOverride = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : {};
 
 		var params = {
 			names: names,
@@ -85,7 +86,8 @@ var useOperatingSystemCreateFromShell = exports.useOperatingSystemCreateFromShel
 			family: family,
 			boot: boot,
 			Shell_Volume__: shellVolumeId,
-			cpu: cpu
+			cpu: cpu,
+			isPublic: isPublic
 		};
 
 		var settings = settingsOverride;
@@ -112,11 +114,11 @@ var useOperatingSystemCreateFromFile = exports.useOperatingSystemCreateFromFile 
 	    loadingImage = _useFileUploader8[1],
 	    progressImage = _useFileUploader8[2];
 
-	var doAction = (0, _react.useCallback)(function (file, names, family, boot, cpu) {
-		var descriptions = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : [];
-		var shortDescriptions = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : [];
-		var icon = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : null;
-		var settingsOverride = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : {};
+	var doAction = (0, _react.useCallback)(function (file, names, family, boot, cpu, isPublic) {
+		var descriptions = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : [];
+		var shortDescriptions = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : [];
+		var icon = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : null;
+		var settingsOverride = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : {};
 
 		var params = {
 			names: names,
@@ -124,7 +126,8 @@ var useOperatingSystemCreateFromFile = exports.useOperatingSystemCreateFromFile 
 			shortDescriptions: shortDescriptions,
 			family: family,
 			boot: boot,
-			cpu: cpu
+			cpu: cpu,
+			isPublic: isPublic
 		};
 
 		var settings = settingsOverride;
