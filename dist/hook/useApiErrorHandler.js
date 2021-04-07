@@ -53,9 +53,9 @@ var useApiErrorHandler = exports.useApiErrorHandler = function useApiErrorHandle
 				break;
 		}
 
-		if (reThrow) throw error;
-
 		if (restContext.restErrorCallback) restContext.restErrorCallback(error);
+
+		if (reThrow) throw error;
 
 		return error;
 	};
