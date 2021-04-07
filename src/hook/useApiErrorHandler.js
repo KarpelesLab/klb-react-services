@@ -55,6 +55,10 @@ export const useApiErrorHandler = () => {
 		}
 
 		if (reThrow) throw error;
+
+		if (restContext.restErrorCallback)
+			restContext.restErrorCallback(error);
+
 		return error;
 	};
 

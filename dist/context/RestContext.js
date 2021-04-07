@@ -15,7 +15,7 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var defaultRestContext = exports.defaultRestContext = { snackMessageCallback: null, logoutUserCallback: null };
+var defaultRestContext = exports.defaultRestContext = { snackMessageCallback: null, logoutUserCallback: null, restErrorCallback: null };
 var RestContext = exports.RestContext = (0, _react.createContext)(defaultRestContext);
 
 var RestContextContainer = exports.RestContextContainer = function RestContextContainer(_ref) {
@@ -32,6 +32,13 @@ var RestContextContainer = exports.RestContextContainer = function RestContextCo
 		});
 	}, [setContext]); // eslint-disable-line
 
+	var setRestErrorCallbackCallback = (0, _react.useCallback)(function (callback) {
+		setContext(function (prev) {
+			return _extends({}, prev, { restErrorCallback: callback });
+		});
+	}, [setContext]); // eslint-disable-line
+
+
 	var setLogoutUserCallback = (0, _react.useCallback)(function (callback) {
 		setContext(function (prev) {
 			return _extends({}, prev, { logoutUserCallback: callback });
@@ -40,7 +47,7 @@ var RestContextContainer = exports.RestContextContainer = function RestContextCo
 
 	return _react2.default.createElement(
 		RestContext.Provider,
-		{ value: { restContext: restContext, setSnackMessageCallback: setSnackMessageCallback, setLogoutUserCallback: setLogoutUserCallback } },
+		{ value: { restContext: restContext, setSnackMessageCallback: setSnackMessageCallback, setLogoutUserCallback: setLogoutUserCallback, setRestErrorCallbackCallback: setRestErrorCallbackCallback } },
 		children
 	);
 };
