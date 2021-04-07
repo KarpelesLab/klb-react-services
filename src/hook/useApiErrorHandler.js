@@ -2,7 +2,7 @@ import { useContext }  from 'react';
 import { RestContext } from '../context/RestContext';
 
 export const useApiErrorHandler = () => {
-	const { restContext } = useContext(RestContext);
+	const { restContext, setLastError } = useContext(RestContext);
 
 	const catchRedirect = result => {
 		if (!result || !result.result || result.result !== 'redirect')
@@ -53,6 +53,8 @@ export const useApiErrorHandler = () => {
 					restContext.snackMessageCallback(msg, 'error', false);
 				break;
 		}
+
+		setLastError(error);
 
 		if (restContext.restErrorCallback)
 			restContext.restErrorCallback(error);

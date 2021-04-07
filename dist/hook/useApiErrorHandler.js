@@ -11,7 +11,8 @@ var _RestContext = require('../context/RestContext');
 
 var useApiErrorHandler = exports.useApiErrorHandler = function useApiErrorHandler() {
 	var _useContext = (0, _react.useContext)(_RestContext.RestContext),
-	    restContext = _useContext.restContext;
+	    restContext = _useContext.restContext,
+	    setLastError = _useContext.setLastError;
 
 	var catchRedirect = function catchRedirect(result) {
 		if (!result || !result.result || result.result !== 'redirect') return result;
@@ -52,6 +53,8 @@ var useApiErrorHandler = exports.useApiErrorHandler = function useApiErrorHandle
 				if (restContext.snackMessageCallback) restContext.snackMessageCallback(msg, 'error', false);
 				break;
 		}
+
+		setLastError(error);
 
 		if (restContext.restErrorCallback) restContext.restErrorCallback(error);
 

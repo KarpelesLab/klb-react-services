@@ -1,6 +1,11 @@
 import React, { createContext, useCallback, useState } from 'react';
 
-export const defaultRestContext = { snackMessageCallback: null, logoutUserCallback: null, restErrorCallback: null };
+export const defaultRestContext = {
+	snackMessageCallback: null,
+	logoutUserCallback: null,
+	restErrorCallback: null,
+	lastError: null
+};
 export const RestContext = createContext(defaultRestContext);
 
 export const RestContextContainer = ({ children }) => {
@@ -25,8 +30,15 @@ export const RestContextContainer = ({ children }) => {
 		});
 	}, [setContext]); // eslint-disable-line
 
+	const setLastError = useCallback(lastError => {
+		setContext(prev => {
+			return { ...prev, lastError: lastError };
+		});
+	}, [setContext]); // eslint-disable-line
+
 	return (
-		<RestContext.Provider value={{ restContext, setSnackMessageCallback, setLogoutUserCallback, setRestErrorCallbackCallback }}>
+		<RestContext.Provider
+			value={{ restContext, setSnackMessageCallback, setLogoutUserCallback, setRestErrorCallbackCallback, setLastError }}>
 			{children}
 		</RestContext.Provider>
 	);
