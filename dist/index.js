@@ -553,6 +553,21 @@ Object.defineProperty(exports, 'useShellISOMountUnmount', {
 	}
 });
 
+var _useShellWarning = require('./hook/shell/warning/useShellWarning');
+
+Object.defineProperty(exports, 'useShellAccountWarnings', {
+	enumerable: true,
+	get: function get() {
+		return _useShellWarning.useShellAccountWarnings;
+	}
+});
+Object.defineProperty(exports, 'useShellProductChangeWarning', {
+	enumerable: true,
+	get: function get() {
+		return _useShellWarning.useShellProductChangeWarning;
+	}
+});
+
 var _useBaseHooks = require('./hook/useBaseHooks');
 
 Object.defineProperty(exports, 'useResource', {
@@ -1162,5 +1177,20 @@ Object.defineProperty(exports, 'getShellISOMountEndpoint', {
 	enumerable: true,
 	get: function get() {
 		return _shellISOMountEndpoints.getShellISOMountEndpoint;
+	}
+});
+
+var _shellWarningEndpoint = require('./enpoints/shell/warning/shellWarningEndpoint');
+
+Object.defineProperty(exports, 'getShellAccountWarningsEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _shellWarningEndpoint.getShellAccountWarningsEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getShellProductChangeWarningEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _shellWarningEndpoint.getShellProductChangeWarningEndpoint;
 	}
 });
