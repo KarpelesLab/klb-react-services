@@ -6,7 +6,7 @@ import {
 }                                 from '../../../enpoints/catalog/cart/catalogCartEndpoints';
 import { useCallback }            from 'react';
 
-export const useCatalogCart = (cartId = '@') => useResource(getCatalogCartEndpoint(cartId));
+export const useCatalogCart = (cartId = '@', params = null) => useResource(getCatalogCartEndpoint(cartId), params);
 export const useCatalogCartProcess = (cartId = '@') => {
 	const [_doAction, loading] = useAction(getCatalogCartProcessEndpoint(cartId), 'POST', { snackMessageToken: 'cart_product_added_success' });
 

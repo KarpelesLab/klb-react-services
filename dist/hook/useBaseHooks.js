@@ -22,7 +22,7 @@ var deepCopy = function deepCopy(object) {
 };
 
 var useResource = exports.useResource = function useResource(endpoint) {
-	var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+	var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
 	var _useState = (0, _react.useState)(null),
 	    _useState2 = _slicedToArray(_useState, 2),
@@ -46,7 +46,7 @@ var useResource = exports.useResource = function useResource(endpoint) {
 		}
 
 		setLoading(true);
-		return (0, _klbfw.rest)(endpoint, 'GET', params).then(catchRedirect).then(function (r) {
+		return (0, _klbfw.rest)(endpoint, 'GET', params ? params : {}).then(catchRedirect).then(function (r) {
 			setResource(r);
 			return r;
 		}).catch(function (e) {
@@ -126,9 +126,9 @@ var defaultSettings = {
 
 var useAction = exports.useAction = function useAction(endpoint) {
 	var method = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'POST';
-	var restSettings = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+	var restSettings = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
 
-	var settings = _extends({}, defaultSettings, restSettings);
+	var settings = _extends({}, defaultSettings, restSettings ? restSettings : {});
 
 	var _useState13 = (0, _react.useState)(false),
 	    _useState14 = _slicedToArray(_useState13, 2),
@@ -169,9 +169,9 @@ var useAction = exports.useAction = function useAction(endpoint) {
 };
 
 var useFileUploader = exports.useFileUploader = function useFileUploader() {
-	var restSettings = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	var restSettings = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
-	var settings = _extends({}, defaultSettings, restSettings);
+	var settings = _extends({}, defaultSettings, restSettings ? restSettings : {});
 
 	var _useState15 = (0, _react.useState)(0),
 	    _useState16 = _slicedToArray(_useState15, 2),

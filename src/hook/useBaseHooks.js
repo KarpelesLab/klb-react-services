@@ -7,7 +7,7 @@ const deepCopy = (object) => {
 	return JSON.parse(JSON.stringify(object));
 };
 
-export const useResource = (endpoint, params = {}) => {
+export const useResource = (endpoint, params = null) => {
 	const [resource, setResource]      = useState(null);
 	const [catchRedirect, handleError] = useApiErrorHandler();
 	const [loading, setLoading] = useState(false)
@@ -20,7 +20,7 @@ export const useResource = (endpoint, params = {}) => {
 			}
 
 			setLoading(true)
-			return rest(endpoint, 'GET', params)
+			return rest(endpoint, 'GET', params ? params : {})
 				.then(catchRedirect)
 				.then(r => {
 					setResource(r);
@@ -83,8 +83,8 @@ const defaultSettings = {
 	innerThen:            null,
 };
 
-export const useAction = (endpoint, method = 'POST', restSettings = {}) => {
-	let settings = { ...defaultSettings, ...restSettings };
+export const useAction = (endpoint, method = 'POST', restSettings = null) => {
+	let settings = { ...defaultSettings, ...(restSettings ? restSettings : {}) };
 
 	const [loading, setLoading]        = useState(false);
 	const [catchRedirect, handleError] = useApiErrorHandler();
@@ -111,8 +111,8 @@ export const useAction = (endpoint, method = 'POST', restSettings = {}) => {
 	return [doAction, loading];
 };
 
-export const useFileUploader = (restSettings = {}) => {
-	let settings                       = { ...defaultSettings, ...restSettings };
+export const useFileUploader = (restSettings = null) => {
+	let settings                       = { ...defaultSettings, ...(restSettings ? restSettings : {}) };
 	const [progress, setProgress]      = useState(0);
 	const [catchRedirect, handleError] = useApiErrorHandler();
 	const [uploading, setUploading]    = useState(false);

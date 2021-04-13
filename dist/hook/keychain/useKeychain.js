@@ -17,7 +17,8 @@ var useKeychains = exports.useKeychains = function useKeychains() {
 	return (0, _useBaseHooks.useResourceList)((0, _keychainEndpoints.getKeychainsEndpoint)());
 };
 var useKeychain = exports.useKeychain = function useKeychain(keychainId) {
-	return (0, _useBaseHooks.useResource)((0, _keychainEndpoints.getKeychainEndpoint)(keychainId));
+	var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+	return (0, _useBaseHooks.useResource)((0, _keychainEndpoints.getKeychainEndpoint)(keychainId), params);
 };
 var useKeychainUpdate = exports.useKeychainUpdate = function useKeychainUpdate(keychainId) {
 	return (0, _useBaseHooks.useAction)((0, _keychainEndpoints.getKeychainEndpoint)(keychainId), 'PATCH', { snackMessageToken: 'keychain_update_success' });

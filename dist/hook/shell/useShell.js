@@ -19,7 +19,8 @@ var useShells = exports.useShells = function useShells() {
 	return (0, _useBaseHooks.useResourceList)((0, _shellEndpoints.getShellsEndpoint)());
 };
 var useShell = exports.useShell = function useShell(shellId) {
-	return (0, _useBaseHooks.useResource)((0, _shellEndpoints.getShellEndpoint)(shellId));
+	var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+	return (0, _useBaseHooks.useResource)((0, _shellEndpoints.getShellEndpoint)(shellId), params);
 };
 var useShellUpdate = exports.useShellUpdate = function useShellUpdate(shellId) {
 	return (0, _useBaseHooks.useAction)((0, _shellEndpoints.getShellEndpoint)(shellId), 'PATCH', { snackMessageToken: 'shell_update_success' });

@@ -17,7 +17,8 @@ var useOperatingSystems = exports.useOperatingSystems = function useOperatingSys
 	return (0, _useBaseHooks.useResourceList)((0, _shellOsEndpoints.getShellOsesEndpoint)());
 };
 var useOperatingSystem = exports.useOperatingSystem = function useOperatingSystem(osId) {
-	return (0, _useBaseHooks.useResource)((0, _shellOsEndpoints.getShellOsEndpoint)(osId));
+	var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+	return (0, _useBaseHooks.useResource)((0, _shellOsEndpoints.getShellOsEndpoint)(osId), params);
 };
 var useOperatingSystemImages = exports.useOperatingSystemImages = function useOperatingSystemImages(osId) {
 	return (0, _useBaseHooks.useResourceList)((0, _shellOsEndpoints.getShellOsImagesEndpoint)(osId));

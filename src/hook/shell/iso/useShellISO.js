@@ -8,7 +8,7 @@ import {
 import { useCallback }                                              from 'react';
 
 export const useShellISOs = () => useResourceList(getShellISOsEndpoint());
-export const useShellISO = isoId => useResource(getShellISOEndpoint(isoId));
+export const useShellISO = (isoId, params = null) => useResource(getShellISOEndpoint(isoId), params);
 export const useShellISOUpload = () => {
 	const [_doUploadMain, loadingMain, progress] = useFileUploader({ snackMessageToken: 'shell_iso_create_success' });
 
