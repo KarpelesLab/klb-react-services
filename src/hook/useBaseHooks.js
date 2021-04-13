@@ -31,11 +31,11 @@ export const useResource = (endpoint, params = {}) => {
 					handleError(e);
 				}).finally(() => {setLoading(false)});
 		}
-		, [resource]); //eslint-disable-line
+		, [resource, endpoint]); //eslint-disable-line
 
 	useEffect(() => {
 		refresh();
-	}, []); //eslint-disable-line
+	}, [endpoint]); //eslint-disable-line
 
 	return [resource, refresh, loading];
 };
