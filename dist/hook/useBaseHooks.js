@@ -55,11 +55,11 @@ var useResource = exports.useResource = function useResource(endpoint) {
 		}).finally(function () {
 			setLoading(false);
 		});
-	}, [resource, endpoint]); //eslint-disable-line
+	}, [resource, endpoint, params]); //eslint-disable-line
 
 	(0, _react.useEffect)(function () {
 		refresh();
-	}, [endpoint]); //eslint-disable-line
+	}, [endpoint, params]); //eslint-disable-line
 
 	return [resource, refresh, loading];
 };
