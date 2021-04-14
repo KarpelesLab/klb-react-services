@@ -38,8 +38,9 @@ var useOperatingSystemCreateEmpty = exports.useOperatingSystemCreateEmpty = func
 	var doAction = (0, _react.useCallback)(function (names, family, boot, cpu, isPublic) {
 		var descriptions = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : [];
 		var shortDescriptions = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : [];
-		var icon = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : null;
-		var settingsOverride = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : {};
+		var purpose = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 'unknown';
+		var icon = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : null;
+		var settingsOverride = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : {};
 
 		var params = {
 			names: names,
@@ -48,7 +49,8 @@ var useOperatingSystemCreateEmpty = exports.useOperatingSystemCreateEmpty = func
 			family: family,
 			boot: boot,
 			cpu: cpu,
-			isPublic: isPublic
+			isPublic: isPublic,
+			purpose: purpose
 		};
 
 		var settings = settingsOverride;
@@ -77,8 +79,9 @@ var useOperatingSystemCreateFromShell = exports.useOperatingSystemCreateFromShel
 	var doAction = (0, _react.useCallback)(function (shellVolumeId, names, family, boot, cpu, isPublic) {
 		var descriptions = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : [];
 		var shortDescriptions = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : [];
-		var icon = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : null;
-		var settingsOverride = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : {};
+		var purpose = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : 'unknown';
+		var icon = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : null;
+		var settingsOverride = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : {};
 
 		var params = {
 			names: names,
@@ -88,7 +91,8 @@ var useOperatingSystemCreateFromShell = exports.useOperatingSystemCreateFromShel
 			boot: boot,
 			Shell_Volume__: shellVolumeId,
 			cpu: cpu,
-			isPublic: isPublic
+			isPublic: isPublic,
+			purpose: purpose
 		};
 
 		var settings = settingsOverride;
@@ -118,8 +122,9 @@ var useOperatingSystemCreateFromFile = exports.useOperatingSystemCreateFromFile 
 	var doAction = (0, _react.useCallback)(function (file, names, family, boot, cpu, isPublic) {
 		var descriptions = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : [];
 		var shortDescriptions = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : [];
-		var icon = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : null;
-		var settingsOverride = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : {};
+		var purpose = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : 'unknown';
+		var icon = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : null;
+		var settingsOverride = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : {};
 
 		var params = {
 			names: names,
@@ -128,7 +133,8 @@ var useOperatingSystemCreateFromFile = exports.useOperatingSystemCreateFromFile 
 			family: family,
 			boot: boot,
 			cpu: cpu,
-			isPublic: isPublic
+			isPublic: isPublic,
+			purpose: purpose
 		};
 
 		var settings = settingsOverride;
