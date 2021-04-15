@@ -60,6 +60,12 @@ Object.defineProperty(exports, 'useKeychainKeyCreate', {
 		return _useKeychainKey.useKeychainKeyCreate;
 	}
 });
+Object.defineProperty(exports, 'useKeychainKeyCheck', {
+	enumerable: true,
+	get: function get() {
+		return _useKeychainKey.useKeychainKeyCheck;
+	}
+});
 
 var _useKeychain = require('./hook/keychain/useKeychain');
 
@@ -727,6 +733,12 @@ Object.defineProperty(exports, 'getKeychainKeysEndpoint', {
 	enumerable: true,
 	get: function get() {
 		return _keychainKeyEndpoints.getKeychainKeysEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getKeychainKeyCheckEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _keychainKeyEndpoints.getKeychainKeyCheckEndpoint;
 	}
 });
 

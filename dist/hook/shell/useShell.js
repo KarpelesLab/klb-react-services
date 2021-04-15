@@ -45,8 +45,12 @@ var useShellSetInitialOS = exports.useShellSetInitialOS = function useShellSetIn
 	    loading = _useAction4[1];
 
 	var doAction = (0, _react.useCallback)(function (osId) {
-		var settingsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-		return _doAction({ Shell_OS__: osId }, settingsOverride);
+		var keychainId = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+		var settingsOverride = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+		return _doAction({
+			Shell_OS__: osId,
+			Keychain__: keychainId
+		}, settingsOverride);
 	}, []); //eslint-disable-line
 
 	return [doAction, loading];

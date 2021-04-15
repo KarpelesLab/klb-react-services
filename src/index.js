@@ -2,7 +2,12 @@
 
 export { useAffiliate, useUserWallets }                                    from './hook/affiliate/useAffiliate';
 export { useConsumerLink, useConsumerTokenUnlink, useConsumerTokens }      from './hook/oauth2/useOAuth';
-export { useKeychainKeys, useKeychainKeyDelete, useKeychainKeyCreate }     from './hook/keychain/useKeychainKey';
+export {
+	useKeychainKeys,
+	useKeychainKeyDelete,
+	useKeychainKeyCreate,
+	useKeychainKeyCheck
+}                                                                          from './hook/keychain/useKeychainKey';
 export { useKeychains, useKeychain, useKeychainUpdate, useKeychainCreate } from './hook/keychain/useKeychain';
 export { useOrder, useOrders, useOrderCreate, useOrderProcess }            from './hook/order/useOrder';
 export {
@@ -115,7 +120,8 @@ export { getKeychainEndpoint, getKeychainsEndpoint }       from './enpoints/keyc
 export {
 	getKeychainKeyCreateEndpoint,
 	getKeychainKeyEndpoint,
-	getKeychainKeysEndpoint
+	getKeychainKeysEndpoint,
+	getKeychainKeyCheckEndpoint
 }                                                          from './enpoints/keychain/keychainKeyEndpoints';
 export {
 	getMoneyBankAccountEndpoint,

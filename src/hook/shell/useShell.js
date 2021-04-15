@@ -1,5 +1,5 @@
-import { useAction, useResource, useResourceList }                                                  from '../useBaseHooks';
-import { useCallback }                                                                              from 'react';
+import { useAction, useResource, useResourceList } from '../useBaseHooks';
+import { useCallback } from 'react';
 import { getShellAddTag, getShellRemoveTag, useUserBillingCreateWithMethod, useUserLocationCreate } from '../..';
 import {
 	getShellCancelEndpoint,
@@ -12,7 +12,7 @@ import {
 	getShellSetInitialOsEndpoint,
 	getShellStartEndpoint,
 	getShellStopEndpoint
-}                                                                                                   from '../../enpoints/shell/shellEndpoints';
+} from '../../enpoints/shell/shellEndpoints';
 
 export const useShells = () => useResourceList(getShellsEndpoint());
 export const useShell = (shellId, params = null) => useResource(getShellEndpoint(shellId), params);
@@ -27,7 +27,10 @@ export const useShellDeleteIp = shellId => {
 export const useShellSetInitialOS = shellId => {
 	const [_doAction, loading] = useAction(getShellSetInitialOsEndpoint(shellId), 'POST', { snackMessageToken: 'shell_initial_os_set_success' });
 
-	const doAction = useCallback((osId, settingsOverride = {}) => _doAction({ Shell_OS__: osId }, settingsOverride), []); //eslint-disable-line
+	const doAction = useCallback((osId, keychainId = null, settingsOverride = {}) => _doAction({
+		Shell_OS__: osId,
+		Keychain__: keychainId
+	}, settingsOverride), []); //eslint-disable-line
 
 	return [doAction, loading];
 };
