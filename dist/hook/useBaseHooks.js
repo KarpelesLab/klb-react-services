@@ -159,7 +159,9 @@ var useAction = exports.useAction = function useAction(endpoint) {
 			if (restContext.snackMessageCallback && settings.snackMessageToken) restContext.snackMessageCallback(settings.snackMessageToken, settings.snackMessageSeverity, true);
 			return res;
 		}).catch(function (d) {
-			return settings.handleError ? handleError(d) : d;
+			if (settings.handleError) handleError(d);else {
+				throw d;
+			}
 		}).finally(function () {
 			setLoading(false);
 		});
@@ -228,7 +230,9 @@ var useFileUploader = exports.useFileUploader = function useFileUploader() {
 			if (restContext.snackMessageCallback && settings.snackMessageToken) restContext.snackMessageCallback(settings.snackMessageToken, settings.snackMessageSeverity, true);
 			return res;
 		}).catch(function (d) {
-			return settings.handleError ? handleError(d) : d;
+			if (settings.handleError) handleError(d);else {
+				throw d;
+			}
 		}).finally(function () {
 			return setUploading(false);
 		});

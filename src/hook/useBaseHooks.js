@@ -102,7 +102,12 @@ export const useAction = (endpoint, method = 'POST', restSettings = null) => {
 					restContext.snackMessageCallback(settings.snackMessageToken, settings.snackMessageSeverity, true);
 				return res;
 			})
-			.catch(d => settings.handleError ? handleError(d) : d)
+			.catch(d => {
+				if (settings.handleError) handleError(d);
+				else {
+					throw d;
+				}
+			})
 			.finally(() => {
 				setLoading(false);
 			});
@@ -156,7 +161,12 @@ export const useFileUploader = (restSettings = null) => {
 					restContext.snackMessageCallback(settings.snackMessageToken, settings.snackMessageSeverity, true);
 				return res;
 			})
-			.catch(d => settings.handleError ? handleError(d) : d)
+			.catch(d => {
+				if (settings.handleError ) handleError(d)
+				else {
+					throw d
+				}
+			})
 			.finally(() => setUploading(false));
 
 	}, []);//eslint-disable-line
