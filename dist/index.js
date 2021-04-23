@@ -18,6 +18,12 @@ Object.defineProperty(exports, 'useUserWallets', {
 		return _useAffiliate.useUserWallets;
 	}
 });
+Object.defineProperty(exports, 'useAffiliateExportOrder', {
+	enumerable: true,
+	get: function get() {
+		return _useAffiliate.useAffiliateExportOrder;
+	}
+});
 
 var _useOAuth = require('./hook/oauth2/useOAuth');
 
@@ -664,6 +670,12 @@ Object.defineProperty(exports, 'getUserWalletsEndpoint', {
 	enumerable: true,
 	get: function get() {
 		return _affiliateEndpoints.getUserWalletsEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getAffiliateExportOrdersEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _affiliateEndpoints.getAffiliateExportOrdersEndpoint;
 	}
 });
 

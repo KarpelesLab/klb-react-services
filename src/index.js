@@ -1,6 +1,10 @@
 /** HOOKS **/
 
-export { useAffiliate, useUserWallets }                                    from './hook/affiliate/useAffiliate';
+export {
+	useAffiliate,
+	useUserWallets,
+	useAffiliateExportOrder
+}                                                                          from './hook/affiliate/useAffiliate';
 export { useConsumerLink, useConsumerTokenUnlink, useConsumerTokens }      from './hook/oauth2/useOAuth';
 export {
 	useKeychainKeys,
@@ -109,7 +113,11 @@ export { LoginContextContainer, LoginContext, defaultLoginContext } from './cont
 
 /** ENDPOINTS **/
 
-export { getAffiliateEndpoint, getUserWalletsEndpoint }    from './enpoints/affiliate/affiliateEndpoints';
+export {
+	getAffiliateEndpoint,
+	getUserWalletsEndpoint,
+	getAffiliateExportOrdersEndpoint
+}                                                          from './enpoints/affiliate/affiliateEndpoints';
 export {
 	getCatalogProductsSearchEndpoint,
 	getCatalogProductEndpoint
