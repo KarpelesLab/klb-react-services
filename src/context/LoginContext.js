@@ -56,8 +56,8 @@ export const LoginContextContainer = ({ children, onValidated }) => {
 	useEffect(() => {
 		callRest().then(setFlowData);
 	}, [data]); // eslint-disable-line
+
 	useEffect(() => {
-		setLoading(false);
 		if (flowData)
 			setSession(flowData.data.session);
 		// eslint-disable-next-line

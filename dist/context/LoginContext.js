@@ -113,8 +113,8 @@ var LoginContextContainer = exports.LoginContextContainer = function LoginContex
 	(0, _react.useEffect)(function () {
 		callRest().then(setFlowData);
 	}, [data]); // eslint-disable-line
+
 	(0, _react.useEffect)(function () {
-		setLoading(false);
 		if (flowData) setSession(flowData.data.session);
 		// eslint-disable-next-line
 	}, [flowData]);
