@@ -41,7 +41,9 @@ var useResource = exports.useResource = function useResource(endpoint) {
 
 	var refresh = (0, _react.useCallback)(function (data) {
 		if (data) {
-			setResource(_extends({}, resource ? resource : {}, { data: data }));
+			setResource(function (prev) {
+				return _extends({}, prev ? prev : {}, { data: data });
+			});
 			return;
 		}
 
@@ -55,7 +57,7 @@ var useResource = exports.useResource = function useResource(endpoint) {
 		}).finally(function () {
 			setLoading(false);
 		});
-	}, [resource, endpoint, params]); //eslint-disable-line
+	}, [setResource, endpoint, params]); //eslint-disable-line
 
 	(0, _react.useEffect)(function () {
 		refresh();

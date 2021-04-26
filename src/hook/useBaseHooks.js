@@ -15,7 +15,7 @@ export const useResource = (endpoint, params = null) => {
 	const refresh = useCallback(
 		data => {
 			if (data) {
-				setResource({ ...(resource ? resource : {}), data: data });
+				setResource(prev => ({ ...(prev ? prev : {}), data: data }));
 				return;
 			}
 
@@ -31,7 +31,7 @@ export const useResource = (endpoint, params = null) => {
 					handleError(e);
 				}).finally(() => {setLoading(false)});
 		}
-		, [resource, endpoint, params]); //eslint-disable-line
+		, [setResource, endpoint, params]); //eslint-disable-line
 
 	useEffect(() => {
 		refresh();
