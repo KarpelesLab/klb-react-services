@@ -79,6 +79,10 @@ export {
 }
                                                                            from './hook/shell/os/useShellOperatingSystem';
 export {
+	useShellLicense,
+	useShellLicenses
+}                                                                          from './hook/shell/license/useShellLicense';
+export {
 	useCatalogCart,
 	useCatalogCartProcess,
 	useCatalogCartCreateOrder
@@ -160,6 +164,11 @@ export {
 	getShellOsImageImportEndpoint,
 	getShellOsImportEndpoint
 }                                                          from './enpoints/shell/os/shellOsEndpoints';
+export {
+	getShellLicenseEndpoint,
+	getShellLicensesEndpoint
+
+}                                                          from './enpoints/shell/license/shellLicenseEndpoints';
 export {
 	getShellVolumeSnapshotRestoreEndpoint,
 	getShellVolumeSnapshotsEndpoint

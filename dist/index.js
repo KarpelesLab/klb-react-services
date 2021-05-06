@@ -490,6 +490,21 @@ Object.defineProperty(exports, 'useOperatingSystemDelete', {
 	}
 });
 
+var _useShellLicense = require('./hook/shell/license/useShellLicense');
+
+Object.defineProperty(exports, 'useShellLicense', {
+	enumerable: true,
+	get: function get() {
+		return _useShellLicense.useShellLicense;
+	}
+});
+Object.defineProperty(exports, 'useShellLicenses', {
+	enumerable: true,
+	get: function get() {
+		return _useShellLicense.useShellLicenses;
+	}
+});
+
 var _useCatalogCart = require('./hook/catalog/cart/useCatalogCart');
 
 Object.defineProperty(exports, 'useCatalogCart', {
@@ -904,6 +919,21 @@ Object.defineProperty(exports, 'getShellOsImportEndpoint', {
 	enumerable: true,
 	get: function get() {
 		return _shellOsEndpoints.getShellOsImportEndpoint;
+	}
+});
+
+var _shellLicenseEndpoints = require('./enpoints/shell/license/shellLicenseEndpoints');
+
+Object.defineProperty(exports, 'getShellLicenseEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _shellLicenseEndpoints.getShellLicenseEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getShellLicensesEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _shellLicenseEndpoints.getShellLicensesEndpoint;
 	}
 });
 
