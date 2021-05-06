@@ -20,7 +20,8 @@ var useOrders = exports.useOrders = function useOrders() {
 };
 var useOrder = exports.useOrder = function useOrder(orderId) {
 	var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-	return (0, _useBaseHooks.useResource)((0, _orderEndpoints.getOrderEndpoint)(orderId), params);
+	var restSettings = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+	return (0, _useBaseHooks.useResource)((0, _orderEndpoints.getOrderEndpoint)(orderId), params, restSettings);
 };
 var useOrderCreate = exports.useOrderCreate = function useOrderCreate() {
 	var _useAction = (0, _useBaseHooks.useAction)((0, _orderEndpoints.getOrdersEndpoint)(), 'POST', { snackMessageToken: 'success_order_created' }),

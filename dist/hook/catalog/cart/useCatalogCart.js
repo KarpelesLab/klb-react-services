@@ -16,7 +16,8 @@ var _react = require('react');
 var useCatalogCart = exports.useCatalogCart = function useCatalogCart() {
 	var cartId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '@';
 	var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-	return (0, _useBaseHooks.useResource)((0, _catalogCartEndpoints.getCatalogCartEndpoint)(cartId), params);
+	var restSettings = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+	return (0, _useBaseHooks.useResource)((0, _catalogCartEndpoints.getCatalogCartEndpoint)(cartId), params, restSettings);
 };
 var useCatalogCartProcess = exports.useCatalogCartProcess = function useCatalogCartProcess() {
 	var cartId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '@';

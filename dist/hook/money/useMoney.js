@@ -17,6 +17,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var useMoneySwift = exports.useMoneySwift = function useMoneySwift(code) {
 	var isAba = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+	var restSettings = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
 
 	var param = isAba ? 'aba' : 'swift';
 
@@ -36,5 +37,5 @@ var useMoneySwift = exports.useMoneySwift = function useMoneySwift(code) {
 		setEndpoint(isAba ? (0, _moneyEndpoints.getMoneySwiftAbaEndpoint)() : (0, _moneyEndpoints.getMoneySwiftEndpoint)());
 	}, [code, isAba, setParams, setEndpoint]);
 
-	return (0, _useBaseHooks.useResource)(endpoint, 'GET', params);
+	return (0, _useBaseHooks.useResource)(endpoint, 'GET', params, restSettings);
 };

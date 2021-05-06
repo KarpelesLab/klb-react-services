@@ -15,7 +15,7 @@ import {
 } from '../../enpoints/shell/shellEndpoints';
 
 export const useShells = () => useResourceList(getShellsEndpoint());
-export const useShell = (shellId, params = null) => useResource(getShellEndpoint(shellId), params);
+export const useShell = (shellId, params = null, restSettings = null) => useResource(getShellEndpoint(shellId), params, restSettings);
 export const useShellUpdate = shellId => useAction(getShellEndpoint(shellId), 'PATCH', { snackMessageToken: 'shell_update_success' });
 export const useShellDeleteIp = shellId => {
 	const [_doAction, loading] = useAction(getShellDeleteIpAddressEndpoint(shellId), 'POST', { snackMessageToken: 'shell_ip_delete_success' });

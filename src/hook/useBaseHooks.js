@@ -7,29 +7,38 @@ const deepCopy = (object) => {
 	return JSON.parse(JSON.stringify(object));
 };
 
-export const useResource = (endpoint, params = null) => {
-	const [resource, setResource]      = useState(null);
+export const useResource = (endpoint, params = null, restSettings = null) => {
+	let settings = { ...defaultSettings, ...(restSettings ? restSettings : {}) };
+	const [resource, setResource] = useState(null);
 	const [catchRedirect, handleError] = useApiErrorHandler();
-	const [loading, setLoading] = useState(false)
+	const [loading, setLoading] = useState(false);
 
 	const refresh = useCallback(
-		data => {
+		(data, settingsOverride = {}) => {
+			settings = { ...settings, ...settingsOverride };
+
 			if (data) {
 				setResource(prev => ({ ...(prev ? prev : {}), data: data }));
 				return;
 			}
 
-			setLoading(true)
+			setLoading(true);
 			return rest(endpoint, 'GET', params ? params : {})
-				.then(catchRedirect)
+				.then(d => settings.catchRedirect ? catchRedirect(d) : d)
+				.then(d => settings.innerThen ? settings.innerThen(d) : d)
 				.then(r => {
 					setResource(r);
 					return r;
 				})
 				.catch(e => {
 					setResource({ error: e });
-					handleError(e);
-				}).finally(() => {setLoading(false)});
+
+					if (settings.handleError) handleError(e);
+					else throw e;
+
+				}).finally(() => {
+					setLoading(false);
+				});
 		}
 		, [setResource, endpoint, params]); //eslint-disable-line
 
@@ -41,11 +50,11 @@ export const useResource = (endpoint, params = null) => {
 };
 
 export const useResourceList = endpoint => {
-	const [list, setList]              = useState(null);
-	const [loading, setLoading]        = useState(false);
+	const [list, setList] = useState(null);
+	const [loading, setLoading] = useState(false);
 	const [catchRedirect, handleError] = useApiErrorHandler();
-	const [lastFilter, setLastFilter]  = useState({});
-	const [lastPaging, setLastPaging]  = useState({});
+	const [lastFilter, setLastFilter] = useState({});
+	const [lastPaging, setLastPaging] = useState({});
 
 	const fetch = useCallback((filters = null, paging = null) => {
 		setLoading(true);
@@ -66,7 +75,7 @@ export const useResourceList = endpoint => {
 	}, []); //eslint-disable-line
 
 	const setItem = (idx, item) => {
-		const cpy     = deepCopy(list);
+		const cpy = deepCopy(list);
 		cpy.data[idx] = item;
 		setList(cpy);
 	};
@@ -75,20 +84,20 @@ export const useResourceList = endpoint => {
 };
 
 const defaultSettings = {
-	snackMessageToken:    null,
+	snackMessageToken: null,
 	snackMessageSeverity: 'success',
-	catchRedirect:        true,
-	handleError:          true,
-	rawResult:            false,
-	innerThen:            null,
+	catchRedirect: true,
+	handleError: true,
+	rawResult: false,
+	innerThen: null,
 };
 
 export const useAction = (endpoint, method = 'POST', restSettings = null) => {
 	let settings = { ...defaultSettings, ...(restSettings ? restSettings : {}) };
 
-	const [loading, setLoading]        = useState(false);
+	const [loading, setLoading] = useState(false);
 	const [catchRedirect, handleError] = useApiErrorHandler();
-	const { restContext }              = useContext(RestContext);
+	const { restContext } = useContext(RestContext);
 
 	const doAction = useCallback((params = {}, settingsOverride = {}) => {
 		settings = { ...settings, ...settingsOverride };
@@ -117,18 +126,18 @@ export const useAction = (endpoint, method = 'POST', restSettings = null) => {
 };
 
 export const useFileUploader = (restSettings = null) => {
-	let settings                       = { ...defaultSettings, ...(restSettings ? restSettings : {}) };
-	const [progress, setProgress]      = useState(0);
+	let settings = { ...defaultSettings, ...(restSettings ? restSettings : {}) };
+	const [progress, setProgress] = useState(0);
 	const [catchRedirect, handleError] = useApiErrorHandler();
-	const [uploading, setUploading]    = useState(false);
-	const { restContext }              = useContext(RestContext);
+	const [uploading, setUploading] = useState(false);
+	const { restContext } = useContext(RestContext);
 
 	const doIt = useCallback((endpoint, file, params, settingsOverride = {}) => {
 		settings = { ...settings, ...settingsOverride };
 		return new Promise((resolve, reject) => {
 			setUploading(true);
 			upload.onprogress = d => {
-				let blockTotal    = 0;
+				let blockTotal = 0;
 				let progressTotal = 0;
 				d.running.forEach((running) => {
 					if (running.status !== 'pending' && running.status !== 'complete') {
@@ -147,9 +156,9 @@ export const useFileUploader = (restSettings = null) => {
 			};
 
 			upload.append(endpoint, file, params)
-			      .then(d => settings.catchRedirect ? catchRedirect(d) : d)
-			      .then(resolve)
-			      .catch(reject);
+				.then(d => settings.catchRedirect ? catchRedirect(d) : d)
+				.then(resolve)
+				.catch(reject);
 
 			upload.run();
 
@@ -162,9 +171,9 @@ export const useFileUploader = (restSettings = null) => {
 				return res;
 			})
 			.catch(d => {
-				if (settings.handleError ) handleError(d)
+				if (settings.handleError) handleError(d);
 				else {
-					throw d
+					throw d;
 				}
 			})
 			.finally(() => setUploading(false));

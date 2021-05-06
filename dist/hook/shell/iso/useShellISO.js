@@ -18,7 +18,8 @@ var useShellISOs = exports.useShellISOs = function useShellISOs() {
 };
 var useShellISO = exports.useShellISO = function useShellISO(isoId) {
 	var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-	return (0, _useBaseHooks.useResource)((0, _.getShellISOEndpoint)(isoId), params);
+	var restSettings = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+	return (0, _useBaseHooks.useResource)((0, _.getShellISOEndpoint)(isoId), params, restSettings);
 };
 var useShellISOUpload = exports.useShellISOUpload = function useShellISOUpload() {
 	var _useFileUploader = (0, _useBaseHooks.useFileUploader)({ snackMessageToken: 'shell_iso_create_success' }),
