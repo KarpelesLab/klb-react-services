@@ -5,9 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.useFileUploader = exports.useAction = exports.useResourceList = exports.useResource = undefined;
 
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 var _react = require('react');
 
@@ -23,9 +23,6 @@ var deepCopy = function deepCopy(object) {
 
 var useResource = exports.useResource = function useResource(endpoint) {
 	var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-	var restSettings = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-
-	var settings = _extends({}, defaultSettings, restSettings ? restSettings : {});
 
 	var _useState = (0, _react.useState)(null),
 	    _useState2 = _slicedToArray(_useState, 2),
@@ -43,10 +40,6 @@ var useResource = exports.useResource = function useResource(endpoint) {
 	    setLoading = _useState4[1];
 
 	var refresh = (0, _react.useCallback)(function (data) {
-		var settingsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-		settings = _extends({}, settings, settingsOverride);
-
 		if (data) {
 			setResource(function (prev) {
 				return _extends({}, prev ? prev : {}, { data: data });
@@ -55,17 +48,12 @@ var useResource = exports.useResource = function useResource(endpoint) {
 		}
 
 		setLoading(true);
-		return (0, _klbfw.rest)(endpoint, 'GET', params ? params : {}).then(function (d) {
-			return settings.catchRedirect ? catchRedirect(d) : d;
-		}).then(function (d) {
-			return settings.innerThen ? settings.innerThen(d) : d;
-		}).then(function (r) {
+		return (0, _klbfw.rest)(endpoint, 'GET', params ? params : {}).then(catchRedirect).then(function (r) {
 			setResource(r);
 			return r;
 		}).catch(function (e) {
 			setResource({ error: e });
-
-			if (settings.handleError) handleError(e);else throw e;
+			handleError(e);
 		}).finally(function () {
 			setLoading(false);
 		});

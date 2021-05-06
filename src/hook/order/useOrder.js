@@ -3,7 +3,7 @@ import { useCallback }                                                  from 're
 import { getOrderEndpoint, getOrderProcessEndpoint, getOrdersEndpoint } from '../../enpoints/order/orderEndpoints';
 
 export const useOrders = () => useResourceList(getOrdersEndpoint());
-export const useOrder = (orderId, params = null, restSettings = null) => useResource(getOrderEndpoint(orderId), params, restSettings);
+export const useOrder = (orderId, params = null) => useResource(getOrderEndpoint(orderId), params);
 export const useOrderCreate = () => {
 	const [_doAction, loading] = useAction(getOrdersEndpoint(), 'POST', { snackMessageToken: 'success_order_created' });
 
