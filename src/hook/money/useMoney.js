@@ -2,7 +2,7 @@ import { useResource }                                     from '../useBaseHooks
 import { getMoneySwiftAbaEndpoint, getMoneySwiftEndpoint } from '../../enpoints/money/moneyEndpoints';
 import { useEffect, useState }                             from 'react';
 
-export const useMoneySwift = (code, isAba = false, restSettings = null) => {
+export const useMoneySwift = (code, isAba = false) => {
 	const param = isAba ? 'aba' : 'swift';
 	const [params, setParams] = useState({ [param]: code });
 	const [endpoint, setEndpoint] = useState(isAba ? getMoneySwiftAbaEndpoint() : getMoneySwiftEndpoint());
@@ -13,5 +13,5 @@ export const useMoneySwift = (code, isAba = false, restSettings = null) => {
 		setEndpoint(isAba ? getMoneySwiftAbaEndpoint() : getMoneySwiftEndpoint());
 	}, [code, isAba, setParams, setEndpoint]);
 
-	return useResource(endpoint, 'GET', params, restSettings);
+	return useResource(endpoint, 'GET', params);
 };

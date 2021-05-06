@@ -13,7 +13,7 @@ import {
 }                                                                   from '../../../enpoints/shell/os/shellOsEndpoints';
 
 export const useOperatingSystems = () => useResourceList(getShellOsesEndpoint());
-export const useOperatingSystem = (osId, params = null, restSettings = null) => useResource(getShellOsEndpoint(osId), params, restSettings);
+export const useOperatingSystem = (osId, params = null) => useResource(getShellOsEndpoint(osId), params);
 export const useOperatingSystemImages = osId => useResourceList(getShellOsImagesEndpoint(osId));
 export const useOperatingSystemCreateEmpty = () => {
 
