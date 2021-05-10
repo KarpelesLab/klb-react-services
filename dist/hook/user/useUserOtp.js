@@ -16,7 +16,8 @@ var _react = require('react');
 var _userOtpEndpoints = require('../../enpoints/user/userOtpEndpoints');
 
 var useUserOTPs = exports.useUserOTPs = function useUserOTPs() {
-	return (0, _useBaseHooks.useResourceList)((0, _userOtpEndpoints.getUserOTPsEndpoint)());
+	var restSettings = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+	return (0, _useBaseHooks.useResourceList)((0, _userOtpEndpoints.getUserOTPsEndpoint)(), restSettings);
 };
 var useUserOTPCreate = exports.useUserOTPCreate = function useUserOTPCreate() {
 	var _useAction = (0, _useBaseHooks.useAction)((0, _userOtpEndpoints.getUserOTPsEndpoint)(), 'POST'),

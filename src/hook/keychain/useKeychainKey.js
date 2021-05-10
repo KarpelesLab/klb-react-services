@@ -5,9 +5,9 @@ import {
 	getKeychainKeyCreateEndpoint,
 	getKeychainKeyEndpoint,
 	getKeychainKeysEndpoint
-} from '../../enpoints/keychain/keychainKeyEndpoints';
+}                                     from '../../enpoints/keychain/keychainKeyEndpoints';
 
-export const useKeychainKeys = keychainId => useResourceList(getKeychainKeysEndpoint(keychainId));
+export const useKeychainKeys = (keychainId, restSettings = null) => useResourceList(getKeychainKeysEndpoint(keychainId), restSettings);
 export const useKeychainKeyDelete = keychainKeyId => useAction(getKeychainKeyEndpoint(keychainKeyId), 'DELETE', { snackMessageToken: 'key_delete_success' });
 export const useKeychainKeyCreate = keychainId => {
 	const [_doAction, loading] = useAction(getKeychainKeyCreateEndpoint(keychainId), 'POST', { snackMessageToken: 'key_create_success' });

@@ -14,7 +14,8 @@ var _react = require('react');
 var _shellVolumeSnapshotEndpoints = require('../../../enpoints/shell/volume/shellVolumeSnapshotEndpoints');
 
 var useShellVolumeSnapshots = exports.useShellVolumeSnapshots = function useShellVolumeSnapshots(shellId) {
-	return (0, _useBaseHooks.useResourceList)((0, _shellVolumeSnapshotEndpoints.getShellVolumeSnapshotsEndpoint)(shellId));
+	var restSettings = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+	return (0, _useBaseHooks.useResourceList)((0, _shellVolumeSnapshotEndpoints.getShellVolumeSnapshotsEndpoint)(shellId), restSettings);
 };
 var useShellVolumeSnapshotRestore = exports.useShellVolumeSnapshotRestore = function useShellVolumeSnapshotRestore(shellId) {
 	var _useAction = (0, _useBaseHooks.useAction)((0, _shellVolumeSnapshotEndpoints.getShellVolumeSnapshotRestoreEndpoint)(shellId), 'POST', { snackMessageToken: 'snapshot_restore_success' }),

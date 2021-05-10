@@ -14,7 +14,8 @@ var _react = require('react');
 var _keychainKeyEndpoints = require('../../enpoints/keychain/keychainKeyEndpoints');
 
 var useKeychainKeys = exports.useKeychainKeys = function useKeychainKeys(keychainId) {
-	return (0, _useBaseHooks.useResourceList)((0, _keychainKeyEndpoints.getKeychainKeysEndpoint)(keychainId));
+	var restSettings = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+	return (0, _useBaseHooks.useResourceList)((0, _keychainKeyEndpoints.getKeychainKeysEndpoint)(keychainId), restSettings);
 };
 var useKeychainKeyDelete = exports.useKeychainKeyDelete = function useKeychainKeyDelete(keychainKeyId) {
 	return (0, _useBaseHooks.useAction)((0, _keychainKeyEndpoints.getKeychainKeyEndpoint)(keychainKeyId), 'DELETE', { snackMessageToken: 'key_delete_success' });

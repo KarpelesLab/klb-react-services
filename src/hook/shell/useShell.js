@@ -1,5 +1,5 @@
-import { useAction, useResource, useResourceList } from '../useBaseHooks';
-import { useCallback } from 'react';
+import { useAction, useResource, useResourceList }                                                  from '../useBaseHooks';
+import { useCallback }                                                                              from 'react';
 import { getShellAddTag, getShellRemoveTag, useUserBillingCreateWithMethod, useUserLocationCreate } from '../..';
 import {
 	getShellCancelEndpoint,
@@ -12,10 +12,10 @@ import {
 	getShellSetInitialOsEndpoint,
 	getShellStartEndpoint,
 	getShellStopEndpoint
-} from '../../enpoints/shell/shellEndpoints';
+}                                                                                                   from '../../enpoints/shell/shellEndpoints';
 
-export const useShells = () => useResourceList(getShellsEndpoint());
-export const useShell = (shellId, params = null) => useResource(getShellEndpoint(shellId), params);
+export const useShells = (restSettings = null) => useResourceList(getShellsEndpoint(), restSettings);
+export const useShell = (shellId, params = null, restSettings = null) => useResource(getShellEndpoint(shellId), params, restSettings);
 export const useShellUpdate = shellId => useAction(getShellEndpoint(shellId), 'PATCH', { snackMessageToken: 'shell_update_success' });
 export const useShellDeleteIp = shellId => {
 	const [_doAction, loading] = useAction(getShellDeleteIpAddressEndpoint(shellId), 'POST', { snackMessageToken: 'shell_ip_delete_success' });

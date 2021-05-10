@@ -12,9 +12,9 @@ import {
 	getShellOsUploadImageEndpoint
 }                                                                   from '../../../enpoints/shell/os/shellOsEndpoints';
 
-export const useOperatingSystems = () => useResourceList(getShellOsesEndpoint());
-export const useOperatingSystem = (osId, params = null) => useResource(getShellOsEndpoint(osId), params);
-export const useOperatingSystemImages = osId => useResourceList(getShellOsImagesEndpoint(osId));
+export const useOperatingSystems = (restSettings = null) => useResourceList(getShellOsesEndpoint(),restSettings);
+export const useOperatingSystem = (osId, params = null, restSettings = null) => useResource(getShellOsEndpoint(osId), params,restSettings);
+export const useOperatingSystemImages = (osId, restSettings = null) => useResourceList(getShellOsImagesEndpoint(osId),restSettings);
 export const useOperatingSystemCreateEmpty = () => {
 
 	const [_doCreate, loading] = useAction(getShellOsCreateEmptyEndpoint(), 'POST', { snackMessageToken: 'custom_os_create_success' });

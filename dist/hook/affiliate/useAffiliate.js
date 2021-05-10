@@ -15,10 +15,11 @@ var _react = require('react');
 
 var useAffiliate = exports.useAffiliate = function useAffiliate(id) {
 	var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-	return (0, _useBaseHooks.useResource)((0, _affiliateEndpoints.getAffiliateEndpoint)(id), params);
+	var restSettings = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+	return (0, _useBaseHooks.useResource)((0, _affiliateEndpoints.getAffiliateEndpoint)(id), params, restSettings);
 };
-var useUserWallets = exports.useUserWallets = function useUserWallets(userId) {
-	return (0, _useBaseHooks.useResourceList)((0, _affiliateEndpoints.getUserWalletsEndpoint)(userId));
+var useUserWallets = exports.useUserWallets = function useUserWallets(userId, restSettings) {
+	return (0, _useBaseHooks.useResourceList)((0, _affiliateEndpoints.getUserWalletsEndpoint)(userId), restSettings);
 };
 var useAffiliateExportOrder = exports.useAffiliateExportOrder = function useAffiliateExportOrder(affiliateId) {
 	var _useAction = (0, _useBaseHooks.useAction)((0, _affiliateEndpoints.getAffiliateExportOrdersEndpoint)(affiliateId), 'POST'),

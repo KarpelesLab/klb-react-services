@@ -33,5 +33,6 @@ var useConsumerTokenUnlink = exports.useConsumerTokenUnlink = function useConsum
 	return (0, _useBaseHooks.useAction)((0, _oauthEndpoints.getOAuth2ConsumerTokenEndpoint)(tokenId), 'DELETE', { snackMessageToken: 'profile_oauth2_token_remove_success' });
 };
 var useConsumerTokens = exports.useConsumerTokens = function useConsumerTokens() {
-	return (0, _useBaseHooks.useResourceList)((0, _oauthEndpoints.getOAuth2ConsumerTokensEndpoint)());
+	var restSettings = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+	return (0, _useBaseHooks.useResourceList)((0, _oauthEndpoints.getOAuth2ConsumerTokensEndpoint)(), restSettings);
 };

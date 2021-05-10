@@ -7,29 +7,48 @@ const deepCopy = (object) => {
 	return JSON.parse(JSON.stringify(object));
 };
 
-export const useResource = (endpoint, params = null) => {
-	const [resource, setResource]      = useState(null);
+export const useResource = (endpoint, params = null, restSettings = null) => {
+	let settings = { ...defaultSettings, ...(restSettings ? restSettings : {}) };
+
+	const [resource, setResource] = useState(null);
 	const [catchRedirect, handleError] = useApiErrorHandler();
-	const [loading, setLoading] = useState(false)
+	const [loading, setLoading] = useState(false);
+
+	const { restContext } = useContext(RestContext);
 
 	const refresh = useCallback(
-		data => {
+		(data, settingsOverride = null) => {
+			settings = { ...settings, ...(settingsOverride ? settingsOverride : {}) };
+
 			if (data) {
 				setResource(prev => ({ ...(prev ? prev : {}), data: data }));
 				return;
 			}
 
-			setLoading(true)
+			if (!settings.silent) setLoading(true);
 			return rest(endpoint, 'GET', params ? params : {})
-				.then(catchRedirect)
+				.then(d => settings.catchRedirect ? catchRedirect(d) : d)
+				.then(d => settings.innerThen ? settings.innerThen(d) : d)
 				.then(r => {
 					setResource(r);
 					return r;
 				})
+				.then(res => {
+					if (restContext.snackMessageCallback && settings.snackMessageToken)
+						restContext.snackMessageCallback(settings.snackMessageToken, settings.snackMessageSeverity, true);
+					return res;
+				})
 				.catch(e => {
 					setResource({ error: e });
-					handleError(e);
-				}).finally(() => {setLoading(false)});
+					if (settings.handleError) handleError(e);
+					else {
+						throw d;
+					}
+				})
+				.finally(() => {
+					if (!settings.silent)
+						setLoading(false);
+				});
 		}
 		, [setResource, endpoint, params]); //eslint-disable-line
 
@@ -40,15 +59,21 @@ export const useResource = (endpoint, params = null) => {
 	return [resource, refresh, loading];
 };
 
-export const useResourceList = endpoint => {
-	const [list, setList]              = useState(null);
-	const [loading, setLoading]        = useState(false);
-	const [catchRedirect, handleError] = useApiErrorHandler();
-	const [lastFilter, setLastFilter]  = useState({});
-	const [lastPaging, setLastPaging]  = useState({});
+export const useResourceList = (endpoint, restSettings = null) => {
+	let settings = { ...defaultSettings, ...(restSettings ? restSettings : {}) };
 
-	const fetch = useCallback((filters = null, paging = null) => {
-		setLoading(true);
+	const [list, setList] = useState(null);
+	const [loading, setLoading] = useState(false);
+	const [catchRedirect, handleError] = useApiErrorHandler();
+	const [lastFilter, setLastFilter] = useState({});
+	const [lastPaging, setLastPaging] = useState({});
+
+	const { restContext } = useContext(RestContext);
+
+	const fetch = useCallback((filters = null, paging = null, settingsOverride = null) => {
+		settings = { ...settings, ...(settingsOverride ? settingsOverride : {}) };
+
+		if (!settings.silent) setLoading(true);
 		if (filters) setLastFilter(lastFilter);
 		if (paging) setLastPaging(lastFilter);
 
@@ -56,17 +81,30 @@ export const useResourceList = endpoint => {
 			...(filters ? filters : lastFilter),
 			...(paging ? paging : lastPaging),
 		})
-			.then(catchRedirect)
+			.then(d => settings.catchRedirect ? catchRedirect(d) : d)
+			.then(d => settings.innerThen ? settings.innerThen(d) : d)
+			.then(res => {
+				if (restContext.snackMessageCallback && settings.snackMessageToken)
+					restContext.snackMessageCallback(settings.snackMessageToken, settings.snackMessageSeverity, true);
+				return res;
+			})
 			.then(list => {
 				setList(list);
 				return list;
 			})
-			.catch(handleError)
-			.finally(() => setLoading(false));
+			.catch(d => {
+				if (settings.handleError) handleError(d);
+				else {
+					throw d;
+				}
+			})
+			.finally(() => {
+				if (!settings.silent) setLoading(true);
+			});
 	}, []); //eslint-disable-line
 
 	const setItem = (idx, item) => {
-		const cpy     = deepCopy(list);
+		const cpy = deepCopy(list);
 		cpy.data[idx] = item;
 		setList(cpy);
 	};
@@ -75,24 +113,25 @@ export const useResourceList = endpoint => {
 };
 
 const defaultSettings = {
-	snackMessageToken:    null,
+	snackMessageToken: null,
 	snackMessageSeverity: 'success',
-	catchRedirect:        true,
-	handleError:          true,
-	rawResult:            false,
-	innerThen:            null,
+	catchRedirect: true,
+	handleError: true,
+	rawResult: false,
+	silent: false,
+	innerThen: null,
 };
 
 export const useAction = (endpoint, method = 'POST', restSettings = null) => {
 	let settings = { ...defaultSettings, ...(restSettings ? restSettings : {}) };
 
-	const [loading, setLoading]        = useState(false);
+	const [loading, setLoading] = useState(false);
 	const [catchRedirect, handleError] = useApiErrorHandler();
-	const { restContext }              = useContext(RestContext);
+	const { restContext } = useContext(RestContext);
 
-	const doAction = useCallback((params = {}, settingsOverride = {}) => {
-		settings = { ...settings, ...settingsOverride };
-		setLoading(true);
+	const doAction = useCallback((params = {}, settingsOverride = null) => {
+		settings = { ...settings, ...(settingsOverride ? settingsOverride : {}) };
+		if (!settings.silent) setLoading(true);
 		return rest(endpoint, method, params)
 			.then(d => settings.catchRedirect ? catchRedirect(d) : d)
 			.then(d => settings.rawResult ? d : d.data)
@@ -109,7 +148,7 @@ export const useAction = (endpoint, method = 'POST', restSettings = null) => {
 				}
 			})
 			.finally(() => {
-				setLoading(false);
+				if (!settings.silent) setLoading(false);
 			});
 	}, [endpoint, method]);//eslint-disable-line
 
@@ -117,18 +156,18 @@ export const useAction = (endpoint, method = 'POST', restSettings = null) => {
 };
 
 export const useFileUploader = (restSettings = null) => {
-	let settings                       = { ...defaultSettings, ...(restSettings ? restSettings : {}) };
-	const [progress, setProgress]      = useState(0);
+	let settings = { ...defaultSettings, ...(restSettings ? restSettings : {}) };
+	const [progress, setProgress] = useState(0);
 	const [catchRedirect, handleError] = useApiErrorHandler();
-	const [uploading, setUploading]    = useState(false);
-	const { restContext }              = useContext(RestContext);
+	const [uploading, setUploading] = useState(false);
+	const { restContext } = useContext(RestContext);
 
-	const doIt = useCallback((endpoint, file, params, settingsOverride = {}) => {
-		settings = { ...settings, ...settingsOverride };
+	const doIt = useCallback((endpoint, file, params, settingsOverride = null) => {
+		settings = { ...settings, ...(settingsOverride ? settingsOverride : {}) };
 		return new Promise((resolve, reject) => {
-			setUploading(true);
+			if (!settings.silent) setUploading(true);
 			upload.onprogress = d => {
-				let blockTotal    = 0;
+				let blockTotal = 0;
 				let progressTotal = 0;
 				d.running.forEach((running) => {
 					if (running.status !== 'pending' && running.status !== 'complete') {
@@ -147,9 +186,9 @@ export const useFileUploader = (restSettings = null) => {
 			};
 
 			upload.append(endpoint, file, params)
-			      .then(d => settings.catchRedirect ? catchRedirect(d) : d)
-			      .then(resolve)
-			      .catch(reject);
+				.then(d => settings.catchRedirect ? catchRedirect(d) : d)
+				.then(resolve)
+				.catch(reject);
 
 			upload.run();
 
@@ -162,12 +201,15 @@ export const useFileUploader = (restSettings = null) => {
 				return res;
 			})
 			.catch(d => {
-				if (settings.handleError ) handleError(d)
+				if (settings.handleError) handleError(d);
 				else {
-					throw d
+					throw d;
 				}
 			})
-			.finally(() => setUploading(false));
+			.finally(() => {
+				if (!settings.silent)
+					setUploading(false);
+			});
 
 	}, []);//eslint-disable-line
 

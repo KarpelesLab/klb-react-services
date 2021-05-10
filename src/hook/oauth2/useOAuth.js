@@ -17,4 +17,4 @@ export const useConsumerLink = consumerId => {
 	return [doAction, loading];
 };
 export const useConsumerTokenUnlink = tokenId => useAction(getOAuth2ConsumerTokenEndpoint(tokenId), 'DELETE', { snackMessageToken: 'profile_oauth2_token_remove_success' });
-export const useConsumerTokens = () => useResourceList(getOAuth2ConsumerTokensEndpoint());
+export const useConsumerTokens = (restSettings = null) => useResourceList(getOAuth2ConsumerTokensEndpoint(), restSettings);

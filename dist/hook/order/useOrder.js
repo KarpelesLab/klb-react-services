@@ -16,11 +16,13 @@ var _react = require('react');
 var _orderEndpoints = require('../../enpoints/order/orderEndpoints');
 
 var useOrders = exports.useOrders = function useOrders() {
-	return (0, _useBaseHooks.useResourceList)((0, _orderEndpoints.getOrdersEndpoint)());
+	var restSettings = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+	return (0, _useBaseHooks.useResourceList)((0, _orderEndpoints.getOrdersEndpoint)(), restSettings);
 };
 var useOrder = exports.useOrder = function useOrder(orderId) {
 	var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-	return (0, _useBaseHooks.useResource)((0, _orderEndpoints.getOrderEndpoint)(orderId), params);
+	var restSettings = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+	return (0, _useBaseHooks.useResource)((0, _orderEndpoints.getOrderEndpoint)(orderId), params, restSettings);
 };
 var useOrderCreate = exports.useOrderCreate = function useOrderCreate() {
 	var _useAction = (0, _useBaseHooks.useAction)((0, _orderEndpoints.getOrdersEndpoint)(), 'POST', { snackMessageToken: 'success_order_created' }),

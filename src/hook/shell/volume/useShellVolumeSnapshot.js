@@ -5,7 +5,7 @@ import {
 	getShellVolumeSnapshotsEndpoint
 }                                     from '../../../enpoints/shell/volume/shellVolumeSnapshotEndpoints';
 
-export const useShellVolumeSnapshots = shellId => useResourceList(getShellVolumeSnapshotsEndpoint(shellId));
+export const useShellVolumeSnapshots = (shellId, restSettings = null) => useResourceList(getShellVolumeSnapshotsEndpoint(shellId), restSettings);
 export const useShellVolumeSnapshotRestore = shellId => {
 	const [_doAction, loading] = useAction(getShellVolumeSnapshotRestoreEndpoint(shellId), 'POST', { snackMessageToken: 'snapshot_restore_success' });
 

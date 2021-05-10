@@ -8,7 +8,7 @@ import {
 	getUserOTPUnsetEndpoint
 }                                     from '../../enpoints/user/userOtpEndpoints';
 
-export const useUserOTPs = () => useResourceList(getUserOTPsEndpoint());
+export const useUserOTPs = (restSettings = null) => useResourceList(getUserOTPsEndpoint(), restSettings);
 export const useUserOTPCreate = () => {
 	const [_doAction, loading] = useAction(getUserOTPsEndpoint(), 'POST');
 

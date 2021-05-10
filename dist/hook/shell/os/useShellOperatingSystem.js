@@ -14,14 +14,17 @@ var _react = require('react');
 var _shellOsEndpoints = require('../../../enpoints/shell/os/shellOsEndpoints');
 
 var useOperatingSystems = exports.useOperatingSystems = function useOperatingSystems() {
-	return (0, _useBaseHooks.useResourceList)((0, _shellOsEndpoints.getShellOsesEndpoint)());
+	var restSettings = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+	return (0, _useBaseHooks.useResourceList)((0, _shellOsEndpoints.getShellOsesEndpoint)(), restSettings);
 };
 var useOperatingSystem = exports.useOperatingSystem = function useOperatingSystem(osId) {
 	var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-	return (0, _useBaseHooks.useResource)((0, _shellOsEndpoints.getShellOsEndpoint)(osId), params);
+	var restSettings = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+	return (0, _useBaseHooks.useResource)((0, _shellOsEndpoints.getShellOsEndpoint)(osId), params, restSettings);
 };
 var useOperatingSystemImages = exports.useOperatingSystemImages = function useOperatingSystemImages(osId) {
-	return (0, _useBaseHooks.useResourceList)((0, _shellOsEndpoints.getShellOsImagesEndpoint)(osId));
+	var restSettings = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+	return (0, _useBaseHooks.useResourceList)((0, _shellOsEndpoints.getShellOsImagesEndpoint)(osId), restSettings);
 };
 var useOperatingSystemCreateEmpty = exports.useOperatingSystemCreateEmpty = function useOperatingSystemCreateEmpty() {
 	var _useAction = (0, _useBaseHooks.useAction)((0, _shellOsEndpoints.getShellOsCreateEmptyEndpoint)(), 'POST', { snackMessageToken: 'custom_os_create_success' }),

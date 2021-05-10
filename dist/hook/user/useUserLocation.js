@@ -11,7 +11,8 @@ var _userLocationEndpoints = require('../../enpoints/user/userLocationEndpoints'
 
 var useUserLocation = exports.useUserLocation = function useUserLocation(locationId) {
   var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-  return (0, _useBaseHooks.useResource)((0, _userLocationEndpoints.getUserLocationEndpoint)(locationId), params);
+  var restSettings = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+  return (0, _useBaseHooks.useResource)((0, _userLocationEndpoints.getUserLocationEndpoint)(locationId), params, restSettings);
 };
 var useUserLocationUpdate = exports.useUserLocationUpdate = function useUserLocationUpdate(locationId) {
   return (0, _useBaseHooks.useAction)((0, _userLocationEndpoints.getUserLocationEndpoint)(locationId), 'PATCH', { snackMessageToken: 'user_location_update_success' });

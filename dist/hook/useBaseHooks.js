@@ -5,9 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.useFileUploader = exports.useAction = exports.useResourceList = exports.useResource = undefined;
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = require('react');
 
@@ -23,6 +23,9 @@ var deepCopy = function deepCopy(object) {
 
 var useResource = exports.useResource = function useResource(endpoint) {
 	var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+	var restSettings = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+
+	var settings = _extends({}, defaultSettings, restSettings ? restSettings : {});
 
 	var _useState = (0, _react.useState)(null),
 	    _useState2 = _slicedToArray(_useState, 2),
@@ -39,7 +42,14 @@ var useResource = exports.useResource = function useResource(endpoint) {
 	    loading = _useState4[0],
 	    setLoading = _useState4[1];
 
+	var _useContext = (0, _react.useContext)(_RestContext.RestContext),
+	    restContext = _useContext.restContext;
+
 	var refresh = (0, _react.useCallback)(function (data) {
+		var settingsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+		settings = _extends({}, settings, settingsOverride ? settingsOverride : {});
+
 		if (data) {
 			setResource(function (prev) {
 				return _extends({}, prev ? prev : {}, { data: data });
@@ -47,15 +57,24 @@ var useResource = exports.useResource = function useResource(endpoint) {
 			return;
 		}
 
-		setLoading(true);
-		return (0, _klbfw.rest)(endpoint, 'GET', params ? params : {}).then(catchRedirect).then(function (r) {
+		if (!settings.silent) setLoading(true);
+		return (0, _klbfw.rest)(endpoint, 'GET', params ? params : {}).then(function (d) {
+			return settings.catchRedirect ? catchRedirect(d) : d;
+		}).then(function (d) {
+			return settings.innerThen ? settings.innerThen(d) : d;
+		}).then(function (r) {
 			setResource(r);
 			return r;
+		}).then(function (res) {
+			if (restContext.snackMessageCallback && settings.snackMessageToken) restContext.snackMessageCallback(settings.snackMessageToken, settings.snackMessageSeverity, true);
+			return res;
 		}).catch(function (e) {
 			setResource({ error: e });
-			handleError(e);
+			if (settings.handleError) handleError(e);else {
+				throw d;
+			}
 		}).finally(function () {
-			setLoading(false);
+			if (!settings.silent) setLoading(false);
 		});
 	}, [setResource, endpoint, params]); //eslint-disable-line
 
@@ -67,6 +86,10 @@ var useResource = exports.useResource = function useResource(endpoint) {
 };
 
 var useResourceList = exports.useResourceList = function useResourceList(endpoint) {
+	var restSettings = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+	var settings = _extends({}, defaultSettings, restSettings ? restSettings : {});
+
 	var _useState5 = (0, _react.useState)(null),
 	    _useState6 = _slicedToArray(_useState5, 2),
 	    list = _useState6[0],
@@ -92,19 +115,36 @@ var useResourceList = exports.useResourceList = function useResourceList(endpoin
 	    lastPaging = _useState12[0],
 	    setLastPaging = _useState12[1];
 
+	var _useContext2 = (0, _react.useContext)(_RestContext.RestContext),
+	    restContext = _useContext2.restContext;
+
 	var fetch = (0, _react.useCallback)(function () {
 		var filters = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 		var paging = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+		var settingsOverride = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
 
-		setLoading(true);
+		settings = _extends({}, settings, settingsOverride ? settingsOverride : {});
+
+		if (!settings.silent) setLoading(true);
 		if (filters) setLastFilter(lastFilter);
 		if (paging) setLastPaging(lastFilter);
 
-		return (0, _klbfw.rest)(endpoint, 'GET', _extends({}, filters ? filters : lastFilter, paging ? paging : lastPaging)).then(catchRedirect).then(function (list) {
+		return (0, _klbfw.rest)(endpoint, 'GET', _extends({}, filters ? filters : lastFilter, paging ? paging : lastPaging)).then(function (d) {
+			return settings.catchRedirect ? catchRedirect(d) : d;
+		}).then(function (d) {
+			return settings.innerThen ? settings.innerThen(d) : d;
+		}).then(function (res) {
+			if (restContext.snackMessageCallback && settings.snackMessageToken) restContext.snackMessageCallback(settings.snackMessageToken, settings.snackMessageSeverity, true);
+			return res;
+		}).then(function (list) {
 			setList(list);
 			return list;
-		}).catch(handleError).finally(function () {
-			return setLoading(false);
+		}).catch(function (d) {
+			if (settings.handleError) handleError(d);else {
+				throw d;
+			}
+		}).finally(function () {
+			if (!settings.silent) setLoading(true);
 		});
 	}, []); //eslint-disable-line
 
@@ -123,6 +163,7 @@ var defaultSettings = {
 	catchRedirect: true,
 	handleError: true,
 	rawResult: false,
+	silent: false,
 	innerThen: null
 };
 
@@ -142,15 +183,15 @@ var useAction = exports.useAction = function useAction(endpoint) {
 	    catchRedirect = _useApiErrorHandler6[0],
 	    handleError = _useApiErrorHandler6[1];
 
-	var _useContext = (0, _react.useContext)(_RestContext.RestContext),
-	    restContext = _useContext.restContext;
+	var _useContext3 = (0, _react.useContext)(_RestContext.RestContext),
+	    restContext = _useContext3.restContext;
 
 	var doAction = (0, _react.useCallback)(function () {
 		var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-		var settingsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+		var settingsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
-		settings = _extends({}, settings, settingsOverride);
-		setLoading(true);
+		settings = _extends({}, settings, settingsOverride ? settingsOverride : {});
+		if (!settings.silent) setLoading(true);
 		return (0, _klbfw.rest)(endpoint, method, params).then(function (d) {
 			return settings.catchRedirect ? catchRedirect(d) : d;
 		}).then(function (d) {
@@ -165,7 +206,7 @@ var useAction = exports.useAction = function useAction(endpoint) {
 				throw d;
 			}
 		}).finally(function () {
-			setLoading(false);
+			if (!settings.silent) setLoading(false);
 		});
 	}, [endpoint, method]); //eslint-disable-line
 
@@ -192,15 +233,15 @@ var useFileUploader = exports.useFileUploader = function useFileUploader() {
 	    uploading = _useState18[0],
 	    setUploading = _useState18[1];
 
-	var _useContext2 = (0, _react.useContext)(_RestContext.RestContext),
-	    restContext = _useContext2.restContext;
+	var _useContext4 = (0, _react.useContext)(_RestContext.RestContext),
+	    restContext = _useContext4.restContext;
 
 	var doIt = (0, _react.useCallback)(function (endpoint, file, params) {
-		var settingsOverride = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+		var settingsOverride = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
 
-		settings = _extends({}, settings, settingsOverride);
+		settings = _extends({}, settings, settingsOverride ? settingsOverride : {});
 		return new Promise(function (resolve, reject) {
-			setUploading(true);
+			if (!settings.silent) setUploading(true);
 			_klbfw.upload.onprogress = function (d) {
 				var blockTotal = 0;
 				var progressTotal = 0;
@@ -236,7 +277,7 @@ var useFileUploader = exports.useFileUploader = function useFileUploader() {
 				throw d;
 			}
 		}).finally(function () {
-			return setUploading(false);
+			if (!settings.silent) setUploading(false);
 		});
 	}, []); //eslint-disable-line
 

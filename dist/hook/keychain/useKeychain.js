@@ -14,11 +14,13 @@ var _react = require('react');
 var _keychainEndpoints = require('../../enpoints/keychain/keychainEndpoints');
 
 var useKeychains = exports.useKeychains = function useKeychains() {
-	return (0, _useBaseHooks.useResourceList)((0, _keychainEndpoints.getKeychainsEndpoint)());
+	var restSettings = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+	return (0, _useBaseHooks.useResourceList)((0, _keychainEndpoints.getKeychainsEndpoint)(), restSettings);
 };
 var useKeychain = exports.useKeychain = function useKeychain(keychainId) {
 	var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-	return (0, _useBaseHooks.useResource)((0, _keychainEndpoints.getKeychainEndpoint)(keychainId), params);
+	var restSettings = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+	return (0, _useBaseHooks.useResource)((0, _keychainEndpoints.getKeychainEndpoint)(keychainId), params, restSettings);
 };
 var useKeychainUpdate = exports.useKeychainUpdate = function useKeychainUpdate(keychainId) {
 	return (0, _useBaseHooks.useAction)((0, _keychainEndpoints.getKeychainEndpoint)(keychainId), 'PATCH', { snackMessageToken: 'keychain_update_success' });

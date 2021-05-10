@@ -18,7 +18,8 @@ var _useUserLocation = require('./useUserLocation');
 var _userBillingEndpoints = require('../../enpoints/user/userBillingEndpoints');
 
 var useUserBillings = exports.useUserBillings = function useUserBillings(userId) {
-	return (0, _useBaseHooks.useResourceList)((0, _userBillingEndpoints.getUserBillingsEndpoint)(userId));
+	var restSettings = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+	return (0, _useBaseHooks.useResourceList)((0, _userBillingEndpoints.getUserBillingsEndpoint)(userId), restSettings);
 };
 var useUserBillingUpdate = exports.useUserBillingUpdate = function useUserBillingUpdate(billingId) {
 	return (0, _useBaseHooks.useAction)((0, _userBillingEndpoints.getUserBillingEndpoint)(billingId), 'PATCH');
