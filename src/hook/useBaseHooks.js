@@ -99,7 +99,7 @@ export const useResourceList = (endpoint, restSettings = null) => {
 				}
 			})
 			.finally(() => {
-				if (!settings.silent) setLoading(true);
+				if (!settings.silent) setLoading(false);
 			});
 	}, []); //eslint-disable-line
 
