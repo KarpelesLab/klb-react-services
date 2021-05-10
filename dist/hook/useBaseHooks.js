@@ -144,7 +144,7 @@ var useResourceList = exports.useResourceList = function useResourceList(endpoin
 				throw d;
 			}
 		}).finally(function () {
-			if (!settings.silent) setLoading(true);
+			if (!settings.silent) setLoading(false);
 		});
 	}, []); //eslint-disable-line
 
