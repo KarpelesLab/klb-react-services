@@ -146,7 +146,7 @@ var useResourceList = exports.useResourceList = function useResourceList(endpoin
 		}).finally(function () {
 			if (!settings.silent) setLoading(false);
 		});
-	}, []); //eslint-disable-line
+	}, [lastPaging, lastFilter, endpoint]); //eslint-disable-line
 
 	var setItem = function setItem(idx, item) {
 		var cpy = deepCopy(list);

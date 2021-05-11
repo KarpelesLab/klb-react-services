@@ -101,7 +101,7 @@ export const useResourceList = (endpoint, restSettings = null) => {
 			.finally(() => {
 				if (!settings.silent) setLoading(false);
 			});
-	}, []); //eslint-disable-line
+	}, [lastPaging, lastFilter, endpoint]); //eslint-disable-line
 
 	const setItem = (idx, item) => {
 		const cpy = deepCopy(list);
