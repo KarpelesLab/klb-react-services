@@ -74,8 +74,8 @@ export const useResourceList = (endpoint, restSettings = null) => {
 		settings = { ...settings, ...(settingsOverride ? settingsOverride : {}) };
 
 		if (!settings.silent) setLoading(true);
-		if (filters) setLastFilter(lastFilter);
-		if (paging) setLastPaging(lastFilter);
+		if (filters) setLastFilter(filters);
+		if (paging) setLastPaging(paging);
 
 		return rest(endpoint, 'GET', {
 			...(filters ? filters : lastFilter),

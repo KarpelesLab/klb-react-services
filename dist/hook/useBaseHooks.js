@@ -126,8 +126,8 @@ var useResourceList = exports.useResourceList = function useResourceList(endpoin
 		settings = _extends({}, settings, settingsOverride ? settingsOverride : {});
 
 		if (!settings.silent) setLoading(true);
-		if (filters) setLastFilter(lastFilter);
-		if (paging) setLastPaging(lastFilter);
+		if (filters) setLastFilter(filters);
+		if (paging) setLastPaging(paging);
 
 		return (0, _klbfw.rest)(endpoint, 'GET', _extends({}, filters ? filters : lastFilter, paging ? paging : lastPaging)).then(function (d) {
 			return settings.catchRedirect ? catchRedirect(d) : d;
