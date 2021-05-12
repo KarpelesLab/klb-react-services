@@ -48,7 +48,7 @@ var useResource = exports.useResource = function useResource(endpoint) {
 	var refresh = (0, _react.useCallback)(function (data) {
 		var settingsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
-		settings = _extends({}, settings, settingsOverride ? settingsOverride : {});
+		var s = _extends({}, settings, settingsOverride ? settingsOverride : {});
 
 		if (data) {
 			setResource(function (prev) {
@@ -57,24 +57,24 @@ var useResource = exports.useResource = function useResource(endpoint) {
 			return;
 		}
 
-		if (!settings.silent) setLoading(true);
+		if (!s.silent) setLoading(true);
 		return (0, _klbfw.rest)(endpoint, 'GET', params ? params : {}).then(function (d) {
-			return settings.catchRedirect ? catchRedirect(d) : d;
+			return s.catchRedirect ? catchRedirect(d) : d;
 		}).then(function (d) {
-			return settings.innerThen ? settings.innerThen(d) : d;
+			return s.innerThen ? s.innerThen(d) : d;
 		}).then(function (r) {
 			setResource(r);
 			return r;
 		}).then(function (res) {
-			if (restContext.snackMessageCallback && settings.snackMessageToken) restContext.snackMessageCallback(settings.snackMessageToken, settings.snackMessageSeverity, true);
+			if (restContext.snackMessageCallback && s.snackMessageToken) restContext.snackMessageCallback(s.snackMessageToken, s.snackMessageSeverity, true);
 			return res;
 		}).catch(function (e) {
 			setResource({ error: e });
-			if (settings.handleError) handleError(e);else {
+			if (s.handleError) handleError(e);else {
 				throw d;
 			}
 		}).finally(function () {
-			if (!settings.silent) setLoading(false);
+			if (!s.silent) setLoading(false);
 		});
 	}, [setResource, endpoint, params]); //eslint-disable-line
 
@@ -123,28 +123,28 @@ var useResourceList = exports.useResourceList = function useResourceList(endpoin
 		var paging = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 		var settingsOverride = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
 
-		settings = _extends({}, settings, settingsOverride ? settingsOverride : {});
+		var s = _extends({}, settings, settingsOverride ? settingsOverride : {});
 
-		if (!settings.silent) setLoading(true);
+		if (!s.silent) setLoading(true);
 		if (filters) setLastFilter(filters);
 		if (paging) setLastPaging(paging);
 
 		return (0, _klbfw.rest)(endpoint, 'GET', _extends({}, filters ? filters : lastFilter, paging ? paging : lastPaging)).then(function (d) {
-			return settings.catchRedirect ? catchRedirect(d) : d;
+			return s.catchRedirect ? catchRedirect(d) : d;
 		}).then(function (d) {
-			return settings.innerThen ? settings.innerThen(d) : d;
+			return s.innerThen ? s.innerThen(d) : d;
 		}).then(function (res) {
-			if (restContext.snackMessageCallback && settings.snackMessageToken) restContext.snackMessageCallback(settings.snackMessageToken, settings.snackMessageSeverity, true);
+			if (restContext.snackMessageCallback && s.snackMessageToken) restContext.snackMessageCallback(s.snackMessageToken, s.snackMessageSeverity, true);
 			return res;
 		}).then(function (list) {
 			setList(list);
 			return list;
 		}).catch(function (d) {
-			if (settings.handleError) handleError(d);else {
+			if (s.handleError) handleError(d);else {
 				throw d;
 			}
 		}).finally(function () {
-			if (!settings.silent) setLoading(false);
+			if (!s.silent) setLoading(false);
 		});
 	}, [lastPaging, lastFilter, endpoint]); //eslint-disable-line
 
@@ -190,23 +190,23 @@ var useAction = exports.useAction = function useAction(endpoint) {
 		var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 		var settingsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
-		settings = _extends({}, settings, settingsOverride ? settingsOverride : {});
-		if (!settings.silent) setLoading(true);
+		var s = _extends({}, settings, settingsOverride ? settingsOverride : {});
+		if (!s.silent) setLoading(true);
 		return (0, _klbfw.rest)(endpoint, method, params).then(function (d) {
-			return settings.catchRedirect ? catchRedirect(d) : d;
+			return s.catchRedirect ? catchRedirect(d) : d;
 		}).then(function (d) {
-			return settings.rawResult ? d : d.data;
+			return s.rawResult ? d : d.data;
 		}).then(function (d) {
-			return settings.innerThen ? settings.innerThen(d) : d;
+			return s.innerThen ? s.innerThen(d) : d;
 		}).then(function (res) {
-			if (restContext.snackMessageCallback && settings.snackMessageToken) restContext.snackMessageCallback(settings.snackMessageToken, settings.snackMessageSeverity, true);
+			if (restContext.snackMessageCallback && s.snackMessageToken) restContext.snackMessageCallback(s.snackMessageToken, s.snackMessageSeverity, true);
 			return res;
 		}).catch(function (d) {
-			if (settings.handleError) handleError(d);else {
+			if (s.handleError) handleError(d);else {
 				throw d;
 			}
 		}).finally(function () {
-			if (!settings.silent) setLoading(false);
+			if (!s.silent) setLoading(false);
 		});
 	}, [endpoint, method]); //eslint-disable-line
 
@@ -239,9 +239,9 @@ var useFileUploader = exports.useFileUploader = function useFileUploader() {
 	var doIt = (0, _react.useCallback)(function (endpoint, file, params) {
 		var settingsOverride = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
 
-		settings = _extends({}, settings, settingsOverride ? settingsOverride : {});
+		var s = _extends({}, settings, settingsOverride ? settingsOverride : {});
 		return new Promise(function (resolve, reject) {
-			if (!settings.silent) setUploading(true);
+			if (!s.silent) setUploading(true);
 			_klbfw.upload.onprogress = function (d) {
 				var blockTotal = 0;
 				var progressTotal = 0;
@@ -261,23 +261,23 @@ var useFileUploader = exports.useFileUploader = function useFileUploader() {
 			};
 
 			_klbfw.upload.append(endpoint, file, params).then(function (d) {
-				return settings.catchRedirect ? catchRedirect(d) : d;
+				return s.catchRedirect ? catchRedirect(d) : d;
 			}).then(resolve).catch(reject);
 
 			_klbfw.upload.run();
 		}).then(function (data) {
 			return data.final;
 		}).then(function (d) {
-			return settings.innerThen ? settings.innerThen(d) : d;
+			return s.innerThen ? s.innerThen(d) : d;
 		}).then(function (res) {
-			if (restContext.snackMessageCallback && settings.snackMessageToken) restContext.snackMessageCallback(settings.snackMessageToken, settings.snackMessageSeverity, true);
+			if (restContext.snackMessageCallback && s.snackMessageToken) restContext.snackMessageCallback(s.snackMessageToken, s.snackMessageSeverity, true);
 			return res;
 		}).catch(function (d) {
-			if (settings.handleError) handleError(d);else {
+			if (s.handleError) handleError(d);else {
 				throw d;
 			}
 		}).finally(function () {
-			if (!settings.silent) setUploading(false);
+			if (!s.silent) setUploading(false);
 		});
 	}, []); //eslint-disable-line
 

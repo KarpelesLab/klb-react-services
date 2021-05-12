@@ -18,35 +18,35 @@ export const useResource = (endpoint, params = null, restSettings = null) => {
 
 	const refresh = useCallback(
 		(data, settingsOverride = null) => {
-			settings = { ...settings, ...(settingsOverride ? settingsOverride : {}) };
+			const s = { ...settings, ...(settingsOverride ? settingsOverride : {}) };
 
 			if (data) {
 				setResource(prev => ({ ...(prev ? prev : {}), data: data }));
 				return;
 			}
 
-			if (!settings.silent) setLoading(true);
+			if (!s.silent) setLoading(true);
 			return rest(endpoint, 'GET', params ? params : {})
-				.then(d => settings.catchRedirect ? catchRedirect(d) : d)
-				.then(d => settings.innerThen ? settings.innerThen(d) : d)
+				.then(d => s.catchRedirect ? catchRedirect(d) : d)
+				.then(d => s.innerThen ? s.innerThen(d) : d)
 				.then(r => {
 					setResource(r);
 					return r;
 				})
 				.then(res => {
-					if (restContext.snackMessageCallback && settings.snackMessageToken)
-						restContext.snackMessageCallback(settings.snackMessageToken, settings.snackMessageSeverity, true);
+					if (restContext.snackMessageCallback && s.snackMessageToken)
+						restContext.snackMessageCallback(s.snackMessageToken, s.snackMessageSeverity, true);
 					return res;
 				})
 				.catch(e => {
 					setResource({ error: e });
-					if (settings.handleError) handleError(e);
+					if (s.handleError) handleError(e);
 					else {
 						throw d;
 					}
 				})
 				.finally(() => {
-					if (!settings.silent)
+					if (!s.silent)
 						setLoading(false);
 				});
 		}
@@ -71,9 +71,9 @@ export const useResourceList = (endpoint, restSettings = null) => {
 	const { restContext } = useContext(RestContext);
 
 	const fetch = useCallback((filters = null, paging = null, settingsOverride = null) => {
-		settings = { ...settings, ...(settingsOverride ? settingsOverride : {}) };
+		const s = { ...settings, ...(settingsOverride ? settingsOverride : {}) };
 
-		if (!settings.silent) setLoading(true);
+		if (!s.silent) setLoading(true);
 		if (filters) setLastFilter(filters);
 		if (paging) setLastPaging(paging);
 
@@ -81,11 +81,11 @@ export const useResourceList = (endpoint, restSettings = null) => {
 			...(filters ? filters : lastFilter),
 			...(paging ? paging : lastPaging),
 		})
-			.then(d => settings.catchRedirect ? catchRedirect(d) : d)
-			.then(d => settings.innerThen ? settings.innerThen(d) : d)
+			.then(d => s.catchRedirect ? catchRedirect(d) : d)
+			.then(d => s.innerThen ? s.innerThen(d) : d)
 			.then(res => {
-				if (restContext.snackMessageCallback && settings.snackMessageToken)
-					restContext.snackMessageCallback(settings.snackMessageToken, settings.snackMessageSeverity, true);
+				if (restContext.snackMessageCallback && s.snackMessageToken)
+					restContext.snackMessageCallback(s.snackMessageToken, s.snackMessageSeverity, true);
 				return res;
 			})
 			.then(list => {
@@ -93,13 +93,13 @@ export const useResourceList = (endpoint, restSettings = null) => {
 				return list;
 			})
 			.catch(d => {
-				if (settings.handleError) handleError(d);
+				if (s.handleError) handleError(d);
 				else {
 					throw d;
 				}
 			})
 			.finally(() => {
-				if (!settings.silent) setLoading(false);
+				if (!s.silent) setLoading(false);
 			});
 	}, [lastPaging, lastFilter, endpoint]); //eslint-disable-line
 
@@ -130,25 +130,25 @@ export const useAction = (endpoint, method = 'POST', restSettings = null) => {
 	const { restContext } = useContext(RestContext);
 
 	const doAction = useCallback((params = {}, settingsOverride = null) => {
-		settings = { ...settings, ...(settingsOverride ? settingsOverride : {}) };
-		if (!settings.silent) setLoading(true);
+		const s = { ...settings, ...(settingsOverride ? settingsOverride : {}) };
+		if (!s.silent) setLoading(true);
 		return rest(endpoint, method, params)
-			.then(d => settings.catchRedirect ? catchRedirect(d) : d)
-			.then(d => settings.rawResult ? d : d.data)
-			.then(d => settings.innerThen ? settings.innerThen(d) : d)
+			.then(d => s.catchRedirect ? catchRedirect(d) : d)
+			.then(d => s.rawResult ? d : d.data)
+			.then(d => s.innerThen ? s.innerThen(d) : d)
 			.then(res => {
-				if (restContext.snackMessageCallback && settings.snackMessageToken)
-					restContext.snackMessageCallback(settings.snackMessageToken, settings.snackMessageSeverity, true);
+				if (restContext.snackMessageCallback && s.snackMessageToken)
+					restContext.snackMessageCallback(s.snackMessageToken, s.snackMessageSeverity, true);
 				return res;
 			})
 			.catch(d => {
-				if (settings.handleError) handleError(d);
+				if (s.handleError) handleError(d);
 				else {
 					throw d;
 				}
 			})
 			.finally(() => {
-				if (!settings.silent) setLoading(false);
+				if (!s.silent) setLoading(false);
 			});
 	}, [endpoint, method]);//eslint-disable-line
 
@@ -163,9 +163,9 @@ export const useFileUploader = (restSettings = null) => {
 	const { restContext } = useContext(RestContext);
 
 	const doIt = useCallback((endpoint, file, params, settingsOverride = null) => {
-		settings = { ...settings, ...(settingsOverride ? settingsOverride : {}) };
+		const s = { ...settings, ...(settingsOverride ? settingsOverride : {}) };
 		return new Promise((resolve, reject) => {
-			if (!settings.silent) setUploading(true);
+			if (!s.silent) setUploading(true);
 			upload.onprogress = d => {
 				let blockTotal = 0;
 				let progressTotal = 0;
@@ -186,7 +186,7 @@ export const useFileUploader = (restSettings = null) => {
 			};
 
 			upload.append(endpoint, file, params)
-				.then(d => settings.catchRedirect ? catchRedirect(d) : d)
+				.then(d => s.catchRedirect ? catchRedirect(d) : d)
 				.then(resolve)
 				.catch(reject);
 
@@ -194,20 +194,20 @@ export const useFileUploader = (restSettings = null) => {
 
 		})
 			.then(data => data.final)
-			.then(d => settings.innerThen ? settings.innerThen(d) : d)
+			.then(d => s.innerThen ? s.innerThen(d) : d)
 			.then(res => {
-				if (restContext.snackMessageCallback && settings.snackMessageToken)
-					restContext.snackMessageCallback(settings.snackMessageToken, settings.snackMessageSeverity, true);
+				if (restContext.snackMessageCallback && s.snackMessageToken)
+					restContext.snackMessageCallback(s.snackMessageToken, s.snackMessageSeverity, true);
 				return res;
 			})
 			.catch(d => {
-				if (settings.handleError) handleError(d);
+				if (s.handleError) handleError(d);
 				else {
 					throw d;
 				}
 			})
 			.finally(() => {
-				if (!settings.silent)
+				if (!s.silent)
 					setUploading(false);
 			});
 
