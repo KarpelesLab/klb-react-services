@@ -525,6 +525,18 @@ Object.defineProperty(exports, 'useCatalogCartCreateOrder', {
 		return _useCatalogCart.useCatalogCartCreateOrder;
 	}
 });
+Object.defineProperty(exports, 'useCatalogCartItemRemove', {
+	enumerable: true,
+	get: function get() {
+		return _useCatalogCart.useCatalogCartItemRemove;
+	}
+});
+Object.defineProperty(exports, 'useCatalogCartReset', {
+	enumerable: true,
+	get: function get() {
+		return _useCatalogCart.useCatalogCartReset;
+	}
+});
 
 var _useShellISO = require('./hook/shell/iso/useShellISO');
 
@@ -1183,6 +1195,18 @@ Object.defineProperty(exports, 'getCatalogCartCreateOrderEndpoint', {
 	enumerable: true,
 	get: function get() {
 		return _catalogCartEndpoints.getCatalogCartCreateOrderEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getCatalogCartItemSetQuantityEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _catalogCartEndpoints.getCatalogCartItemSetQuantityEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getCatalogCartResetEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _catalogCartEndpoints.getCatalogCartResetEndpoint;
 	}
 });
 

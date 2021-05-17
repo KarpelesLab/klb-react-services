@@ -85,7 +85,9 @@ export {
 export {
 	useCatalogCart,
 	useCatalogCartProcess,
-	useCatalogCartCreateOrder
+	useCatalogCartCreateOrder,
+	useCatalogCartItemRemove,
+	useCatalogCartReset
 }                                                                          from './hook/catalog/cart/useCatalogCart';
 export {
 	useShellISO,
@@ -217,7 +219,9 @@ export { getUserProfileAddImageEndpoint, getUserProfileEndpoint } from './enpoin
 export {
 	getCatalogCartEndpoint,
 	getCatalogCartProcessEndpoint,
-	getCatalogCartCreateOrderEndpoint
+	getCatalogCartCreateOrderEndpoint,
+	getCatalogCartItemSetQuantityEndpoint,
+	getCatalogCartResetEndpoint
 }                                                                 from './enpoints/catalog/cart/catalogCartEndpoints';
 export {
 	getShellISOEndpoint,

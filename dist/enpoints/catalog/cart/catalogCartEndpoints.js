@@ -15,3 +15,11 @@ var getCatalogCartCreateOrderEndpoint = exports.getCatalogCartCreateOrderEndpoin
   var cartId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '@';
   return 'Catalog/Cart/' + cartId + ':createOrder';
 };
+var getCatalogCartResetEndpoint = exports.getCatalogCartResetEndpoint = function getCatalogCartResetEndpoint() {
+  var cartId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '@';
+  return 'Catalog/Cart/' + cartId + ':reset';
+};
+var getCatalogCartItemSetQuantityEndpoint = exports.getCatalogCartItemSetQuantityEndpoint = function getCatalogCartItemSetQuantityEndpoint() {
+  var cartId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '@';
+  return 'Catalog/Cart/' + cartId + ':setQuantity';
+};
