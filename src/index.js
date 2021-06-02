@@ -107,6 +107,9 @@ export {
 	useShellProductChangeWarning,
 }
                                                                            from './hook/shell/warning/useShellWarning';
+export {
+	useMetaObjectLinkAccess
+}                                                                          from './hook/metaObject/useMetaObject';
 export { useResource, useResourceList, useAction, useFileUploader }        from './hook/useBaseHooks';
 export {
 	useApiErrorHandler
@@ -239,3 +242,6 @@ export {
 	getShellAccountWarningsEndpoint,
 	getShellProductChangeWarningEndpoint,
 }                                                                 from './enpoints/shell/warning/shellWarningEndpoint';
+export {
+	getMetaObjectLinkAccessEndpoint,
+}                                                                 from './enpoints/metaObject/metaObjectEndpoints';

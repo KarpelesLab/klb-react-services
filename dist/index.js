@@ -607,6 +607,15 @@ Object.defineProperty(exports, 'useShellProductChangeWarning', {
 	}
 });
 
+var _useMetaObject = require('./hook/metaObject/useMetaObject');
+
+Object.defineProperty(exports, 'useMetaObjectLinkAccess', {
+	enumerable: true,
+	get: function get() {
+		return _useMetaObject.useMetaObjectLinkAccess;
+	}
+});
+
 var _useBaseHooks = require('./hook/useBaseHooks');
 
 Object.defineProperty(exports, 'useResource', {
@@ -1270,5 +1279,14 @@ Object.defineProperty(exports, 'getShellProductChangeWarningEndpoint', {
 	enumerable: true,
 	get: function get() {
 		return _shellWarningEndpoint.getShellProductChangeWarningEndpoint;
+	}
+});
+
+var _metaObjectEndpoints = require('./enpoints/metaObject/metaObjectEndpoints');
+
+Object.defineProperty(exports, 'getMetaObjectLinkAccessEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _metaObjectEndpoints.getMetaObjectLinkAccessEndpoint;
 	}
 });
