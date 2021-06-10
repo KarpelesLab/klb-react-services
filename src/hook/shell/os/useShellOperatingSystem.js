@@ -19,7 +19,7 @@ export const useOperatingSystemCreateEmpty = () => {
 
 	const [_doCreate, loading] = useAction(getShellOsCreateEmptyEndpoint(), 'POST', { snackMessageToken: 'custom_os_create_success' });
 	const [_doUpload, uploading, progress] = useFileUploader();
-	const doAction = useCallback((names, family, boot, cpu, isPublic, descriptions = [], shortDescriptions = [], purpose = 'unknown', icon = null, settingsOverride = {}) => {
+	const doAction = useCallback((names, family, boot, cpu, isPublic, descriptions = [], shortDescriptions = [], purpose = 'unknown', beta = 'Y', icon = null, settingsOverride = {}) => {
 		const params = {
 			names: names,
 			descriptions: descriptions,
@@ -29,6 +29,7 @@ export const useOperatingSystemCreateEmpty = () => {
 			cpu: cpu,
 			isPublic: isPublic,
 			purpose: purpose,
+			beta: beta,
 		};
 
 		let settings = settingsOverride;
@@ -45,7 +46,7 @@ export const useOperatingSystemCreateEmpty = () => {
 export const useOperatingSystemCreateFromShell = () => {
 	const [_doCreate, loading] = useAction(getShellOsImportEndpoint(), 'POST', { snackMessageToken: 'custom_os_create_success' });
 	const [_doUpload, uploading, progress] = useFileUploader();
-	const doAction = useCallback((shellVolumeId, names, family, boot, cpu, isPublic, descriptions = [], shortDescriptions = [], purpose = 'unknown', icon = null, settingsOverride = {}) => {
+	const doAction = useCallback((shellVolumeId, names, family, boot, cpu, isPublic, descriptions = [], shortDescriptions = [], purpose = 'unknown', beta = 'Y', icon = null, settingsOverride = {}) => {
 		const params = {
 			names: names,
 			descriptions: descriptions,
@@ -56,6 +57,7 @@ export const useOperatingSystemCreateFromShell = () => {
 			cpu: cpu,
 			isPublic: isPublic,
 			purpose: purpose,
+			beta: beta,
 		};
 
 		let settings = settingsOverride;
@@ -73,7 +75,7 @@ export const useOperatingSystemCreateFromFile = () => {
 	const [_doUploadMain, loadingMain, progress] = useFileUploader({ snackMessageToken: 'custom_os_create_success' });
 	const [_doImageUpload, loadingImage, progressImage] = useFileUploader();
 
-	const doAction = useCallback((file, names, family, boot, cpu, isPublic, descriptions = [], shortDescriptions = [], purpose = 'unknown', icon = null, settingsOverride = {}) => {
+	const doAction = useCallback((file, names, family, boot, cpu, isPublic, descriptions = [], shortDescriptions = [], purpose = 'unknown', beta = 'Y', icon = null, settingsOverride = {}) => {
 		const params = {
 			names: names,
 			descriptions: descriptions,
@@ -83,6 +85,7 @@ export const useOperatingSystemCreateFromFile = () => {
 			cpu: cpu,
 			isPublic: isPublic,
 			purpose: purpose,
+			beta: beta,
 		};
 
 		let settings = settingsOverride;

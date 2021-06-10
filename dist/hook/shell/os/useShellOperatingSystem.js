@@ -42,8 +42,9 @@ var useOperatingSystemCreateEmpty = exports.useOperatingSystemCreateEmpty = func
 		var descriptions = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : [];
 		var shortDescriptions = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : [];
 		var purpose = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 'unknown';
-		var icon = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : null;
-		var settingsOverride = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : {};
+		var beta = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : 'Y';
+		var icon = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : null;
+		var settingsOverride = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : {};
 
 		var params = {
 			names: names,
@@ -53,7 +54,8 @@ var useOperatingSystemCreateEmpty = exports.useOperatingSystemCreateEmpty = func
 			boot: boot,
 			cpu: cpu,
 			isPublic: isPublic,
-			purpose: purpose
+			purpose: purpose,
+			beta: beta
 		};
 
 		var settings = settingsOverride;
@@ -83,8 +85,9 @@ var useOperatingSystemCreateFromShell = exports.useOperatingSystemCreateFromShel
 		var descriptions = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : [];
 		var shortDescriptions = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : [];
 		var purpose = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : 'unknown';
-		var icon = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : null;
-		var settingsOverride = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : {};
+		var beta = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : 'Y';
+		var icon = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : null;
+		var settingsOverride = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : {};
 
 		var params = {
 			names: names,
@@ -95,7 +98,8 @@ var useOperatingSystemCreateFromShell = exports.useOperatingSystemCreateFromShel
 			Shell_Volume__: shellVolumeId,
 			cpu: cpu,
 			isPublic: isPublic,
-			purpose: purpose
+			purpose: purpose,
+			beta: beta
 		};
 
 		var settings = settingsOverride;
@@ -126,8 +130,9 @@ var useOperatingSystemCreateFromFile = exports.useOperatingSystemCreateFromFile 
 		var descriptions = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : [];
 		var shortDescriptions = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : [];
 		var purpose = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : 'unknown';
-		var icon = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : null;
-		var settingsOverride = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : {};
+		var beta = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : 'Y';
+		var icon = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : null;
+		var settingsOverride = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : {};
 
 		var params = {
 			names: names,
@@ -137,7 +142,8 @@ var useOperatingSystemCreateFromFile = exports.useOperatingSystemCreateFromFile 
 			boot: boot,
 			cpu: cpu,
 			isPublic: isPublic,
-			purpose: purpose
+			purpose: purpose,
+			beta: beta
 		};
 
 		var settings = settingsOverride;
