@@ -71,7 +71,7 @@ var useUserSetDefaultLocation = exports.useUserSetDefaultLocation = function use
 };
 
 var useUserSetMeta = exports.useUserSetMeta = function useUserSetMeta(userId) {
-	var _useAction7 = (0, _useBaseHooks.useAction)((0, _userEndpoints.getUserSetMetaEndpoint)(userId), 'PATCH'),
+	var _useAction7 = (0, _useBaseHooks.useAction)((0, _userEndpoints.getUserSetMetaEndpoint)(userId), 'POST'),
 	    _useAction8 = _slicedToArray(_useAction7, 2),
 	    _doAction = _useAction8[0],
 	    loading = _useAction8[1];

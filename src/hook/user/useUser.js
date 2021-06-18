@@ -47,7 +47,7 @@ export const useUserSetDefaultLocation = userId => {
 };
 
 export const useUserSetMeta = userId => {
-	const [_doAction, loading] = useAction(getUserSetMetaEndpoint(userId), 'PATCH');
+	const [_doAction, loading] = useAction(getUserSetMetaEndpoint(userId), 'POST');
 
 	const doAction = useCallback((name, value, settingsOverride = {}) => {
 		return _doAction({ name: name, value: value }, settingsOverride);
