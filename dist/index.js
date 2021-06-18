@@ -153,6 +153,12 @@ Object.defineProperty(exports, 'useUserSetDefaultLocation', {
 		return _useUser.useUserSetDefaultLocation;
 	}
 });
+Object.defineProperty(exports, 'useUserSetMeta', {
+	enumerable: true,
+	get: function get() {
+		return _useUser.useUserSetMeta;
+	}
+});
 
 var _useUserProfile = require('./hook/user/useUserProfile');
 
@@ -1120,6 +1126,12 @@ Object.defineProperty(exports, 'getUserSetDefaultEndpoint', {
 	enumerable: true,
 	get: function get() {
 		return _userEndpoints.getUserSetDefaultEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getUserSetMetaEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _userEndpoints.getUserSetMetaEndpoint;
 	}
 });
 

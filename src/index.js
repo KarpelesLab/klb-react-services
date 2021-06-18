@@ -18,7 +18,8 @@ export {
 	useUserChangePassword,
 	useUserSetEmail,
 	useUserLogout,
-	useUserSetDefaultLocation
+	useUserSetDefaultLocation,
+	useUserSetMeta
 }                                                                          from './hook/user/useUser';
 export { useUserProfileUpdate, useUserProfileUpdateAvatar }                from './hook/user/useUserProfile';
 export {
@@ -209,6 +210,7 @@ export {
 	getUserEndpoint,
 	getUserSetPasswordEndpoint,
 	getUserSetDefaultEndpoint,
+	getUserSetMetaEndpoint
 }                                                                 from './enpoints/user/userEndpoints';
 export { getUserLocationEndpoint, getUserLocationsEndpoint }      from './enpoints/user/userLocationEndpoints';
 export {

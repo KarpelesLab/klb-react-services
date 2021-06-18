@@ -4,6 +4,7 @@ import {
 	getUserLogoutEndpoint,
 	getUserSetDefaultEndpoint,
 	getUserSetEmailEndpoint,
+	getUserSetMetaEndpoint,
 	getUserSetPasswordEndpoint
 }                      from '../../enpoints/user/userEndpoints';
 
@@ -41,6 +42,16 @@ export const useUserSetDefaultLocation = userId => {
 		User_Location__: userLocationId,
 		type: type
 	}, settingsOverride), []); //eslint-disable-line
+
+	return [doAction, loading];
+};
+
+export const useUserSetMeta = userId => {
+	const [_doAction, loading] = useAction(getUserSetMetaEndpoint(userId), 'PATCH');
+
+	const doAction = useCallback((name, value, settingsOverride = {}) => {
+		return _doAction({ name: name, value: value }, settingsOverride);
+	}, []); //eslint-disable-line
 
 	return [doAction, loading];
 };
