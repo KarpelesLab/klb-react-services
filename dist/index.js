@@ -613,6 +613,15 @@ Object.defineProperty(exports, 'useShellProductChangeWarning', {
 	}
 });
 
+var _useUserWalletAuto = require('./hook/user/wallet/auto/useUserWalletAuto');
+
+Object.defineProperty(exports, 'useUserWalletAutos', {
+	enumerable: true,
+	get: function get() {
+		return _useUserWalletAuto.useUserWalletAutos;
+	}
+});
+
 var _useMetaObject = require('./hook/metaObject/useMetaObject');
 
 Object.defineProperty(exports, 'useMetaObjectLinkAccess', {
@@ -1300,5 +1309,14 @@ Object.defineProperty(exports, 'getMetaObjectLinkAccessEndpoint', {
 	enumerable: true,
 	get: function get() {
 		return _metaObjectEndpoints.getMetaObjectLinkAccessEndpoint;
+	}
+});
+
+var _userWalletAutoEndpoints = require('./enpoints/user/wallet/auto/userWalletAutoEndpoints');
+
+Object.defineProperty(exports, 'getUserWalletAutosEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _userWalletAutoEndpoints.getUserWalletAutosEndpoint;
 	}
 });

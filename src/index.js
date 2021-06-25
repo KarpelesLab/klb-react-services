@@ -109,6 +109,10 @@ export {
 }
                                                                            from './hook/shell/warning/useShellWarning';
 export {
+	useUserWalletAutos,
+}
+                                                                           from './hook/user/wallet/auto/useUserWalletAuto';
+export {
 	useMetaObjectLinkAccess
 }                                                                          from './hook/metaObject/useMetaObject';
 export { useResource, useResourceList, useAction, useFileUploader }        from './hook/useBaseHooks';
@@ -247,3 +251,7 @@ export {
 export {
 	getMetaObjectLinkAccessEndpoint,
 }                                                                 from './enpoints/metaObject/metaObjectEndpoints';
+export {
+	getUserWalletAutosEndpoint,
+}
+                                                                  from './enpoints/user/wallet/auto/userWalletAutoEndpoints';
