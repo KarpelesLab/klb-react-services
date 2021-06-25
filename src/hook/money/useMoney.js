@@ -13,5 +13,5 @@ export const useMoneySwift = (code, isAba = false, restSettings = null) => {
 		setEndpoint(isAba ? getMoneySwiftAbaEndpoint() : getMoneySwiftEndpoint());
 	}, [code, isAba, setParams, setEndpoint]);
 
-	return useResource(endpoint, 'GET', params, restSettings);
+	return useResource(endpoint, params, restSettings);
 };

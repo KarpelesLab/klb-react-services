@@ -37,5 +37,5 @@ var useMoneySwift = exports.useMoneySwift = function useMoneySwift(code) {
 		setEndpoint(isAba ? (0, _moneyEndpoints.getMoneySwiftAbaEndpoint)() : (0, _moneyEndpoints.getMoneySwiftEndpoint)());
 	}, [code, isAba, setParams, setEndpoint]);
 
-	return (0, _useBaseHooks.useResource)(endpoint, 'GET', params, restSettings);
+	return (0, _useBaseHooks.useResource)(endpoint, params, restSettings);
 };
