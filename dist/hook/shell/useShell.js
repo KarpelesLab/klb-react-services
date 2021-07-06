@@ -184,9 +184,8 @@ var useShellTransfer = exports.useShellTransfer = function useShellTransfer(shel
 	    loading = _useAction16[1];
 
 	var doAction = (0, _react.useCallback)(function (toEmail) {
-		var validationMethod = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'mail';
-		var settingsOverride = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-		return _doAction({ toEmail: toEmail, validationMethod: validationMethod }, settingsOverride);
+		var settingsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+		return _doAction({ toEmail: toEmail }, settingsOverride);
 	}, []); //eslint-disable-line
 
 	return [doAction, loading];

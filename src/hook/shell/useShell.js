@@ -115,8 +115,8 @@ export const useShellTransfer = shellId => {
 	const [_doAction, loading] = useAction(getShellTransfer(shellId), 'POST');
 
 	const doAction = useCallback(
-		(toEmail, validationMethod = 'mail', settingsOverride = {}) =>
-			_doAction({ toEmail: toEmail, validationMethod: validationMethod }, settingsOverride),
+		(toEmail, settingsOverride = {}) =>
+			_doAction({ toEmail: toEmail }, settingsOverride),
 		[]); //eslint-disable-line
 
 	return [doAction, loading];
