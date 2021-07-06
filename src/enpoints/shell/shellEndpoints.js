@@ -10,3 +10,4 @@ export const getShellRebootEndpoint = shellId => `Shell/${shellId}:reboot`;
 export const getShellSetBillingEndpoint = shellId => `Shell/${shellId}:setBilling`;
 export const getShellAddTag = shellId => `Shell/${shellId}:addTag`;
 export const getShellRemoveTag = shellId => `Shell/${shellId}:delTag`;
+export const getShellTransfer = shellId => `Shell/${shellId}:transfer`;

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.useShellRemoveTag = exports.useShellAddTag = exports.useShellCreate = exports.useShellCreateAndSetBilling = exports.useShellSetBilling = exports.useShellReboot = exports.useShellStop = exports.useShellStart = exports.useShellCancelSubscription = exports.useShellReconfigure = exports.useShellSetInitialOS = exports.useShellDeleteIp = exports.useShellUpdate = exports.useShell = exports.useShells = undefined;
+exports.useShellTransfer = exports.useShellRemoveTag = exports.useShellAddTag = exports.useShellCreate = exports.useShellCreateAndSetBilling = exports.useShellSetBilling = exports.useShellReboot = exports.useShellStop = exports.useShellStart = exports.useShellCancelSubscription = exports.useShellReconfigure = exports.useShellSetInitialOS = exports.useShellDeleteIp = exports.useShellUpdate = exports.useShell = exports.useShells = undefined;
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
@@ -173,6 +173,20 @@ var useShellRemoveTag = exports.useShellRemoveTag = function useShellRemoveTag(s
 	var doAction = (0, _react.useCallback)(function (tag) {
 		var settingsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 		return _doAction({ tag: tag }, settingsOverride);
+	}, []); //eslint-disable-line
+
+	return [doAction, loading];
+};
+var useShellTransfer = exports.useShellTransfer = function useShellTransfer(shellId) {
+	var _useAction15 = (0, _useBaseHooks.useAction)((0, _.getShellTransfer)(shellId), 'POST'),
+	    _useAction16 = _slicedToArray(_useAction15, 2),
+	    _doAction = _useAction16[0],
+	    loading = _useAction16[1];
+
+	var doAction = (0, _react.useCallback)(function (toEmail) {
+		var validationMethod = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'mail';
+		var settingsOverride = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+		return _doAction({ toEmail: toEmail, validationMethod: validationMethod }, settingsOverride);
 	}, []); //eslint-disable-line
 
 	return [doAction, loading];

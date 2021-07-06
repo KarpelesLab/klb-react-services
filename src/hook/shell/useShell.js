@@ -1,6 +1,12 @@
-import { useAction, useResource, useResourceList }                                                  from '../useBaseHooks';
-import { useCallback }                                                                              from 'react';
-import { getShellAddTag, getShellRemoveTag, useUserBillingCreateWithMethod, useUserLocationCreate } from '../..';
+import { useAction, useResource, useResourceList } from '../useBaseHooks';
+import { useCallback }                             from 'react';
+import {
+	getShellAddTag,
+	getShellRemoveTag,
+	getShellTransfer,
+	useUserBillingCreateWithMethod,
+	useUserLocationCreate
+}                                                  from '../..';
 import {
 	getShellCancelEndpoint,
 	getShellDeleteIpAddressEndpoint,
@@ -12,7 +18,7 @@ import {
 	getShellSetInitialOsEndpoint,
 	getShellStartEndpoint,
 	getShellStopEndpoint
-}                                                                                                   from '../../enpoints/shell/shellEndpoints';
+}                                                  from '../../enpoints/shell/shellEndpoints';
 
 export const useShells = (restSettings = null) => useResourceList(getShellsEndpoint(), restSettings);
 export const useShell = (shellId, params = null, restSettings = null) => useResource(getShellEndpoint(shellId), params, restSettings);
@@ -102,6 +108,16 @@ export const useShellRemoveTag = shellId => {
 	const [_doAction, loading] = useAction(getShellRemoveTag(shellId), 'POST', { snackMessageToken: 'shell_remove_tag_success' });
 
 	const doAction = useCallback((tag, settingsOverride = {}) => _doAction({ tag: tag }, settingsOverride), []); //eslint-disable-line
+
+	return [doAction, loading];
+};
+export const useShellTransfer = shellId => {
+	const [_doAction, loading] = useAction(getShellTransfer(shellId), 'POST');
+
+	const doAction = useCallback(
+		(toEmail, validationMethod = 'mail', settingsOverride = {}) =>
+			_doAction({ toEmail: toEmail, validationMethod: validationMethod }, settingsOverride),
+		[]); //eslint-disable-line
 
 	return [doAction, loading];
 };

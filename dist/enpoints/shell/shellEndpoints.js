@@ -39,3 +39,6 @@ var getShellAddTag = exports.getShellAddTag = function getShellAddTag(shellId) {
 var getShellRemoveTag = exports.getShellRemoveTag = function getShellRemoveTag(shellId) {
   return 'Shell/' + shellId + ':delTag';
 };
+var getShellTransfer = exports.getShellTransfer = function getShellTransfer(shellId) {
+  return 'Shell/' + shellId + ':transfer';
+};

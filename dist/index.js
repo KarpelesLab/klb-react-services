@@ -357,6 +357,12 @@ Object.defineProperty(exports, 'useShellRemoveTag', {
 		return _useShell.useShellRemoveTag;
 	}
 });
+Object.defineProperty(exports, 'useShellTransfer', {
+	enumerable: true,
+	get: function get() {
+		return _useShell.useShellTransfer;
+	}
+});
 
 var _useShellVolumeSnapshot = require('./hook/shell/volume/useShellVolumeSnapshot');
 
@@ -1060,6 +1066,12 @@ Object.defineProperty(exports, 'getShellRemoveTag', {
 	enumerable: true,
 	get: function get() {
 		return _shellEndpoints.getShellRemoveTag;
+	}
+});
+Object.defineProperty(exports, 'getShellTransfer', {
+	enumerable: true,
+	get: function get() {
+		return _shellEndpoints.getShellTransfer;
 	}
 });
 
