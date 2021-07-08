@@ -9,9 +9,10 @@ import { useCallback } from 'react';
 export const useMetaObjectLinkAccess = (metaObjectId) => {
 	const [_doAction, loading] = useAction(getMetaObjectLinkAccessEndpoint(metaObjectId), 'POST');
 
-	const doAction = useCallback((access, expires, settingsOverride = {}) => _doAction({
+	const doAction = useCallback((access, expires, type = 'unknown', settingsOverride = {}) => _doAction({
 		access: access,
-		expires: expires
+		expires: expires,
+		type: type,
 	}, settingsOverride), []); //eslint-disable-line
 
 	return [doAction, loading];

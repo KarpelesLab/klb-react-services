@@ -20,10 +20,12 @@ var useMetaObjectLinkAccess = exports.useMetaObjectLinkAccess = function useMeta
 	    loading = _useAction2[1];
 
 	var doAction = (0, _react.useCallback)(function (access, expires) {
-		var settingsOverride = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+		var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'unknown';
+		var settingsOverride = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
 		return _doAction({
 			access: access,
-			expires: expires
+			expires: expires,
+			type: type
 		}, settingsOverride);
 	}, []); //eslint-disable-line
 
