@@ -1,6 +1,7 @@
 import { useAction }   from '../useBaseHooks';
 import {
 	getMetaObjectLinkAccessEndpoint,
+	getMetaObjectLinkJoinEndpoint,
 	getMetaObjectListAccessEndpoint,
 	getMetaObjectUnsetAccessEndpoint
 }                      from '../../enpoints/metaObject/metaObjectEndpoints';
@@ -19,7 +20,7 @@ export const useMetaObjectLinkAccess = (metaObjectId) => {
 };
 
 export const useMetaObjectLinkJoin = () => {
-	const [_doAction, loading] = useAction(getMetaObjectLinkAccessEndpoint(), 'POST');
+	const [_doAction, loading] = useAction(getMetaObjectLinkJoinEndpoint(), 'POST');
 
 	const doAction = useCallback((id, settingsOverride = {}) => _doAction({
 		id: id,
