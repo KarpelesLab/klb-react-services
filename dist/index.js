@@ -636,6 +636,51 @@ Object.defineProperty(exports, 'useMetaObjectLinkAccess', {
 		return _useMetaObject.useMetaObjectLinkAccess;
 	}
 });
+Object.defineProperty(exports, 'useMetaObjectLinkJoin', {
+	enumerable: true,
+	get: function get() {
+		return _useMetaObject.useMetaObjectLinkJoin;
+	}
+});
+Object.defineProperty(exports, 'useMetaObjectListAccess', {
+	enumerable: true,
+	get: function get() {
+		return _useMetaObject.useMetaObjectListAccess;
+	}
+});
+Object.defineProperty(exports, 'useMetaObjectUnsetAccess', {
+	enumerable: true,
+	get: function get() {
+		return _useMetaObject.useMetaObjectUnsetAccess;
+	}
+});
+
+var _useMetaObjectLink = require('./hook/metaObject/link/useMetaObjectLink');
+
+Object.defineProperty(exports, 'useMetaObjectLink', {
+	enumerable: true,
+	get: function get() {
+		return _useMetaObjectLink.useMetaObjectLink;
+	}
+});
+Object.defineProperty(exports, 'useMetaObjectLinkDelete', {
+	enumerable: true,
+	get: function get() {
+		return _useMetaObjectLink.useMetaObjectLinkDelete;
+	}
+});
+Object.defineProperty(exports, 'useMetaObjectLinks', {
+	enumerable: true,
+	get: function get() {
+		return _useMetaObjectLink.useMetaObjectLinks;
+	}
+});
+Object.defineProperty(exports, 'useMetaObjectLinksClear', {
+	enumerable: true,
+	get: function get() {
+		return _useMetaObjectLink.useMetaObjectLinksClear;
+	}
+});
 
 var _useBaseHooks = require('./hook/useBaseHooks');
 
@@ -1323,6 +1368,24 @@ Object.defineProperty(exports, 'getMetaObjectLinkAccessEndpoint', {
 		return _metaObjectEndpoints.getMetaObjectLinkAccessEndpoint;
 	}
 });
+Object.defineProperty(exports, 'getMetaObjectLinkJoinEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _metaObjectEndpoints.getMetaObjectLinkJoinEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getMetaObjectListAccessEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _metaObjectEndpoints.getMetaObjectListAccessEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getMetaObjectUnsetAccessEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _metaObjectEndpoints.getMetaObjectUnsetAccessEndpoint;
+	}
+});
 
 var _userWalletAutoEndpoints = require('./enpoints/user/wallet/auto/userWalletAutoEndpoints');
 
@@ -1330,5 +1393,20 @@ Object.defineProperty(exports, 'getUserWalletAutosEndpoint', {
 	enumerable: true,
 	get: function get() {
 		return _userWalletAutoEndpoints.getUserWalletAutosEndpoint;
+	}
+});
+
+var _metaObjectLinkEndpoint = require('./enpoints/metaObject/link/metaObjectLinkEndpoint');
+
+Object.defineProperty(exports, 'getMetaObjectLinkEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _metaObjectLinkEndpoint.getMetaObjectLinkEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getMetaObjectLinksEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _metaObjectLinkEndpoint.getMetaObjectLinksEndpoint;
 	}
 });

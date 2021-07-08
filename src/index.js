@@ -114,8 +114,18 @@ export {
 }
                                                                            from './hook/user/wallet/auto/useUserWalletAuto';
 export {
-	useMetaObjectLinkAccess
+	useMetaObjectLinkAccess,
+	useMetaObjectLinkJoin,
+	useMetaObjectListAccess,
+	useMetaObjectUnsetAccess
 }                                                                          from './hook/metaObject/useMetaObject';
+export {
+	useMetaObjectLink,
+	useMetaObjectLinkDelete,
+	useMetaObjectLinks,
+	useMetaObjectLinksClear
+}
+                                                                           from './hook/metaObject/link/useMetaObjectLink';
 export { useResource, useResourceList, useAction, useFileUploader }        from './hook/useBaseHooks';
 export {
 	useApiErrorHandler
@@ -252,8 +262,16 @@ export {
 }                                                                 from './enpoints/shell/warning/shellWarningEndpoint';
 export {
 	getMetaObjectLinkAccessEndpoint,
+	getMetaObjectLinkJoinEndpoint,
+	getMetaObjectListAccessEndpoint,
+	getMetaObjectUnsetAccessEndpoint
 }                                                                 from './enpoints/metaObject/metaObjectEndpoints';
 export {
 	getUserWalletAutosEndpoint,
 }
                                                                   from './enpoints/user/wallet/auto/userWalletAutoEndpoints';
+export {
+	getMetaObjectLinkEndpoint,
+	getMetaObjectLinksEndpoint
+}
+                                                                  from './enpoints/metaObject/link/metaObjectLinkEndpoint';
