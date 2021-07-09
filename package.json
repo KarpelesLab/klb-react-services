@@ -1,6 +1,6 @@
 {
   "name": "@karpeleslab/klb-react-services",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "dependencies": {
     "@karpeleslab/klbfw": "^0.0.35",
     "@testing-library/jest-dom": "^5.11.4",

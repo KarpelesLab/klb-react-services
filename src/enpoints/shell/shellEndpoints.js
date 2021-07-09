@@ -11,3 +11,4 @@ export const getShellSetBillingEndpoint = shellId => `Shell/${shellId}:setBillin
 export const getShellAddTag = shellId => `Shell/${shellId}:addTag`;
 export const getShellRemoveTag = shellId => `Shell/${shellId}:delTag`;
 export const getShellTransfer = shellId => `Shell/${shellId}:transfer`;
+export const getShellInviteEndpoint = shellId => `Shell/${shellId}:invite`;

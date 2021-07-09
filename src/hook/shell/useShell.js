@@ -2,6 +2,7 @@ import { useAction, useResource, useResourceList } from '../useBaseHooks';
 import { useCallback }                             from 'react';
 import {
 	getShellAddTag,
+	getShellInviteEndpoint,
 	getShellRemoveTag,
 	getShellTransfer,
 	useUserBillingCreateWithMethod,
@@ -117,6 +118,16 @@ export const useShellTransfer = shellId => {
 	const doAction = useCallback(
 		(toEmail, settingsOverride = {}) =>
 			_doAction({ toEmail: toEmail }, settingsOverride),
+		[]); //eslint-disable-line
+
+	return [doAction, loading];
+};
+export const useShellInvite = shellId => {
+	const [_doAction, loading] = useAction(getShellInviteEndpoint(shellId), 'POST');
+
+	const doAction = useCallback(
+		(expires = null, emails = [], settingsOverride = {}) =>
+			_doAction({ emails: emails, expires: expires }, settingsOverride),
 		[]); //eslint-disable-line
 
 	return [doAction, loading];

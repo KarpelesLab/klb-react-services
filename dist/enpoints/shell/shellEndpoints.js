@@ -42,3 +42,6 @@ var getShellRemoveTag = exports.getShellRemoveTag = function getShellRemoveTag(s
 var getShellTransfer = exports.getShellTransfer = function getShellTransfer(shellId) {
   return 'Shell/' + shellId + ':transfer';
 };
+var getShellInviteEndpoint = exports.getShellInviteEndpoint = function getShellInviteEndpoint(shellId) {
+  return 'Shell/' + shellId + ':invite';
+};

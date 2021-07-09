@@ -33,7 +33,7 @@ var useMetaObjectLinkAccess = exports.useMetaObjectLinkAccess = function useMeta
 };
 
 var useMetaObjectLinkJoin = exports.useMetaObjectLinkJoin = function useMetaObjectLinkJoin() {
-	var _useAction3 = (0, _useBaseHooks.useAction)((0, _metaObjectEndpoints.getMetaObjectLinkAccessEndpoint)(), 'POST'),
+	var _useAction3 = (0, _useBaseHooks.useAction)((0, _metaObjectEndpoints.getMetaObjectLinkJoinEndpoint)(), 'POST'),
 	    _useAction4 = _slicedToArray(_useAction3, 2),
 	    _doAction = _useAction4[0],
 	    loading = _useAction4[1];

@@ -363,6 +363,12 @@ Object.defineProperty(exports, 'useShellTransfer', {
 		return _useShell.useShellTransfer;
 	}
 });
+Object.defineProperty(exports, 'useShellInvite', {
+	enumerable: true,
+	get: function get() {
+		return _useShell.useShellInvite;
+	}
+});
 
 var _useShellVolumeSnapshot = require('./hook/shell/volume/useShellVolumeSnapshot');
 
@@ -1117,6 +1123,12 @@ Object.defineProperty(exports, 'getShellTransfer', {
 	enumerable: true,
 	get: function get() {
 		return _shellEndpoints.getShellTransfer;
+	}
+});
+Object.defineProperty(exports, 'getShellInviteEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _shellEndpoints.getShellInviteEndpoint;
 	}
 });
 

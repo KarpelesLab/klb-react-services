@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.useShellTransfer = exports.useShellRemoveTag = exports.useShellAddTag = exports.useShellCreate = exports.useShellCreateAndSetBilling = exports.useShellSetBilling = exports.useShellReboot = exports.useShellStop = exports.useShellStart = exports.useShellCancelSubscription = exports.useShellReconfigure = exports.useShellSetInitialOS = exports.useShellDeleteIp = exports.useShellUpdate = exports.useShell = exports.useShells = undefined;
+exports.useShellInvite = exports.useShellTransfer = exports.useShellRemoveTag = exports.useShellAddTag = exports.useShellCreate = exports.useShellCreateAndSetBilling = exports.useShellSetBilling = exports.useShellReboot = exports.useShellStop = exports.useShellStart = exports.useShellCancelSubscription = exports.useShellReconfigure = exports.useShellSetInitialOS = exports.useShellDeleteIp = exports.useShellUpdate = exports.useShell = exports.useShells = undefined;
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
@@ -186,6 +186,21 @@ var useShellTransfer = exports.useShellTransfer = function useShellTransfer(shel
 	var doAction = (0, _react.useCallback)(function (toEmail) {
 		var settingsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 		return _doAction({ toEmail: toEmail }, settingsOverride);
+	}, []); //eslint-disable-line
+
+	return [doAction, loading];
+};
+var useShellInvite = exports.useShellInvite = function useShellInvite(shellId) {
+	var _useAction17 = (0, _useBaseHooks.useAction)((0, _.getShellInviteEndpoint)(shellId), 'POST'),
+	    _useAction18 = _slicedToArray(_useAction17, 2),
+	    _doAction = _useAction18[0],
+	    loading = _useAction18[1];
+
+	var doAction = (0, _react.useCallback)(function () {
+		var expires = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+		var emails = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+		var settingsOverride = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+		return _doAction({ emails: emails, expires: expires }, settingsOverride);
 	}, []); //eslint-disable-line
 
 	return [doAction, loading];

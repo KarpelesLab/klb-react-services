@@ -52,7 +52,8 @@ export {
 	useShellCreate,
 	useShellAddTag,
 	useShellRemoveTag,
-	useShellTransfer
+	useShellTransfer,
+	useShellInvite
 }                                                                          from './hook/shell/useShell';
 export {
 	useShellVolumeSnapshotRestore, useShellVolumeSnapshots
@@ -208,7 +209,8 @@ export {
 	getShellStopEndpoint,
 	getShellAddTag,
 	getShellRemoveTag,
-	getShellTransfer
+	getShellTransfer,
+	getShellInviteEndpoint
 }                                                                 from './enpoints/shell/shellEndpoints';
 export {
 	getUserBillingCreateEndpoint,
