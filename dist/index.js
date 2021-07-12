@@ -661,6 +661,15 @@ Object.defineProperty(exports, 'useMetaObjectUnsetAccess', {
 	}
 });
 
+var _useGeoIp = require('./hook/thirdParty/geoip/useGeoIp');
+
+Object.defineProperty(exports, 'useGeoIpLookup', {
+	enumerable: true,
+	get: function get() {
+		return _useGeoIp.useGeoIpLookup;
+	}
+});
+
 var _useMetaObjectLink = require('./hook/metaObject/link/useMetaObjectLink');
 
 Object.defineProperty(exports, 'useMetaObjectLink', {
@@ -1420,5 +1429,14 @@ Object.defineProperty(exports, 'getMetaObjectLinksEndpoint', {
 	enumerable: true,
 	get: function get() {
 		return _metaObjectLinkEndpoint.getMetaObjectLinksEndpoint;
+	}
+});
+
+var _geoIpEndpoints = require('./enpoints/thirdParty/geoip/geoIpEndpoints');
+
+Object.defineProperty(exports, 'getGeoIpEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _geoIpEndpoints.getGeoIpEndpoint;
 	}
 });

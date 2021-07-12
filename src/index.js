@@ -121,6 +121,9 @@ export {
 	useMetaObjectUnsetAccess
 }                                                                          from './hook/metaObject/useMetaObject';
 export {
+	useGeoIpLookup
+}                                                                          from './hook/thirdParty/geoip/useGeoIp';
+export {
 	useMetaObjectLink,
 	useMetaObjectLinkDelete,
 	useMetaObjectLinks,
@@ -277,3 +280,7 @@ export {
 	getMetaObjectLinksEndpoint
 }
                                                                   from './enpoints/metaObject/link/metaObjectLinkEndpoint';
+export {
+	getGeoIpEndpoint
+}
+                                                                  from './enpoints/thirdParty/geoip/geoIpEndpoints';
