@@ -42,7 +42,7 @@ export const useResource = (endpoint, params = null, restSettings = null) => {
 					setResource({ error: e });
 					if (s.handleError) handleError(e);
 					else {
-						throw d;
+						throw e;
 					}
 				})
 				.finally(() => {

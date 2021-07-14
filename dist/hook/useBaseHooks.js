@@ -71,7 +71,7 @@ var useResource = exports.useResource = function useResource(endpoint) {
 		}).catch(function (e) {
 			setResource({ error: e });
 			if (s.handleError) handleError(e);else {
-				throw d;
+				throw e;
 			}
 		}).finally(function () {
 			if (!s.silent) setLoading(false);
