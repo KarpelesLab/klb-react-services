@@ -130,10 +130,20 @@ export {
 	useMetaObjectLinksClear
 }
                                                                            from './hook/metaObject/link/useMetaObjectLink';
-export { useResource, useResourceList, useAction, useFileUploader }        from './hook/useBaseHooks';
+export {
+	useShellOrganization,
+	useShellOrganizationCreate,
+	useShellOrganizations,
+	useShellOrganizationUpdate
+}
+                                                                           from './hook/shell/organization/useShellOrganization';
+export { useSiteTemplate, useSiteTemplates }                               from './hook/site/template/useSiteTemplate';
+export { useSetting, useSettingUpload }                                    from './hook/setting/useSetting';
+
+export { useResource, useResourceList, useAction, useFileUploader } from './hook/useBaseHooks';
 export {
 	useApiErrorHandler
-}                                                                          from './hook/useApiErrorHandler';
+}                                                                   from './hook/useApiErrorHandler';
 
 /** CONTEXTS **/
 
@@ -284,3 +294,19 @@ export {
 	getGeoIpEndpoint
 }
                                                                   from './enpoints/thirdParty/geoip/geoIpEndpoints';
+export {
+	getShellOrganizationCreateEndpoint,
+	getShellOrganizationEndpoint,
+	getShellOrganizationsEndpoint
+}
+                                                                  from './enpoints/shell/organization/shellOrganizationEndpoints';
+export {
+	getSiteTemplatesEndpoint,
+	getSiteTemplateEndpoint
+}
+                                                                  from './enpoints/site/template/siteTemplateEndpoints';
+export {
+	getSettingEndpoint,
+	getSettingUploadEndpoint
+}
+                                                                  from './enpoints/setting/getSettingEndpoints';

@@ -697,6 +697,63 @@ Object.defineProperty(exports, 'useMetaObjectLinksClear', {
 	}
 });
 
+var _useShellOrganization = require('./hook/shell/organization/useShellOrganization');
+
+Object.defineProperty(exports, 'useShellOrganization', {
+	enumerable: true,
+	get: function get() {
+		return _useShellOrganization.useShellOrganization;
+	}
+});
+Object.defineProperty(exports, 'useShellOrganizationCreate', {
+	enumerable: true,
+	get: function get() {
+		return _useShellOrganization.useShellOrganizationCreate;
+	}
+});
+Object.defineProperty(exports, 'useShellOrganizations', {
+	enumerable: true,
+	get: function get() {
+		return _useShellOrganization.useShellOrganizations;
+	}
+});
+Object.defineProperty(exports, 'useShellOrganizationUpdate', {
+	enumerable: true,
+	get: function get() {
+		return _useShellOrganization.useShellOrganizationUpdate;
+	}
+});
+
+var _useSiteTemplate = require('./hook/site/template/useSiteTemplate');
+
+Object.defineProperty(exports, 'useSiteTemplate', {
+	enumerable: true,
+	get: function get() {
+		return _useSiteTemplate.useSiteTemplate;
+	}
+});
+Object.defineProperty(exports, 'useSiteTemplates', {
+	enumerable: true,
+	get: function get() {
+		return _useSiteTemplate.useSiteTemplates;
+	}
+});
+
+var _useSetting = require('./hook/setting/useSetting');
+
+Object.defineProperty(exports, 'useSetting', {
+	enumerable: true,
+	get: function get() {
+		return _useSetting.useSetting;
+	}
+});
+Object.defineProperty(exports, 'useSettingUpload', {
+	enumerable: true,
+	get: function get() {
+		return _useSetting.useSettingUpload;
+	}
+});
+
 var _useBaseHooks = require('./hook/useBaseHooks');
 
 Object.defineProperty(exports, 'useResource', {
@@ -1438,5 +1495,56 @@ Object.defineProperty(exports, 'getGeoIpEndpoint', {
 	enumerable: true,
 	get: function get() {
 		return _geoIpEndpoints.getGeoIpEndpoint;
+	}
+});
+
+var _shellOrganizationEndpoints = require('./enpoints/shell/organization/shellOrganizationEndpoints');
+
+Object.defineProperty(exports, 'getShellOrganizationCreateEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _shellOrganizationEndpoints.getShellOrganizationCreateEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getShellOrganizationEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _shellOrganizationEndpoints.getShellOrganizationEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getShellOrganizationsEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _shellOrganizationEndpoints.getShellOrganizationsEndpoint;
+	}
+});
+
+var _siteTemplateEndpoints = require('./enpoints/site/template/siteTemplateEndpoints');
+
+Object.defineProperty(exports, 'getSiteTemplatesEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _siteTemplateEndpoints.getSiteTemplatesEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getSiteTemplateEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _siteTemplateEndpoints.getSiteTemplateEndpoint;
+	}
+});
+
+var _getSettingEndpoints = require('./enpoints/setting/getSettingEndpoints');
+
+Object.defineProperty(exports, 'getSettingEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _getSettingEndpoints.getSettingEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getSettingUploadEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _getSettingEndpoints.getSettingUploadEndpoint;
 	}
 });
