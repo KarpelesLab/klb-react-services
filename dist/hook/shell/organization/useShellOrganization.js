@@ -13,6 +13,8 @@ var _shellOrganizationEndpoints = require('../../../enpoints/shell/organization/
 
 var _react = require('react');
 
+var _ = require('../../..');
+
 var useShellOrganizations = exports.useShellOrganizations = function useShellOrganizations() {
 	var restSettings = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 	return (0, _useBaseHooks.useResourceList)((0, _shellOrganizationEndpoints.getShellOrganizationsEndpoint)(), restSettings);
@@ -28,14 +30,66 @@ var useShellOrganizationUpdate = exports.useShellOrganizationUpdate = function u
 var useShellOrganizationCreate = exports.useShellOrganizationCreate = function useShellOrganizationCreate() {
 	var _useAction = (0, _useBaseHooks.useAction)((0, _shellOrganizationEndpoints.getShellOrganizationCreateEndpoint)(), 'POST', { snackMessageToken: 'shell_organization_create_success' }),
 	    _useAction2 = _slicedToArray(_useAction, 2),
-	    _doAction = _useAction2[0],
-	    loading = _useAction2[1];
+	    _doCreate = _useAction2[0],
+	    creating = _useAction2[1];
 
-	var doAction = (0, _react.useCallback)(function (name, settings, templateId) {
-		var settingsOverride = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+	var _useFileUploader = (0, _useBaseHooks.useFileUploader)(),
+	    _useFileUploader2 = _slicedToArray(_useFileUploader, 3),
+	    _doUpload = _useFileUploader2[0],
+	    uploading = _useFileUploader2[1],
+	    progress = _useFileUploader2[2];
 
-		return _doAction({ name: name, settings: settings, template: templateId }, settingsOverride);
+	var doAction = (0, _react.useCallback)(function (name, settings, templateId, files) {
+		var settingsOverride = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : {};
+
+		var params = { name: name, settings: settings, template: templateId };
+
+		var buildUpload = function buildUpload(key, file, innerThen) {
+			return function (org) {
+				return _doUpload((0, _.getSettingUploadEndpoint)(org.Setting__), file, { key: key }, { innerThen: innerThen ? innerThen : undefined }).then(function () {
+					return org;
+				});
+			};
+		};
+
+		var setOv = {};
+		if (files) {
+			var last = null;
+			var _iteratorNormalCompletion = true;
+			var _didIteratorError = false;
+			var _iteratorError = undefined;
+
+			try {
+				for (var _iterator = Object.entries(files)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+					var _ref = _step.value;
+
+					var _ref2 = _slicedToArray(_ref, 2);
+
+					var settingKey = _ref2[0];
+					var file = _ref2[1];
+
+					last = buildUpload(settingKey, file, last);
+				}
+			} catch (err) {
+				_didIteratorError = true;
+				_iteratorError = err;
+			} finally {
+				try {
+					if (!_iteratorNormalCompletion && _iterator.return) {
+						_iterator.return();
+					}
+				} finally {
+					if (_didIteratorError) {
+						throw _iteratorError;
+					}
+				}
+			}
+
+			setOv = { innerThen: last };
+		}
+
+		return _doCreate(params, setOv);
 	}, []); //eslint-disable-line
 
-	return [doAction, loading];
+	return [doAction, creating || uploading, progress];
 };
