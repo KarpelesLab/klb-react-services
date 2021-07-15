@@ -723,6 +723,12 @@ Object.defineProperty(exports, 'useShellOrganizationUpdate', {
 		return _useShellOrganization.useShellOrganizationUpdate;
 	}
 });
+Object.defineProperty(exports, 'useShellOrganizationSetBilling', {
+	enumerable: true,
+	get: function get() {
+		return _useShellOrganization.useShellOrganizationSetBilling;
+	}
+});
 
 var _useSiteTemplate = require('./hook/site/template/useSiteTemplate');
 
@@ -1525,6 +1531,12 @@ Object.defineProperty(exports, 'getShellOrganizationsEndpoint', {
 	enumerable: true,
 	get: function get() {
 		return _shellOrganizationEndpoints.getShellOrganizationsEndpoint;
+	}
+});
+Object.defineProperty(exports, 'getShellOrganizationSetBillingEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _shellOrganizationEndpoints.getShellOrganizationSetBillingEndpoint;
 	}
 });
 

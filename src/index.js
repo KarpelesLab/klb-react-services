@@ -134,7 +134,8 @@ export {
 	useShellOrganization,
 	useShellOrganizationCreate,
 	useShellOrganizations,
-	useShellOrganizationUpdate
+	useShellOrganizationUpdate,
+	useShellOrganizationSetBilling
 }
                                                                            from './hook/shell/organization/useShellOrganization';
 export { useSiteTemplate, useSiteTemplates }                               from './hook/site/template/useSiteTemplate';
@@ -301,7 +302,8 @@ export {
 export {
 	getShellOrganizationCreateEndpoint,
 	getShellOrganizationEndpoint,
-	getShellOrganizationsEndpoint
+	getShellOrganizationsEndpoint,
+	getShellOrganizationSetBillingEndpoint
 }
                                                                   from './enpoints/shell/organization/shellOrganizationEndpoints';
 export {

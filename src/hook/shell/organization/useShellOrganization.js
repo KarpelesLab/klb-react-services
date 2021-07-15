@@ -4,8 +4,8 @@ import {
 	getShellOrganizationEndpoint,
 	getShellOrganizationsEndpoint
 }                                                                   from '../../../enpoints/shell/organization/shellOrganizationEndpoints';
-import { useCallback }                                              from 'react';
-import { getSettingUploadEndpoint }                                 from '../../..';
+import { useCallback }                                            from 'react';
+import { getSettingUploadEndpoint, getUserBillingCreateEndpoint } from '../../..';
 
 export const useShellOrganizations = (restSettings = null) => useResourceList(getShellOrganizationsEndpoint(), restSettings);
 export const useShellOrganization = (organizationId, params = null, restSettings = null) => useResource(getShellOrganizationEndpoint(organizationId), params, restSettings);
@@ -35,4 +35,13 @@ export const useShellOrganizationCreate = () => {
 	}, []); //eslint-disable-line
 
 	return [doAction, creating || uploading, progress];
+};
+export const useShellOrganizationSetBilling = orgId => {
+	const [_doAction, loading] = useAction(getShellOrganizationCreateEndpoint(orgId), 'POST', { snackMessageToken: 'shell_organization_billing_set_success' });
+
+	const doAction = useCallback((userBillingId, settingsOverride = {}) => _doAction({
+		User_Billing__:userBillingId
+	}, settingsOverride), []); //eslint-disable-line
+
+	return [doAction, loading];
 };

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.useShellOrganizationCreate = exports.useShellOrganizationUpdate = exports.useShellOrganization = exports.useShellOrganizations = undefined;
+exports.useShellOrganizationSetBilling = exports.useShellOrganizationCreate = exports.useShellOrganizationUpdate = exports.useShellOrganization = exports.useShellOrganizations = undefined;
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
@@ -92,4 +92,19 @@ var useShellOrganizationCreate = exports.useShellOrganizationCreate = function u
 	}, []); //eslint-disable-line
 
 	return [doAction, creating || uploading, progress];
+};
+var useShellOrganizationSetBilling = exports.useShellOrganizationSetBilling = function useShellOrganizationSetBilling(orgId) {
+	var _useAction3 = (0, _useBaseHooks.useAction)((0, _shellOrganizationEndpoints.getShellOrganizationCreateEndpoint)(orgId), 'POST', { snackMessageToken: 'shell_organization_billing_set_success' }),
+	    _useAction4 = _slicedToArray(_useAction3, 2),
+	    _doAction = _useAction4[0],
+	    loading = _useAction4[1];
+
+	var doAction = (0, _react.useCallback)(function (userBillingId) {
+		var settingsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+		return _doAction({
+			User_Billing__: userBillingId
+		}, settingsOverride);
+	}, []); //eslint-disable-line
+
+	return [doAction, loading];
 };
