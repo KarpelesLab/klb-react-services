@@ -13,5 +13,5 @@ var getShellOrganizationEndpoint = exports.getShellOrganizationEndpoint = functi
   return 'Shell/Organization/' + orgId;
 };
 var getShellOrganizationSetBillingEndpoint = exports.getShellOrganizationSetBillingEndpoint = function getShellOrganizationSetBillingEndpoint(orgId) {
-  return 'Shell/Organization/' + orgId + ':setBilling';
+  return 'Shell/Organization/' + orgId + ':setUserBilling';
 };
