@@ -2,8 +2,8 @@ import { useAction, useFileUploader, useResource, useResourceList } from '../../
 import {
 	getShellOrganizationCreateEndpoint,
 	getShellOrganizationEndpoint,
-	getShellOrganizationsEndpoint
-}                                                                   from '../../../enpoints/shell/organization/shellOrganizationEndpoints';
+	getShellOrganizationsEndpoint, getShellOrganizationSetBillingEndpoint
+} from '../../../enpoints/shell/organization/shellOrganizationEndpoints';
 import { useCallback }                                            from 'react';
 import { getSettingUploadEndpoint, getUserBillingCreateEndpoint } from '../../..';
 
@@ -37,7 +37,7 @@ export const useShellOrganizationCreate = () => {
 	return [doAction, creating || uploading, progress];
 };
 export const useShellOrganizationSetBilling = orgId => {
-	const [_doAction, loading] = useAction(getShellOrganizationCreateEndpoint(orgId), 'POST', { snackMessageToken: 'shell_organization_billing_set_success' });
+	const [_doAction, loading] = useAction(getShellOrganizationSetBillingEndpoint(orgId), 'POST', { snackMessageToken: 'shell_organization_billing_set_success' });
 
 	const doAction = useCallback((userBillingId, settingsOverride = {}) => _doAction({
 		User_Billing__:userBillingId

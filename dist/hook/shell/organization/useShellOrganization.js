@@ -94,7 +94,7 @@ var useShellOrganizationCreate = exports.useShellOrganizationCreate = function u
 	return [doAction, creating || uploading, progress];
 };
 var useShellOrganizationSetBilling = exports.useShellOrganizationSetBilling = function useShellOrganizationSetBilling(orgId) {
-	var _useAction3 = (0, _useBaseHooks.useAction)((0, _shellOrganizationEndpoints.getShellOrganizationCreateEndpoint)(orgId), 'POST', { snackMessageToken: 'shell_organization_billing_set_success' }),
+	var _useAction3 = (0, _useBaseHooks.useAction)((0, _shellOrganizationEndpoints.getShellOrganizationSetBillingEndpoint)(orgId), 'POST', { snackMessageToken: 'shell_organization_billing_set_success' }),
 	    _useAction4 = _slicedToArray(_useAction3, 2),
 	    _doAction = _useAction4[0],
 	    loading = _useAction4[1];
