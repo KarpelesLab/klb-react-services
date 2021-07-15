@@ -65,7 +65,7 @@ export const LoginContextContainer = ({ children, onValidated }) => {
 
 	const goBack = () => {
 		setData({});
-		setSession({});
+		setSession(null);
 	};
 
 	const handleSubmit = e => {

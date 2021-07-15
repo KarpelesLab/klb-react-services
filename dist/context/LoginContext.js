@@ -121,7 +121,7 @@ var LoginContextContainer = exports.LoginContextContainer = function LoginContex
 
 	var goBack = function goBack() {
 		setData({});
-		setSession({});
+		setSession(null);
 	};
 
 	var handleSubmit = function handleSubmit(e) {
