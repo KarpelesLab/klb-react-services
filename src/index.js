@@ -310,3 +310,7 @@ export {
 	getSettingUploadEndpoint
 }
                                                                   from './enpoints/setting/getSettingEndpoints';
+export {
+	getShellOrganizationFleetEndpoint,
+}
+                                                                  from './enpoints/shell/organization/fleet/shellOrganizationFleetEndpoints';

@@ -1548,3 +1548,12 @@ Object.defineProperty(exports, 'getSettingUploadEndpoint', {
 		return _getSettingEndpoints.getSettingUploadEndpoint;
 	}
 });
+
+var _shellOrganizationFleetEndpoints = require('./enpoints/shell/organization/fleet/shellOrganizationFleetEndpoints');
+
+Object.defineProperty(exports, 'getShellOrganizationFleetEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _shellOrganizationFleetEndpoints.getShellOrganizationFleetEndpoint;
+	}
+});
