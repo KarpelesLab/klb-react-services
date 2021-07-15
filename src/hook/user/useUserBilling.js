@@ -1,14 +1,15 @@
-import { useAction, useResourceList } from '../useBaseHooks';
-import { useCallback }                from 'react';
-import { useUserLocationUpdate }      from './useUserLocation';
+import { useAction, useResource, useResourceList } from '../useBaseHooks';
+import { useCallback }                             from 'react';
+import { useUserLocationUpdate }                   from './useUserLocation';
 import {
 	getUserBillingCreateEndpoint,
 	getUserBillingEndpoint,
 	getUserBillingsEndpoint
-}                                     from '../../enpoints/user/userBillingEndpoints';
+}                                                  from '../../enpoints/user/userBillingEndpoints';
 
-export const useUserBillings = (userId, restSettings = null) => useResourceList(getUserBillingsEndpoint(userId),restSettings);
+export const useUserBillings = (userId, restSettings = null) => useResourceList(getUserBillingsEndpoint(userId), restSettings);
 export const useUserBillingUpdate = billingId => useAction(getUserBillingEndpoint(billingId), 'PATCH');
+export const useUserBilling = (billingId, params = null, restSettings = null) => useResource(getUserBillingEndpoint(billingId), params, restSettings);
 export const useUserBillingUpdateLocation = (billingId, locationId) => {
 	const [_updateBilling, updatingBilling] = useAction(getUserBillingEndpoint(billingId), 'PATCH');
 	const [_updateLocation, updatingLocation] = useUserLocationUpdate(locationId);

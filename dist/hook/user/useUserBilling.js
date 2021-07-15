@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.useUserBillingCreateWithMethod = exports.useUserBillingUpdateLocation = exports.useUserBillingUpdate = exports.useUserBillings = undefined;
+exports.useUserBillingCreateWithMethod = exports.useUserBillingUpdateLocation = exports.useUserBilling = exports.useUserBillingUpdate = exports.useUserBillings = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -23,6 +23,11 @@ var useUserBillings = exports.useUserBillings = function useUserBillings(userId)
 };
 var useUserBillingUpdate = exports.useUserBillingUpdate = function useUserBillingUpdate(billingId) {
 	return (0, _useBaseHooks.useAction)((0, _userBillingEndpoints.getUserBillingEndpoint)(billingId), 'PATCH');
+};
+var useUserBilling = exports.useUserBilling = function useUserBilling(billingId) {
+	var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+	var restSettings = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+	return (0, _useBaseHooks.useResource)((0, _userBillingEndpoints.getUserBillingEndpoint)(billingId), params, restSettings);
 };
 var useUserBillingUpdateLocation = exports.useUserBillingUpdateLocation = function useUserBillingUpdateLocation(billingId, locationId) {
 	var _useAction = (0, _useBaseHooks.useAction)((0, _userBillingEndpoints.getUserBillingEndpoint)(billingId), 'PATCH'),

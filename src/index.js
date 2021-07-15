@@ -26,7 +26,8 @@ export {
 	useUserBillings,
 	useUserBillingUpdateLocation,
 	useUserBillingUpdate,
-	useUserBillingCreateWithMethod
+	useUserBillingCreateWithMethod,
+	useUserBilling
 }                                                                          from './hook/user/useUserBilling';
 export { useUserBillingMethods, useUserBillingMethodUpdate }               from './hook/user/useUserBillingMethod';
 export { useTwoStepValidation }                                            from './hook/util/useUtil';

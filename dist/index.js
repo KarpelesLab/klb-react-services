@@ -201,6 +201,12 @@ Object.defineProperty(exports, 'useUserBillingCreateWithMethod', {
 		return _useUserBilling.useUserBillingCreateWithMethod;
 	}
 });
+Object.defineProperty(exports, 'useUserBilling', {
+	enumerable: true,
+	get: function get() {
+		return _useUserBilling.useUserBilling;
+	}
+});
 
 var _useUserBillingMethod = require('./hook/user/useUserBillingMethod');
 
