@@ -754,6 +754,15 @@ Object.defineProperty(exports, 'useSettingUpload', {
 	}
 });
 
+var _useShellOrganizationFleet = require('./hook/shell/organization/fleet/useShellOrganizationFleet');
+
+Object.defineProperty(exports, 'useShellOrganizationFleet', {
+	enumerable: true,
+	get: function get() {
+		return _useShellOrganizationFleet.useShellOrganizationFleet;
+	}
+});
+
 var _useBaseHooks = require('./hook/useBaseHooks');
 
 Object.defineProperty(exports, 'useResource', {

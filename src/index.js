@@ -139,6 +139,10 @@ export {
                                                                            from './hook/shell/organization/useShellOrganization';
 export { useSiteTemplate, useSiteTemplates }                               from './hook/site/template/useSiteTemplate';
 export { useSetting, useSettingUpload }                                    from './hook/setting/useSetting';
+export {
+	useShellOrganizationFleet
+}
+                                                                           from './hook/shell/organization/fleet/useShellOrganizationFleet';
 
 export { useResource, useResourceList, useAction, useFileUploader } from './hook/useBaseHooks';
 export {
