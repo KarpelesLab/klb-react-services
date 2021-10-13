@@ -1299,6 +1299,12 @@ Object.defineProperty(exports, 'getUserSetMetaEndpoint', {
 		return _userEndpoints.getUserSetMetaEndpoint;
 	}
 });
+Object.defineProperty(exports, 'getUserGetEndpoint', {
+	enumerable: true,
+	get: function get() {
+		return _userEndpoints.getUserGetEndpoint;
+	}
+});
 
 var _userLocationEndpoints = require('./enpoints/user/userLocationEndpoints');
 

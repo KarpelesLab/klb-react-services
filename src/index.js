@@ -247,7 +247,8 @@ export {
 	getUserEndpoint,
 	getUserSetPasswordEndpoint,
 	getUserSetDefaultEndpoint,
-	getUserSetMetaEndpoint
+	getUserSetMetaEndpoint,
+	getUserGetEndpoint
 }                                                                 from './enpoints/user/userEndpoints';
 export { getUserLocationEndpoint, getUserLocationsEndpoint }      from './enpoints/user/userLocationEndpoints';
 export {
