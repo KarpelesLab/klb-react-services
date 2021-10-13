@@ -13,7 +13,7 @@ var getUserLogoutEndpoint = exports.getUserLogoutEndpoint = function getUserLogo
   return 'User/@:logout';
 };
 var getUserGetEndpoint = exports.getUserGetEndpoint = function getUserGetEndpoint() {
-  return 'User/@:get';
+  return 'User:get';
 };
 var getUserFlowEndpoint = exports.getUserFlowEndpoint = function getUserFlowEndpoint() {
   return 'User:flow';
