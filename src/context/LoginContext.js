@@ -1,15 +1,17 @@
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
-import queryString                                                            from 'query-string';
-import { rest }                                                               from '@karpeleslab/klbfw';
-import { useLocation }                                                        from 'react-router-dom';
-import { RestContext }                                                        from './RestContext';
-import { getUserFlowEndpoint }                                                from '../enpoints/user/userEndpoints';
+import queryString             from 'query-string';
+import { rest }                from '@karpeleslab/klbfw';
+import { useLocation }         from 'react-router-dom';
+import { RestContext }         from './RestContext';
+import { getUserFlowEndpoint } from '../enpoints/user/userEndpoints';
+import { useFileUploader }     from '../hook/useBaseHooks';
 
 export const defaultLoginContext = {};
 export const LoginContext = createContext(defaultLoginContext);
 
 export const LoginContextContainer = ({ children, onValidated }) => {
 	const { restContext } = useContext(RestContext);
+	const [uploadFile, uploadingFile, uploadProgress] = useFileUploader();
 
 	const [loading, setLoading] = useState(true);
 	const [form, setForm] = useState({});
@@ -37,7 +39,15 @@ export const LoginContextContainer = ({ children, onValidated }) => {
 		return rest(getUserFlowEndpoint(), 'POST', params)
 			.then(res => {
 				if (res.data && res.data.complete) {
-					onValidated(res.data);
+					if (form?.files?.profile_pic) {
+						uploadFile(
+							form.files.profile_pic.target,
+							form.files.profile_pic.file,
+							form.files.profile_pic.param
+						).finally(() => onValidated(res.data));
+					} else 
+						onValidated(res.data);
+
 					return flowData;
 				} else {
 					setLoading(false);
