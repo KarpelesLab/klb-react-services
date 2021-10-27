@@ -45,8 +45,12 @@ export const LoginContextContainer = ({ children, onValidated }) => {
 				}
 			})
 			.catch(err => {
-				if (restContext.snackMessageCallback)
-					restContext.snackMessageCallback('login_flow_error', 'error', true);
+				if (restContext.snackMessageCallback) {
+					if(err.token)
+						restContext.snackMessageCallback(err.token, 'error', true);
+					else
+						restContext.snackMessageCallback('login_flow_error', 'error', true);
+				}
 				setLoading(false);
 				throw err;
 			});
