@@ -75,7 +75,7 @@ export const LoginContextContainer = ({ children, onValidated }) => {
 	const handleSubmit = e => {
 		e.preventDefault();
 		setLoading(true);
-		setData(form);
+		setData({ ...form });
 	};
 
 	const onInputChange = e => {
