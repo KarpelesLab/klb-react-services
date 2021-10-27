@@ -39,7 +39,7 @@ export const LoginContextContainer = ({ children, onValidated }) => {
 		return rest(getUserFlowEndpoint(), 'POST', params)
 			.then(res => {
 				if (res.data && res.data.complete) {
-					if (form?.files?.profile_pic) {
+					if (form && form.files && form.files.profile_pic) {
 						uploadFile(
 							form.files.profile_pic.target,
 							form.files.profile_pic.file,
