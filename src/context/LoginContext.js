@@ -99,7 +99,7 @@ export const LoginContextContainer = ({ children, onValidated }) => {
 
 	const onOauthClicked = (id) => {
 		let oauth = oauthFields.filter(field => field.id === id);
-		if (oauth && oauth?.Button_Extra.trigger) {
+		if (oauth && oauth?.Button_Extra?.trigger) {
 			let _rest = rest;
 			eval(oauth.Button_Extra.trigger)
 				.then(res => setData({ ...res, oauth2: id }))
