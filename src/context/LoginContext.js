@@ -99,9 +99,9 @@ export const LoginContextContainer = ({ children, onValidated }) => {
 
 	const onOauthClicked = (id) => {
 		let oauth = oauthFields.filter(field => field.id === id);
-		if (oauth && oauth?.Button_Extra?.trigger) {
+		if (oauth && oauth.info && oauth.info.Button_Extra && oauth.info.Button_Extra.trigger) {
 			let _rest = rest;
-			eval(oauth.Button_Extra.trigger)
+			eval(oauth.info.Button_Extra.trigger)
 				.then(res => setData({ ...res, oauth2: id }))
 				.catch(() => {});
  		} else
@@ -148,7 +148,7 @@ export const LoginContextContainer = ({ children, onValidated }) => {
 				tmpFields.push(field);
 			}
 		});
-		tmpOAuth = tmpOAuth.filter(field => field?.Button_Extra?.condition ? eval(field.Button_Extra.condition) : true);
+		tmpOAuth = tmpOAuth.filter(field => field.info && field.info.Button_Extra && field.info.Button_Extra.condition ? eval(field.info.Button_Extra.condition) : true);
 
 		setOAuthFields(tmpOAuth);
 		setFields(tmpFields);
