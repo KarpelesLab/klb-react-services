@@ -102,7 +102,7 @@ export const LoginContextContainer = ({ children, onValidated }) => {
 		if (oauth && oauth.info && oauth.info.Button_Extra && oauth.info.Button_Extra.trigger) {
 			let _rest = rest;
 			eval(oauth.info.Button_Extra.trigger)
-				.then(res => setData({ ...res, oauth2: id }))
+				.then(setData)
 				.catch(() => {});
  		} else
 			setData({ ...form, oauth2: id });
