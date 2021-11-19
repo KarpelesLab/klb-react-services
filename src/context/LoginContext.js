@@ -27,7 +27,7 @@ export const LoginContextContainer = ({ children, onValidated }) => {
 
 	const callRest = useCallback(() => {
 		setLoading(true);
-		let params = { session: session, ...data };
+		let params = { session, ...data };
 		if (!flowData) {
 			const currentQuery = queryString.parse(location.search);
 			if (currentQuery.session)
@@ -97,7 +97,16 @@ export const LoginContextContainer = ({ children, onValidated }) => {
 		setForm(newForm);
 	};
 
-	const onOauthClicked = id => setData({ ...form, oauth2: id });
+	const onOauthClicked = (id) => {
+		let oauth = oauthFields.filter(field => field.id === id);
+		if (oauth && oauth?.Button_Extra.trigger) {
+			let _rest = rest;
+			eval(oauth.Button_Extra.trigger)
+				.then(res => setData({ ...res, oauth2: id }))
+				.catch(() => {});
+ 		} else
+			setData({ ...form, oauth2: id });
+	};
 
 	const setAvatarImage = (fieldName, file, param, target) => {
 		setForm({
@@ -130,7 +139,7 @@ export const LoginContextContainer = ({ children, onValidated }) => {
 		}
 
 		const tmpFields = [];
-		const tmpOAuth = [];
+		let tmpOAuth    = [];
 
 		flowData.data.fields.forEach(field => {
 			if (field.type === 'oauth2') tmpOAuth.push(field);
@@ -139,6 +148,7 @@ export const LoginContextContainer = ({ children, onValidated }) => {
 				tmpFields.push(field);
 			}
 		});
+		tmpOAuth = tmpOAuth.filter(field => field?.Button_Extra?.condition ? eval(field.Button_Extra.condition) : true);
 
 		setOAuthFields(tmpOAuth);
 		setFields(tmpFields);
