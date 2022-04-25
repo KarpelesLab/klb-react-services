@@ -162,7 +162,10 @@ export const useFileUploader = (restSettings = null) => {
 	const [uploading, setUploading] = useState(false);
 	const { restContext } = useContext(RestContext);
 
-	const doIt = useCallback((endpoint, file, params, settingsOverride = null) => {
+	const doIt = useCallback((endpoint, files, params, settingsOverride = null) => {
+		if(!Array.isArray(files)) files = [files];
+		const total = files.length;
+		let current = 0;
 		const s = { ...settings, ...(settingsOverride ? settingsOverride : {}) };
 		return new Promise((resolve, reject) => {
 			if (!s.silent) setUploading(true);
@@ -185,10 +188,16 @@ export const useFileUploader = (restSettings = null) => {
 				setProgress(blockTotal > 0 ? progressTotal / blockTotal : 0);
 			};
 
-			upload.append(endpoint, file, params)
-				.then(d => s.catchRedirect ? catchRedirect(d) : d)
-				.then(resolve)
-				.catch(reject);
+			files.forEach(file => {
+				upload.append(endpoint, file, params)
+					.then(d => s.catchRedirect ? catchRedirect(d) : d)
+					.then(d => {
+						current +=1;
+						if (current<total)return;
+						return resolve(d);
+					})
+					.catch(reject);
+			})
 
 			upload.run();
 
