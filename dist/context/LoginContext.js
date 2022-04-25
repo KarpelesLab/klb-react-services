@@ -25,6 +25,8 @@ var _RestContext = require('./RestContext');
 
 var _userEndpoints = require('../enpoints/user/userEndpoints');
 
+var _useBaseHooks = require('../hook/useBaseHooks');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -38,6 +40,12 @@ var LoginContextContainer = exports.LoginContextContainer = function LoginContex
 
 	var _useContext = (0, _react.useContext)(_RestContext.RestContext),
 	    restContext = _useContext.restContext;
+
+	var _useFileUploader = (0, _useBaseHooks.useFileUploader)(),
+	    _useFileUploader2 = _slicedToArray(_useFileUploader, 3),
+	    uploadFile = _useFileUploader2[0],
+	    uploadingFile = _useFileUploader2[1],
+	    uploadProgress = _useFileUploader2[2];
 
 	var _useState = (0, _react.useState)(true),
 	    _useState2 = _slicedToArray(_useState, 2),
@@ -97,14 +105,21 @@ var LoginContextContainer = exports.LoginContextContainer = function LoginContex
 
 		return (0, _klbfw.rest)((0, _userEndpoints.getUserFlowEndpoint)(), 'POST', params).then(function (res) {
 			if (res.data && res.data.complete) {
-				onValidated(res.data);
+				if (form && form.files && form.files.profile_pic) {
+					uploadFile(form.files.profile_pic.target, form.files.profile_pic.file, form.files.profile_pic.param).finally(function () {
+						return onValidated(res.data);
+					});
+				} else onValidated(res.data);
+
 				return flowData;
 			} else {
 				setLoading(false);
 				return res;
 			}
 		}).catch(function (err) {
-			if (restContext.snackMessageCallback) restContext.snackMessageCallback('login_flow_error', 'error', true);
+			if (restContext.snackMessageCallback) {
+				if (err.token) restContext.snackMessageCallback(err.token, 'error', true);else restContext.snackMessageCallback('login_flow_error', 'error', true);
+			}
 			setLoading(false);
 			throw err;
 		});
@@ -127,7 +142,7 @@ var LoginContextContainer = exports.LoginContextContainer = function LoginContex
 	var handleSubmit = function handleSubmit(e) {
 		e.preventDefault();
 		setLoading(true);
-		setData(form);
+		setData(_extends({}, form));
 	};
 
 	var onInputChange = function onInputChange(e) {
@@ -136,7 +151,13 @@ var LoginContextContainer = exports.LoginContextContainer = function LoginContex
 	};
 
 	var onOauthClicked = function onOauthClicked(id) {
-		return setData(_extends({}, form, { oauth2: id }));
+		var oauth = oauthFields.find(function (field) {
+			return field.id === id;
+		});
+		if (oauth && oauth.info && oauth.info.Button_Extra && oauth.info.Button_Extra.trigger) {
+			var _rest = _klbfw.rest;
+			eval(oauth.info.Button_Extra.trigger).then(setData).catch(function () {});
+		} else setData(_extends({}, form, { oauth2: id }));
 	};
 
 	var setAvatarImage = function setAvatarImage(fieldName, file, param, target) {
@@ -174,6 +195,9 @@ var LoginContextContainer = exports.LoginContextContainer = function LoginContex
 				field.required = flowData.data.req.includes(field.name);
 				tmpFields.push(field);
 			}
+		});
+		tmpOAuth = tmpOAuth.filter(function (field) {
+			return field.info && field.info.Button_Extra && field.info.Button_Extra.condition ? eval(field.info.Button_Extra.condition) : true;
 		});
 
 		setOAuthFields(tmpOAuth);

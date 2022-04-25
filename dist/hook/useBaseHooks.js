@@ -236,9 +236,12 @@ var useFileUploader = exports.useFileUploader = function useFileUploader() {
 	var _useContext4 = (0, _react.useContext)(_RestContext.RestContext),
 	    restContext = _useContext4.restContext;
 
-	var doIt = (0, _react.useCallback)(function (endpoint, file, params) {
+	var doIt = (0, _react.useCallback)(function (endpoint, files, params) {
 		var settingsOverride = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
 
+		if (!Array.isArray(files)) files = [files];
+		var total = files.length;
+		var current = 0;
 		var s = _extends({}, settings, settingsOverride ? settingsOverride : {});
 		return new Promise(function (resolve, reject) {
 			if (!s.silent) setUploading(true);
@@ -260,9 +263,15 @@ var useFileUploader = exports.useFileUploader = function useFileUploader() {
 				setProgress(blockTotal > 0 ? progressTotal / blockTotal : 0);
 			};
 
-			_klbfw.upload.append(endpoint, file, params).then(function (d) {
-				return s.catchRedirect ? catchRedirect(d) : d;
-			}).then(resolve).catch(reject);
+			files.forEach(function (file) {
+				_klbfw.upload.append(endpoint, file, params).then(function (d) {
+					return s.catchRedirect ? catchRedirect(d) : d;
+				}).then(function (d) {
+					current += 1;
+					if (current < total) return;
+					return resolve(d);
+				}).catch(reject);
+			});
 
 			_klbfw.upload.run();
 		}).then(function (data) {
