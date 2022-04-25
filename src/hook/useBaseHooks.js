@@ -163,7 +163,7 @@ export const useFileUploader = (restSettings = null) => {
 	const { restContext } = useContext(RestContext);
 
 	const doIt = useCallback((endpoint, files, params, settingsOverride = null, onFileComplete = null) => {
-		if(!Array.isArray(files)) files = [files];
+		if(files instanceof File) files = [files];
 		const total = files.length;
 		let current = 0;
 		const s = { ...settings, ...(settingsOverride ? settingsOverride : {}) };
@@ -188,8 +188,8 @@ export const useFileUploader = (restSettings = null) => {
 				setProgress(blockTotal > 0 ? progressTotal / blockTotal : 0);
 			};
 
-			files.forEach(file => {
-				upload.append(endpoint, file, params)
+			for (let i = 0; i < files.length; i++) {
+				upload.append(endpoint, files[i], params)
 					.then(d => s.catchRedirect ? catchRedirect(d) : d)
 					.then(d => {
 						if(onFileComplete) onFileComplete(d);
@@ -198,7 +198,7 @@ export const useFileUploader = (restSettings = null) => {
 						return resolve(d);
 					})
 					.catch(reject);
-			})
+			}
 
 			upload.run();
 
