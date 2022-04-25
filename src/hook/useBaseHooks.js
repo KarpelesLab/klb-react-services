@@ -162,7 +162,7 @@ export const useFileUploader = (restSettings = null) => {
 	const [uploading, setUploading] = useState(false);
 	const { restContext } = useContext(RestContext);
 
-	const doIt = useCallback((endpoint, files, params, settingsOverride = null) => {
+	const doIt = useCallback((endpoint, files, params, settingsOverride = null, onFileComplete = null) => {
 		if(!Array.isArray(files)) files = [files];
 		const total = files.length;
 		let current = 0;
@@ -192,6 +192,7 @@ export const useFileUploader = (restSettings = null) => {
 				upload.append(endpoint, file, params)
 					.then(d => s.catchRedirect ? catchRedirect(d) : d)
 					.then(d => {
+						if(onFileComplete) onFileComplete(d);
 						current +=1;
 						if (current<total)return;
 						return resolve(d);
