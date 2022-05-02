@@ -26,7 +26,7 @@ export const useResource = (endpoint, params = null, restSettings = null) => {
 			}
 
 			if (!s.silent) setLoading(true);
-			return rest(endpoint, 'GET', params ? params : {})
+			return rest(endpoint, 'GET', params ? params : {}, s.context)
 				.then(d => s.catchRedirect ? catchRedirect(d) : d)
 				.then(d => s.innerThen ? s.innerThen(d) : d)
 				.then(r => {
@@ -80,7 +80,7 @@ export const useResourceList = (endpoint, restSettings = null) => {
 		return rest(endpoint, 'GET', {
 			...(filters ? filters : lastFilter),
 			...(paging ? paging : lastPaging),
-		})
+		}, s.context)
 			.then(d => s.catchRedirect ? catchRedirect(d) : d)
 			.then(d => s.innerThen ? s.innerThen(d) : d)
 			.then(res => {
@@ -120,6 +120,7 @@ const defaultSettings = {
 	rawResult: false,
 	silent: false,
 	innerThen: null,
+	context: undefined,
 };
 
 export const useAction = (endpoint, method = 'POST', restSettings = null) => {
@@ -132,7 +133,7 @@ export const useAction = (endpoint, method = 'POST', restSettings = null) => {
 	const doAction = useCallback((params = {}, settingsOverride = null) => {
 		const s = { ...settings, ...(settingsOverride ? settingsOverride : {}) };
 		if (!s.silent) setLoading(true);
-		return rest(endpoint, method, params)
+		return rest(endpoint, method, params, s.context)
 			.then(d => s.catchRedirect ? catchRedirect(d) : d)
 			.then(d => s.rawResult ? d : d.data)
 			.then(d => s.innerThen ? s.innerThen(d) : d)
@@ -189,7 +190,7 @@ export const useFileUploader = (restSettings = null) => {
 			};
 
 			for (let i = 0; i < files.length; i++) {
-				upload.append(endpoint, files[i], params)
+				upload.append(endpoint, files[i], params, s.context)
 					.then(d => s.catchRedirect ? catchRedirect(d) : d)
 					.then(d => {
 						if(onFileComplete) onFileComplete(d);
