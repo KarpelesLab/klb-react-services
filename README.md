@@ -1,15 +1,35 @@
-# Usage
+# KLB React Services
 
-To ba able to use this project as an npm package you must create a `.npmrc` at the root of your project with the following content
+React hooks and utilities for KarpelesLab services.
 
+## Installation
 
+```bash
+npm install @karpeleslab/klb-react-services
 ```
-@karpeleslab:registry=https://git.atonline.com/api/v4/packages/npm/
-//git.atonline.com/api/v4/packages/npm/:_authToken=xc86yhdJpC5V42ZLvyxt
+
+or
+
+```bash
+yarn add @karpeleslab/klb-react-services
 ```
 
-Then you will be able to add the package like so
+## Usage
 
+```jsx
+import { useUser, useApiErrorHandler } from '@karpeleslab/klb-react-services';
+
+function MyComponent() {
+  const { user, loading, error } = useUser();
+  const handleApiError = useApiErrorHandler();
+  
+  // Your component logic here
+}
 ```
-npm i @karpeleslab/klb-react-services
-```
+
+## Features
+
+- React hooks for KarpelesLab API services
+- Context providers for authentication and API access
+- Typescript definitions
+- Organized API endpoints for different services
