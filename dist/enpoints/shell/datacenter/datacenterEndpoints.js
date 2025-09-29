@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var getShellDatacentersListEndpoint = exports.getShellDatacentersListEndpoint = function getShellDatacentersListEndpoint() {
-  return 'Shell/Datacenter:list';
-};
+exports.getShellDatacentersListEndpoint = void 0;
+const getShellDatacentersListEndpoint = () => 'Shell/Datacenter:list';
+exports.getShellDatacentersListEndpoint = getShellDatacentersListEndpoint;

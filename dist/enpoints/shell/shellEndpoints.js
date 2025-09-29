@@ -1,47 +1,34 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var getShellsEndpoint = exports.getShellsEndpoint = function getShellsEndpoint() {
-  return 'Shell';
-};
-var getShellEndpoint = exports.getShellEndpoint = function getShellEndpoint(shellId) {
-  return 'Shell/' + shellId;
-};
-var getShellDeleteIpAddressEndpoint = exports.getShellDeleteIpAddressEndpoint = function getShellDeleteIpAddressEndpoint(shellId) {
-  return 'Shell/' + shellId + ':deleteIpAddress';
-};
-var getShellSetInitialOsEndpoint = exports.getShellSetInitialOsEndpoint = function getShellSetInitialOsEndpoint(shellId) {
-  return 'Shell/' + shellId + ':setInitialOs';
-};
-var getShellReconfigureEndpoint = exports.getShellReconfigureEndpoint = function getShellReconfigureEndpoint(shellId) {
-  return 'Shell/' + shellId + ':reconfigure';
-};
-var getShellCancelEndpoint = exports.getShellCancelEndpoint = function getShellCancelEndpoint(shellId) {
-  return 'Shell/' + shellId + ':cancel';
-};
-var getShellStartEndpoint = exports.getShellStartEndpoint = function getShellStartEndpoint(shellId) {
-  return 'Shell/' + shellId + ':start';
-};
-var getShellStopEndpoint = exports.getShellStopEndpoint = function getShellStopEndpoint(shellId) {
-  return 'Shell/' + shellId + ':stop';
-};
-var getShellRebootEndpoint = exports.getShellRebootEndpoint = function getShellRebootEndpoint(shellId) {
-  return 'Shell/' + shellId + ':reboot';
-};
-var getShellSetBillingEndpoint = exports.getShellSetBillingEndpoint = function getShellSetBillingEndpoint(shellId) {
-  return 'Shell/' + shellId + ':setBilling';
-};
-var getShellAddTag = exports.getShellAddTag = function getShellAddTag(shellId) {
-  return 'Shell/' + shellId + ':addTag';
-};
-var getShellRemoveTag = exports.getShellRemoveTag = function getShellRemoveTag(shellId) {
-  return 'Shell/' + shellId + ':delTag';
-};
-var getShellTransfer = exports.getShellTransfer = function getShellTransfer(shellId) {
-  return 'Shell/' + shellId + ':transfer';
-};
-var getShellInviteEndpoint = exports.getShellInviteEndpoint = function getShellInviteEndpoint(shellId) {
-  return 'Shell/' + shellId + ':invite';
-};
+exports.getShellsEndpoint = exports.getShellTransfer = exports.getShellStopEndpoint = exports.getShellStartEndpoint = exports.getShellSetInitialOsEndpoint = exports.getShellSetBillingEndpoint = exports.getShellRemoveTag = exports.getShellReconfigureEndpoint = exports.getShellRebootEndpoint = exports.getShellInviteEndpoint = exports.getShellEndpoint = exports.getShellDeleteIpAddressEndpoint = exports.getShellCancelEndpoint = exports.getShellAddTag = void 0;
+const getShellsEndpoint = () => 'Shell';
+exports.getShellsEndpoint = getShellsEndpoint;
+const getShellEndpoint = shellId => `Shell/${shellId}`;
+exports.getShellEndpoint = getShellEndpoint;
+const getShellDeleteIpAddressEndpoint = shellId => `Shell/${shellId}:deleteIpAddress`;
+exports.getShellDeleteIpAddressEndpoint = getShellDeleteIpAddressEndpoint;
+const getShellSetInitialOsEndpoint = shellId => `Shell/${shellId}:setInitialOs`;
+exports.getShellSetInitialOsEndpoint = getShellSetInitialOsEndpoint;
+const getShellReconfigureEndpoint = shellId => `Shell/${shellId}:reconfigure`;
+exports.getShellReconfigureEndpoint = getShellReconfigureEndpoint;
+const getShellCancelEndpoint = shellId => `Shell/${shellId}:cancel`;
+exports.getShellCancelEndpoint = getShellCancelEndpoint;
+const getShellStartEndpoint = shellId => `Shell/${shellId}:start`;
+exports.getShellStartEndpoint = getShellStartEndpoint;
+const getShellStopEndpoint = shellId => `Shell/${shellId}:stop`;
+exports.getShellStopEndpoint = getShellStopEndpoint;
+const getShellRebootEndpoint = shellId => `Shell/${shellId}:reboot`;
+exports.getShellRebootEndpoint = getShellRebootEndpoint;
+const getShellSetBillingEndpoint = shellId => `Shell/${shellId}:setBilling`;
+exports.getShellSetBillingEndpoint = getShellSetBillingEndpoint;
+const getShellAddTag = shellId => `Shell/${shellId}:addTag`;
+exports.getShellAddTag = getShellAddTag;
+const getShellRemoveTag = shellId => `Shell/${shellId}:delTag`;
+exports.getShellRemoveTag = getShellRemoveTag;
+const getShellTransfer = shellId => `Shell/${shellId}:transfer`;
+exports.getShellTransfer = getShellTransfer;
+const getShellInviteEndpoint = shellId => `Shell/${shellId}:invite`;
+exports.getShellInviteEndpoint = getShellInviteEndpoint;

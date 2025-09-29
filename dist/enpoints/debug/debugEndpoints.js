@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var getDebugLogJsErrorEndpoint = exports.getDebugLogJsErrorEndpoint = function getDebugLogJsErrorEndpoint() {
-  return 'Debug:log_js_error';
-};
+exports.getDebugLogJsErrorEndpoint = void 0;
+const getDebugLogJsErrorEndpoint = () => 'Debug:log_js_error';
+exports.getDebugLogJsErrorEndpoint = getDebugLogJsErrorEndpoint;

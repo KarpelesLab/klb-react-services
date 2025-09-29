@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var getCountriesEndpoint = exports.getCountriesEndpoint = function getCountriesEndpoint() {
-  return 'Country';
-};
+exports.getCountriesEndpoint = void 0;
+const getCountriesEndpoint = () => 'Country';
+exports.getCountriesEndpoint = getCountriesEndpoint;

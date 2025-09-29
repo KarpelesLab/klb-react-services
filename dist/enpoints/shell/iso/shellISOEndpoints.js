@@ -1,17 +1,14 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var getShellISOsEndpoint = exports.getShellISOsEndpoint = function getShellISOsEndpoint() {
-  return 'Shell/ISO';
-};
-var getShellISOEndpoint = exports.getShellISOEndpoint = function getShellISOEndpoint(isoID) {
-  return 'Shell/ISO/' + isoID;
-};
-var getShellISOUploadEndpoint = exports.getShellISOUploadEndpoint = function getShellISOUploadEndpoint() {
-  return 'Shell/ISO:upload';
-};
-var getShellMountISOEndpoint = exports.getShellMountISOEndpoint = function getShellMountISOEndpoint(isoID) {
-  return 'Shell/ISO/' + isoID + ':mount';
-};
+exports.getShellMountISOEndpoint = exports.getShellISOsEndpoint = exports.getShellISOUploadEndpoint = exports.getShellISOEndpoint = void 0;
+const getShellISOsEndpoint = () => 'Shell/ISO';
+exports.getShellISOsEndpoint = getShellISOsEndpoint;
+const getShellISOEndpoint = isoID => `Shell/ISO/${isoID}`;
+exports.getShellISOEndpoint = getShellISOEndpoint;
+const getShellISOUploadEndpoint = () => 'Shell/ISO:upload';
+exports.getShellISOUploadEndpoint = getShellISOUploadEndpoint;
+const getShellMountISOEndpoint = isoID => `Shell/ISO/${isoID}:mount`;
+exports.getShellMountISOEndpoint = getShellMountISOEndpoint;

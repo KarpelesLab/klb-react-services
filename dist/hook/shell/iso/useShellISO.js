@@ -1,55 +1,50 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
-exports.useShellMountISO = exports.useShellISODelete = exports.useShellISOUpload = exports.useShellISO = exports.useShellISOs = undefined;
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
-var _useBaseHooks = require('../../useBaseHooks');
-
-var _ = require('../../..');
-
-var _react = require('react');
-
-var useShellISOs = exports.useShellISOs = function useShellISOs() {
-	var restSettings = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-	return (0, _useBaseHooks.useResourceList)((0, _.getShellISOsEndpoint)(), restSettings);
+exports.useShellMountISO = exports.useShellISOs = exports.useShellISOUpload = exports.useShellISODelete = exports.useShellISO = void 0;
+var _useBaseHooks = require("../../useBaseHooks");
+var _ = require("../../..");
+var _react = require("react");
+const useShellISOs = function () {
+  let restSettings = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  return (0, _useBaseHooks.useResourceList)((0, _.getShellISOsEndpoint)(), restSettings);
 };
-var useShellISO = exports.useShellISO = function useShellISO(isoId) {
-	var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-	var restSettings = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-	return (0, _useBaseHooks.useResource)((0, _.getShellISOEndpoint)(isoId), params, restSettings);
+exports.useShellISOs = useShellISOs;
+const useShellISO = function (isoId) {
+  let params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  let restSettings = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+  return (0, _useBaseHooks.useResource)((0, _.getShellISOEndpoint)(isoId), params, restSettings);
 };
-var useShellISOUpload = exports.useShellISOUpload = function useShellISOUpload() {
-	var _useFileUploader = (0, _useBaseHooks.useFileUploader)({ snackMessageToken: 'shell_iso_create_success' }),
-	    _useFileUploader2 = _slicedToArray(_useFileUploader, 3),
-	    _doUploadMain = _useFileUploader2[0],
-	    loadingMain = _useFileUploader2[1],
-	    progress = _useFileUploader2[2];
+exports.useShellISO = useShellISO;
+const useShellISOUpload = () => {
+  const [_doUploadMain, loadingMain, progress] = (0, _useBaseHooks.useFileUploader)({
+    snackMessageToken: 'shell_iso_create_success'
+  });
+  const doAction = (0, _react.useCallback)(function (file) {
+    let settingsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    return _doUploadMain((0, _.getShellISOUploadEndpoint)(), file, {}, settingsOverride);
+  }, []); //eslint-disable-line
 
-	var doAction = (0, _react.useCallback)(function (file) {
-		var settingsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-		return _doUploadMain((0, _.getShellISOUploadEndpoint)(), file, {}, settingsOverride);
-	}, []); //eslint-disable-line
-
-	return [doAction, loadingMain, progress];
+  return [doAction, loadingMain, progress];
 };
-var useShellISODelete = exports.useShellISODelete = function useShellISODelete(isoId) {
-	return (0, _useBaseHooks.useAction)((0, _.getShellISOEndpoint)(isoId), 'DELETE', { snackMessageToken: 'shell_iso_delete_success' });
-};
-var useShellMountISO = exports.useShellMountISO = function useShellMountISO(isoId) {
-	var _useAction = (0, _useBaseHooks.useAction)((0, _.getShellMountISOEndpoint)(isoId), 'POST', { snackMessageToken: 'shell_iso_mount_success' }),
-	    _useAction2 = _slicedToArray(_useAction, 2),
-	    _doAction = _useAction2[0],
-	    loading = _useAction2[1];
+exports.useShellISOUpload = useShellISOUpload;
+const useShellISODelete = isoId => (0, _useBaseHooks.useAction)((0, _.getShellISOEndpoint)(isoId), 'DELETE', {
+  snackMessageToken: 'shell_iso_delete_success'
+});
+exports.useShellISODelete = useShellISODelete;
+const useShellMountISO = isoId => {
+  const [_doAction, loading] = (0, _useBaseHooks.useAction)((0, _.getShellMountISOEndpoint)(isoId), 'POST', {
+    snackMessageToken: 'shell_iso_mount_success'
+  });
+  const doAction = (0, _react.useCallback)(function (shellId) {
+    let settingsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    return _doAction({
+      Shell__: shellId
+    }, settingsOverride);
+  }, [_doAction]); //eslint-disable-line
 
-	var doAction = (0, _react.useCallback)(function (shellId) {
-		var settingsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-		return _doAction({ Shell__: shellId }, settingsOverride);
-	}, [_doAction]); //eslint-disable-line
-
-	return [doAction, loading];
+  return [doAction, loading];
 };
+exports.useShellMountISO = useShellMountISO;

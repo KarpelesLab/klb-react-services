@@ -1,11 +1,10 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var getKeychainsEndpoint = exports.getKeychainsEndpoint = function getKeychainsEndpoint() {
-  return 'Keychain';
-};
-var getKeychainEndpoint = exports.getKeychainEndpoint = function getKeychainEndpoint(keychainId) {
-  return 'Keychain/' + keychainId;
-};
+exports.getKeychainsEndpoint = exports.getKeychainEndpoint = void 0;
+const getKeychainsEndpoint = () => 'Keychain';
+exports.getKeychainsEndpoint = getKeychainsEndpoint;
+const getKeychainEndpoint = keychainId => `Keychain/${keychainId}`;
+exports.getKeychainEndpoint = getKeychainEndpoint;

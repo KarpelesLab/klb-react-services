@@ -1,11 +1,10 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var getMoneyBankWithdrawsEndpoint = exports.getMoneyBankWithdrawsEndpoint = function getMoneyBankWithdrawsEndpoint() {
-  return 'Money/Bank/Withdraw';
-};
-var getMoneyBankAccountEndpoint = exports.getMoneyBankAccountEndpoint = function getMoneyBankAccountEndpoint(id) {
-  return 'Money/Bank/Account/' + id;
-};
+exports.getMoneyBankWithdrawsEndpoint = exports.getMoneyBankAccountEndpoint = void 0;
+const getMoneyBankWithdrawsEndpoint = () => 'Money/Bank/Withdraw';
+exports.getMoneyBankWithdrawsEndpoint = getMoneyBankWithdrawsEndpoint;
+const getMoneyBankAccountEndpoint = id => `Money/Bank/Account/${id}`;
+exports.getMoneyBankAccountEndpoint = getMoneyBankAccountEndpoint;

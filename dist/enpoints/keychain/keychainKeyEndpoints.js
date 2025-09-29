@@ -1,17 +1,14 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var getKeychainKeysEndpoint = exports.getKeychainKeysEndpoint = function getKeychainKeysEndpoint(keychainId) {
-  return 'Keychain/' + keychainId + '/Key';
-};
-var getKeychainKeyEndpoint = exports.getKeychainKeyEndpoint = function getKeychainKeyEndpoint(keychainKeyId) {
-  return 'Keychain/Key/' + keychainKeyId;
-};
-var getKeychainKeyCreateEndpoint = exports.getKeychainKeyCreateEndpoint = function getKeychainKeyCreateEndpoint(keychainId) {
-  return 'Keychain/' + keychainId + '/Key:create';
-};
-var getKeychainKeyCheckEndpoint = exports.getKeychainKeyCheckEndpoint = function getKeychainKeyCheckEndpoint() {
-  return 'Keychain/Key:check';
-};
+exports.getKeychainKeysEndpoint = exports.getKeychainKeyEndpoint = exports.getKeychainKeyCreateEndpoint = exports.getKeychainKeyCheckEndpoint = void 0;
+const getKeychainKeysEndpoint = keychainId => `Keychain/${keychainId}/Key`;
+exports.getKeychainKeysEndpoint = getKeychainKeysEndpoint;
+const getKeychainKeyEndpoint = keychainKeyId => `Keychain/Key/${keychainKeyId}`;
+exports.getKeychainKeyEndpoint = getKeychainKeyEndpoint;
+const getKeychainKeyCreateEndpoint = keychainId => `Keychain/${keychainId}/Key:create`;
+exports.getKeychainKeyCreateEndpoint = getKeychainKeyCreateEndpoint;
+const getKeychainKeyCheckEndpoint = () => 'Keychain/Key:check';
+exports.getKeychainKeyCheckEndpoint = getKeychainKeyCheckEndpoint;

@@ -1,40 +1,38 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
-exports.useKeychainCreate = exports.useKeychainUpdate = exports.useKeychain = exports.useKeychains = undefined;
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
-var _useBaseHooks = require('../useBaseHooks');
-
-var _react = require('react');
-
-var _keychainEndpoints = require('../../enpoints/keychain/keychainEndpoints');
-
-var useKeychains = exports.useKeychains = function useKeychains() {
-	var restSettings = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-	return (0, _useBaseHooks.useResourceList)((0, _keychainEndpoints.getKeychainsEndpoint)(), restSettings);
+exports.useKeychains = exports.useKeychainUpdate = exports.useKeychainCreate = exports.useKeychain = void 0;
+var _useBaseHooks = require("../useBaseHooks");
+var _react = require("react");
+var _keychainEndpoints = require("../../enpoints/keychain/keychainEndpoints");
+const useKeychains = function () {
+  let restSettings = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  return (0, _useBaseHooks.useResourceList)((0, _keychainEndpoints.getKeychainsEndpoint)(), restSettings);
 };
-var useKeychain = exports.useKeychain = function useKeychain(keychainId) {
-	var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-	var restSettings = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-	return (0, _useBaseHooks.useResource)((0, _keychainEndpoints.getKeychainEndpoint)(keychainId), params, restSettings);
+exports.useKeychains = useKeychains;
+const useKeychain = function (keychainId) {
+  let params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  let restSettings = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+  return (0, _useBaseHooks.useResource)((0, _keychainEndpoints.getKeychainEndpoint)(keychainId), params, restSettings);
 };
-var useKeychainUpdate = exports.useKeychainUpdate = function useKeychainUpdate(keychainId) {
-	return (0, _useBaseHooks.useAction)((0, _keychainEndpoints.getKeychainEndpoint)(keychainId), 'PATCH', { snackMessageToken: 'keychain_update_success' });
-};
-var useKeychainCreate = exports.useKeychainCreate = function useKeychainCreate() {
-	var _useAction = (0, _useBaseHooks.useAction)((0, _keychainEndpoints.getKeychainsEndpoint)(), 'POST', { snackMessageToken: 'keychain_create_success' }),
-	    _useAction2 = _slicedToArray(_useAction, 2),
-	    _doAction = _useAction2[0],
-	    loading = _useAction2[1];
+exports.useKeychain = useKeychain;
+const useKeychainUpdate = keychainId => (0, _useBaseHooks.useAction)((0, _keychainEndpoints.getKeychainEndpoint)(keychainId), 'PATCH', {
+  snackMessageToken: 'keychain_update_success'
+});
+exports.useKeychainUpdate = useKeychainUpdate;
+const useKeychainCreate = () => {
+  const [_doAction, loading] = (0, _useBaseHooks.useAction)((0, _keychainEndpoints.getKeychainsEndpoint)(), 'POST', {
+    snackMessageToken: 'keychain_create_success'
+  });
+  const doAction = (0, _react.useCallback)(function (label) {
+    let settingsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    return _doAction({
+      Label: label
+    }, settingsOverride);
+  }, []); //eslint-disable-line
 
-	var doAction = (0, _react.useCallback)(function (label) {
-		var settingsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-		return _doAction({ Label: label }, settingsOverride);
-	}, []); //eslint-disable-line
-
-	return [doAction, loading];
+  return [doAction, loading];
 };
+exports.useKeychainCreate = useKeychainCreate;

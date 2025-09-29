@@ -1,14 +1,12 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var getUserBillingsEndpoint = exports.getUserBillingsEndpoint = function getUserBillingsEndpoint(userId) {
-  return 'User/' + userId + '/Billing';
-};
-var getUserBillingEndpoint = exports.getUserBillingEndpoint = function getUserBillingEndpoint(billingId) {
-  return 'User/Billing/' + billingId;
-};
-var getUserBillingCreateEndpoint = exports.getUserBillingCreateEndpoint = function getUserBillingCreateEndpoint() {
-  return 'User/Billing:create';
-};
+exports.getUserBillingsEndpoint = exports.getUserBillingEndpoint = exports.getUserBillingCreateEndpoint = void 0;
+const getUserBillingsEndpoint = userId => `User/${userId}/Billing`;
+exports.getUserBillingsEndpoint = getUserBillingsEndpoint;
+const getUserBillingEndpoint = billingId => `User/Billing/${billingId}`;
+exports.getUserBillingEndpoint = getUserBillingEndpoint;
+const getUserBillingCreateEndpoint = () => 'User/Billing:create';
+exports.getUserBillingCreateEndpoint = getUserBillingCreateEndpoint;
