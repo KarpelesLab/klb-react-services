@@ -3,9 +3,8 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var getUserLocationEndpoint = exports.getUserLocationEndpoint = function getUserLocationEndpoint(locationId) {
-  return "User/Location/" + locationId;
-};
-var getUserLocationsEndpoint = exports.getUserLocationsEndpoint = function getUserLocationsEndpoint(userId) {
-  return "User/" + userId + "/Location";
-};
+exports.getUserLocationsEndpoint = exports.getUserLocationEndpoint = void 0;
+const getUserLocationEndpoint = locationId => `User/Location/${locationId}`;
+exports.getUserLocationEndpoint = getUserLocationEndpoint;
+const getUserLocationsEndpoint = userId => `User/${userId}/Location`;
+exports.getUserLocationsEndpoint = getUserLocationsEndpoint;

@@ -1,32 +1,28 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
-exports.useShellVolumeSnapshotRestore = exports.useShellVolumeSnapshots = undefined;
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
-var _useBaseHooks = require('../../useBaseHooks');
-
-var _react = require('react');
-
-var _shellVolumeSnapshotEndpoints = require('../../../enpoints/shell/volume/shellVolumeSnapshotEndpoints');
-
-var useShellVolumeSnapshots = exports.useShellVolumeSnapshots = function useShellVolumeSnapshots(shellId) {
-	var restSettings = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-	return (0, _useBaseHooks.useResourceList)((0, _shellVolumeSnapshotEndpoints.getShellVolumeSnapshotsEndpoint)(shellId), restSettings);
+exports.useShellVolumeSnapshots = exports.useShellVolumeSnapshotRestore = void 0;
+var _useBaseHooks = require("../../useBaseHooks");
+var _react = require("react");
+var _shellVolumeSnapshotEndpoints = require("../../../enpoints/shell/volume/shellVolumeSnapshotEndpoints");
+const useShellVolumeSnapshots = function (shellId) {
+  let restSettings = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  return (0, _useBaseHooks.useResourceList)((0, _shellVolumeSnapshotEndpoints.getShellVolumeSnapshotsEndpoint)(shellId), restSettings);
 };
-var useShellVolumeSnapshotRestore = exports.useShellVolumeSnapshotRestore = function useShellVolumeSnapshotRestore(shellId) {
-	var _useAction = (0, _useBaseHooks.useAction)((0, _shellVolumeSnapshotEndpoints.getShellVolumeSnapshotRestoreEndpoint)(shellId), 'POST', { snackMessageToken: 'snapshot_restore_success' }),
-	    _useAction2 = _slicedToArray(_useAction, 2),
-	    _doAction = _useAction2[0],
-	    loading = _useAction2[1];
+exports.useShellVolumeSnapshots = useShellVolumeSnapshots;
+const useShellVolumeSnapshotRestore = shellId => {
+  const [_doAction, loading] = (0, _useBaseHooks.useAction)((0, _shellVolumeSnapshotEndpoints.getShellVolumeSnapshotRestoreEndpoint)(shellId), 'POST', {
+    snackMessageToken: 'snapshot_restore_success'
+  });
+  const doAction = (0, _react.useCallback)(function (snapshotId) {
+    let settingsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    return _doAction({
+      Shell_Volume_Snapshot__: snapshotId
+    }, settingsOverride);
+  }, []); //eslint-disable-line
 
-	var doAction = (0, _react.useCallback)(function (snapshotId) {
-		var settingsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-		return _doAction({ Shell_Volume_Snapshot__: snapshotId }, settingsOverride);
-	}, []); //eslint-disable-line
-
-	return [doAction, loading];
+  return [doAction, loading];
 };
+exports.useShellVolumeSnapshotRestore = useShellVolumeSnapshotRestore;

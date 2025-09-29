@@ -3,9 +3,8 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var getShellVolumeSnapshotsEndpoint = exports.getShellVolumeSnapshotsEndpoint = function getShellVolumeSnapshotsEndpoint(shellId) {
-  return "Shell/" + shellId + "/Volume/Snapshot";
-};
-var getShellVolumeSnapshotRestoreEndpoint = exports.getShellVolumeSnapshotRestoreEndpoint = function getShellVolumeSnapshotRestoreEndpoint(shellId) {
-  return "Shell/" + shellId + ":restoreSnapshot";
-};
+exports.getShellVolumeSnapshotsEndpoint = exports.getShellVolumeSnapshotRestoreEndpoint = void 0;
+const getShellVolumeSnapshotsEndpoint = shellId => `Shell/${shellId}/Volume/Snapshot`;
+exports.getShellVolumeSnapshotsEndpoint = getShellVolumeSnapshotsEndpoint;
+const getShellVolumeSnapshotRestoreEndpoint = shellId => `Shell/${shellId}:restoreSnapshot`;
+exports.getShellVolumeSnapshotRestoreEndpoint = getShellVolumeSnapshotRestoreEndpoint;

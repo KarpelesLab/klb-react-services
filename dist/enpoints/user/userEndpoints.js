@@ -1,29 +1,22 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var getUserSetPasswordEndpoint = exports.getUserSetPasswordEndpoint = function getUserSetPasswordEndpoint(userId) {
-  return 'User/' + userId + ':setPassword';
-};
-var getUserSetEmailEndpoint = exports.getUserSetEmailEndpoint = function getUserSetEmailEndpoint(userId) {
-  return 'User/' + userId + ':setEmail';
-};
-var getUserLogoutEndpoint = exports.getUserLogoutEndpoint = function getUserLogoutEndpoint() {
-  return 'User/@:logout';
-};
-var getUserGetEndpoint = exports.getUserGetEndpoint = function getUserGetEndpoint() {
-  return 'User:get';
-};
-var getUserFlowEndpoint = exports.getUserFlowEndpoint = function getUserFlowEndpoint() {
-  return 'User:flow';
-};
-var getUserEndpoint = exports.getUserEndpoint = function getUserEndpoint(userId) {
-  return 'User/' + userId;
-};
-var getUserSetDefaultEndpoint = exports.getUserSetDefaultEndpoint = function getUserSetDefaultEndpoint(userId) {
-  return 'User/' + userId + ':setDefaultLocation';
-};
-var getUserSetMetaEndpoint = exports.getUserSetMetaEndpoint = function getUserSetMetaEndpoint(userId) {
-  return 'User/' + userId + ':setUserMeta';
-};
+exports.getUserSetPasswordEndpoint = exports.getUserSetMetaEndpoint = exports.getUserSetEmailEndpoint = exports.getUserSetDefaultEndpoint = exports.getUserLogoutEndpoint = exports.getUserGetEndpoint = exports.getUserFlowEndpoint = exports.getUserEndpoint = void 0;
+const getUserSetPasswordEndpoint = userId => `User/${userId}:setPassword`;
+exports.getUserSetPasswordEndpoint = getUserSetPasswordEndpoint;
+const getUserSetEmailEndpoint = userId => `User/${userId}:setEmail`;
+exports.getUserSetEmailEndpoint = getUserSetEmailEndpoint;
+const getUserLogoutEndpoint = () => 'User/@:logout';
+exports.getUserLogoutEndpoint = getUserLogoutEndpoint;
+const getUserGetEndpoint = () => 'User:get';
+exports.getUserGetEndpoint = getUserGetEndpoint;
+const getUserFlowEndpoint = () => 'User:flow';
+exports.getUserFlowEndpoint = getUserFlowEndpoint;
+const getUserEndpoint = userId => `User/${userId}`;
+exports.getUserEndpoint = getUserEndpoint;
+const getUserSetDefaultEndpoint = userId => `User/${userId}:setDefaultLocation`;
+exports.getUserSetDefaultEndpoint = getUserSetDefaultEndpoint;
+const getUserSetMetaEndpoint = userId => `User/${userId}:setUserMeta`;
+exports.getUserSetMetaEndpoint = getUserSetMetaEndpoint;

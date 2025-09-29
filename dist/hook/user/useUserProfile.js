@@ -1,33 +1,27 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
-exports.useUserProfileUpdateAvatar = exports.useUserProfileUpdate = undefined;
+exports.useUserProfileUpdateAvatar = exports.useUserProfileUpdate = void 0;
+var _useBaseHooks = require("../useBaseHooks");
+var _react = require("react");
+var _userProfileEndpoints = require("../../enpoints/user/userProfileEndpoints");
+const useUserProfileUpdate = userId => (0, _useBaseHooks.useAction)((0, _userProfileEndpoints.getUserProfileEndpoint)(userId), 'PATCH', {
+  snackMessageToken: 'success_profile_updated'
+});
+exports.useUserProfileUpdate = useUserProfileUpdate;
+const useUserProfileUpdateAvatar = userId => {
+  const [_doUpload, uploading, progress] = (0, _useBaseHooks.useFileUploader)({
+    snackMessageToken: 'custom_os_image_added_success'
+  });
+  const doAction = (0, _react.useCallback)(function (file, purpose) {
+    let settingsOverride = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+    return _doUpload((0, _userProfileEndpoints.getUserProfileAddImageEndpoint)(userId), file, {
+      purpose: purpose
+    }, settingsOverride);
+  }, [userId]); //eslint-disable-line
 
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
-var _useBaseHooks = require('../useBaseHooks');
-
-var _react = require('react');
-
-var _userProfileEndpoints = require('../../enpoints/user/userProfileEndpoints');
-
-var useUserProfileUpdate = exports.useUserProfileUpdate = function useUserProfileUpdate(userId) {
-	return (0, _useBaseHooks.useAction)((0, _userProfileEndpoints.getUserProfileEndpoint)(userId), 'PATCH', { snackMessageToken: 'success_profile_updated' });
+  return [doAction, uploading, progress];
 };
-var useUserProfileUpdateAvatar = exports.useUserProfileUpdateAvatar = function useUserProfileUpdateAvatar(userId) {
-	var _useFileUploader = (0, _useBaseHooks.useFileUploader)({ snackMessageToken: 'custom_os_image_added_success' }),
-	    _useFileUploader2 = _slicedToArray(_useFileUploader, 3),
-	    _doUpload = _useFileUploader2[0],
-	    uploading = _useFileUploader2[1],
-	    progress = _useFileUploader2[2];
-
-	var doAction = (0, _react.useCallback)(function (file, purpose) {
-		var settingsOverride = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-
-		return _doUpload((0, _userProfileEndpoints.getUserProfileAddImageEndpoint)(userId), file, { purpose: purpose }, settingsOverride);
-	}, [userId]); //eslint-disable-line
-
-	return [doAction, uploading, progress];
-};
+exports.useUserProfileUpdateAvatar = useUserProfileUpdateAvatar;

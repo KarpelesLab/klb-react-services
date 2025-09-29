@@ -1,11 +1,10 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var getMoneySwiftEndpoint = exports.getMoneySwiftEndpoint = function getMoneySwiftEndpoint() {
-  return 'Money/Swift:get';
-};
-var getMoneySwiftAbaEndpoint = exports.getMoneySwiftAbaEndpoint = function getMoneySwiftAbaEndpoint() {
-  return 'Money/Swift:aba';
-};
+exports.getMoneySwiftEndpoint = exports.getMoneySwiftAbaEndpoint = void 0;
+const getMoneySwiftEndpoint = () => 'Money/Swift:get';
+exports.getMoneySwiftEndpoint = getMoneySwiftEndpoint;
+const getMoneySwiftAbaEndpoint = () => 'Money/Swift:aba';
+exports.getMoneySwiftAbaEndpoint = getMoneySwiftAbaEndpoint;

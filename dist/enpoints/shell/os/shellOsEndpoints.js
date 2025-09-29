@@ -1,32 +1,24 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var getShellOsesEndpoint = exports.getShellOsesEndpoint = function getShellOsesEndpoint() {
-  return 'Shell/OS';
-};
-var getShellOsEndpoint = exports.getShellOsEndpoint = function getShellOsEndpoint(osId) {
-  return 'Shell/OS/' + osId;
-};
-var getShellOsImagesEndpoint = exports.getShellOsImagesEndpoint = function getShellOsImagesEndpoint(osId) {
-  return 'Shell/OS/' + osId + '/Image';
-};
-var getShellOsCreateEmptyEndpoint = exports.getShellOsCreateEmptyEndpoint = function getShellOsCreateEmptyEndpoint() {
-  return 'Shell/OS:createEmpty';
-};
-var getShellOsUploadImageEndpoint = exports.getShellOsUploadImageEndpoint = function getShellOsUploadImageEndpoint(osId) {
-  return 'Shell/OS/' + osId + ':uploadImage';
-};
-var getShellOsImportEndpoint = exports.getShellOsImportEndpoint = function getShellOsImportEndpoint() {
-  return 'Shell/OS:import';
-};
-var getShellOsUploadEndpoint = exports.getShellOsUploadEndpoint = function getShellOsUploadEndpoint() {
-  return 'Shell/OS:upload';
-};
-var getShellOsImageImportEndpoint = exports.getShellOsImageImportEndpoint = function getShellOsImageImportEndpoint(osId) {
-  return 'Shell/OS/' + osId + '/Image:import';
-};
-var getOsImageUploadEndpoint = exports.getOsImageUploadEndpoint = function getOsImageUploadEndpoint(osId) {
-  return 'Shell/OS/' + osId + '/Image:upload';
-};
+exports.getShellOsesEndpoint = exports.getShellOsUploadImageEndpoint = exports.getShellOsUploadEndpoint = exports.getShellOsImportEndpoint = exports.getShellOsImagesEndpoint = exports.getShellOsImageImportEndpoint = exports.getShellOsEndpoint = exports.getShellOsCreateEmptyEndpoint = exports.getOsImageUploadEndpoint = void 0;
+const getShellOsesEndpoint = () => 'Shell/OS';
+exports.getShellOsesEndpoint = getShellOsesEndpoint;
+const getShellOsEndpoint = osId => `Shell/OS/${osId}`;
+exports.getShellOsEndpoint = getShellOsEndpoint;
+const getShellOsImagesEndpoint = osId => `Shell/OS/${osId}/Image`;
+exports.getShellOsImagesEndpoint = getShellOsImagesEndpoint;
+const getShellOsCreateEmptyEndpoint = () => 'Shell/OS:createEmpty';
+exports.getShellOsCreateEmptyEndpoint = getShellOsCreateEmptyEndpoint;
+const getShellOsUploadImageEndpoint = osId => `Shell/OS/${osId}:uploadImage`;
+exports.getShellOsUploadImageEndpoint = getShellOsUploadImageEndpoint;
+const getShellOsImportEndpoint = () => 'Shell/OS:import';
+exports.getShellOsImportEndpoint = getShellOsImportEndpoint;
+const getShellOsUploadEndpoint = () => 'Shell/OS:upload';
+exports.getShellOsUploadEndpoint = getShellOsUploadEndpoint;
+const getShellOsImageImportEndpoint = osId => `Shell/OS/${osId}/Image:import`;
+exports.getShellOsImageImportEndpoint = getShellOsImageImportEndpoint;
+const getOsImageUploadEndpoint = osId => `Shell/OS/${osId}/Image:upload`;
+exports.getOsImageUploadEndpoint = getOsImageUploadEndpoint;

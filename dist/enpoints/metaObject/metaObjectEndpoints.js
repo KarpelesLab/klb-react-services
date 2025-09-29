@@ -1,17 +1,14 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var getMetaObjectLinkAccessEndpoint = exports.getMetaObjectLinkAccessEndpoint = function getMetaObjectLinkAccessEndpoint(metaObjectId) {
-  return 'MetaObject/' + metaObjectId + ':linkAccess';
-};
-var getMetaObjectLinkJoinEndpoint = exports.getMetaObjectLinkJoinEndpoint = function getMetaObjectLinkJoinEndpoint() {
-  return 'MetaObject:linkJoin';
-};
-var getMetaObjectUnsetAccessEndpoint = exports.getMetaObjectUnsetAccessEndpoint = function getMetaObjectUnsetAccessEndpoint(metaObjectId) {
-  return 'MetaObject/' + metaObjectId + ':unsetAccess';
-};
-var getMetaObjectListAccessEndpoint = exports.getMetaObjectListAccessEndpoint = function getMetaObjectListAccessEndpoint(metaObjectId) {
-  return 'MetaObject/' + metaObjectId + ':listAccess';
-};
+exports.getMetaObjectUnsetAccessEndpoint = exports.getMetaObjectListAccessEndpoint = exports.getMetaObjectLinkJoinEndpoint = exports.getMetaObjectLinkAccessEndpoint = void 0;
+const getMetaObjectLinkAccessEndpoint = metaObjectId => `MetaObject/${metaObjectId}:linkAccess`;
+exports.getMetaObjectLinkAccessEndpoint = getMetaObjectLinkAccessEndpoint;
+const getMetaObjectLinkJoinEndpoint = () => 'MetaObject:linkJoin';
+exports.getMetaObjectLinkJoinEndpoint = getMetaObjectLinkJoinEndpoint;
+const getMetaObjectUnsetAccessEndpoint = metaObjectId => `MetaObject/${metaObjectId}:unsetAccess`;
+exports.getMetaObjectUnsetAccessEndpoint = getMetaObjectUnsetAccessEndpoint;
+const getMetaObjectListAccessEndpoint = metaObjectId => `MetaObject/${metaObjectId}:listAccess`;
+exports.getMetaObjectListAccessEndpoint = getMetaObjectListAccessEndpoint;

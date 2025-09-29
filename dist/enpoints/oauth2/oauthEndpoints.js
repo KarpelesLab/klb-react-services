@@ -1,17 +1,14 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var getOAuth2ConsumerLinkEndpoint = exports.getOAuth2ConsumerLinkEndpoint = function getOAuth2ConsumerLinkEndpoint(consumerId) {
-  return 'OAuth2/Consumer/' + consumerId + ':link';
-};
-var getOAuth2ConsumerTokenEndpoint = exports.getOAuth2ConsumerTokenEndpoint = function getOAuth2ConsumerTokenEndpoint(tokenId) {
-  return 'OAuth2/Consumer/Token/' + tokenId;
-};
-var getOAuth2ConsumerTokensEndpoint = exports.getOAuth2ConsumerTokensEndpoint = function getOAuth2ConsumerTokensEndpoint() {
-  return 'OAuth2/Consumer/Token';
-};
-var getOAuth2ConsumersEndpoint = exports.getOAuth2ConsumersEndpoint = function getOAuth2ConsumersEndpoint() {
-  return 'OAuth2/Consumer';
-};
+exports.getOAuth2ConsumersEndpoint = exports.getOAuth2ConsumerTokensEndpoint = exports.getOAuth2ConsumerTokenEndpoint = exports.getOAuth2ConsumerLinkEndpoint = void 0;
+const getOAuth2ConsumerLinkEndpoint = consumerId => `OAuth2/Consumer/${consumerId}:link`;
+exports.getOAuth2ConsumerLinkEndpoint = getOAuth2ConsumerLinkEndpoint;
+const getOAuth2ConsumerTokenEndpoint = tokenId => `OAuth2/Consumer/Token/${tokenId}`;
+exports.getOAuth2ConsumerTokenEndpoint = getOAuth2ConsumerTokenEndpoint;
+const getOAuth2ConsumerTokensEndpoint = () => 'OAuth2/Consumer/Token';
+exports.getOAuth2ConsumerTokensEndpoint = getOAuth2ConsumerTokensEndpoint;
+const getOAuth2ConsumersEndpoint = () => 'OAuth2/Consumer';
+exports.getOAuth2ConsumersEndpoint = getOAuth2ConsumersEndpoint;

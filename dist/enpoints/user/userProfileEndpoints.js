@@ -3,9 +3,8 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var getUserProfileEndpoint = exports.getUserProfileEndpoint = function getUserProfileEndpoint(userId) {
-  return "User/" + userId + "/Profile";
-};
-var getUserProfileAddImageEndpoint = exports.getUserProfileAddImageEndpoint = function getUserProfileAddImageEndpoint(userId) {
-  return "User/" + userId + "/Profile:addImage";
-};
+exports.getUserProfileEndpoint = exports.getUserProfileAddImageEndpoint = void 0;
+const getUserProfileEndpoint = userId => `User/${userId}/Profile`;
+exports.getUserProfileEndpoint = getUserProfileEndpoint;
+const getUserProfileAddImageEndpoint = userId => `User/${userId}/Profile:addImage`;
+exports.getUserProfileAddImageEndpoint = getUserProfileAddImageEndpoint;

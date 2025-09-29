@@ -1,14 +1,12 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var getOrdersEndpoint = exports.getOrdersEndpoint = function getOrdersEndpoint() {
-  return 'Order';
-};
-var getOrderEndpoint = exports.getOrderEndpoint = function getOrderEndpoint(orderId) {
-  return 'Order/' + orderId;
-};
-var getOrderProcessEndpoint = exports.getOrderProcessEndpoint = function getOrderProcessEndpoint(orderId) {
-  return 'Order/' + orderId + ':process';
-};
+exports.getOrdersEndpoint = exports.getOrderProcessEndpoint = exports.getOrderEndpoint = void 0;
+const getOrdersEndpoint = () => 'Order';
+exports.getOrdersEndpoint = getOrdersEndpoint;
+const getOrderEndpoint = orderId => `Order/${orderId}`;
+exports.getOrderEndpoint = getOrderEndpoint;
+const getOrderProcessEndpoint = orderId => `Order/${orderId}:process`;
+exports.getOrderProcessEndpoint = getOrderProcessEndpoint;
