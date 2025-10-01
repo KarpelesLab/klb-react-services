@@ -70,7 +70,7 @@ export const LoginContextContainer = ({ children, onValidated, throwErrors = tru
 	}, [data, flowData, session]); // eslint-disable-line
 
 	useEffect(() => {
-		callRest().then(setFlowData);
+		callRest().then(d => {if(!d) return; setFlowData(d)});
 	}, [data]); // eslint-disable-line
 
 	useEffect(() => {
