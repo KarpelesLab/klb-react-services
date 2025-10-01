@@ -48,7 +48,7 @@ const useResource = function (endpoint) {
       setResource({
         error: e
       });
-      if (s.handleError) handleError(e);else {
+      if (s.handleError) handleError(e, endpoint, params, s);else {
         throw e;
       }
     }).finally(() => {
@@ -98,7 +98,10 @@ const useResourceList = function (endpoint) {
       setList(list);
       return list;
     }).catch(d => {
-      if (s.handleError) handleError(d);else {
+      if (s.handleError) handleError(d, endpoint, {
+        ...(filters ? filters : lastFilter),
+        ...(paging ? paging : lastPaging)
+      }, s);else {
         throw d;
       }
     }).finally(() => {
@@ -148,7 +151,7 @@ const useAction = function (endpoint) {
       if (restContext.snackMessageCallback && s.snackMessageToken) restContext.snackMessageCallback(s.snackMessageToken, s.snackMessageSeverity, true);
       return res;
     }).catch(d => {
-      if (s.handleError) handleError(d);else {
+      if (s.handleError) handleError(d, endpoint, params, s);else {
         throw d;
       }
     }).finally(() => {
@@ -211,7 +214,7 @@ const useFileUploader = function () {
       if (restContext.snackMessageCallback && s.snackMessageToken) restContext.snackMessageCallback(s.snackMessageToken, s.snackMessageSeverity, true);
       return res;
     }).catch(d => {
-      if (s.handleError) handleError(d);else {
+      if (s.handleError) handleError(d, endpoint, params, s);else {
         throw d;
       }
     }).finally(() => {
