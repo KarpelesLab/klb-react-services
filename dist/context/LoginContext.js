@@ -19,7 +19,8 @@ const LoginContext = exports.LoginContext = /*#__PURE__*/(0, _react.createContex
 const LoginContextContainer = _ref => {
   let {
     children,
-    onValidated
+    onValidated,
+    throwErrors = true
   } = _ref;
   const {
     restContext
@@ -62,7 +63,7 @@ const LoginContextContainer = _ref => {
         if (err.token) restContext.snackMessageCallback(err.token, 'error', true);else restContext.snackMessageCallback('login_flow_error', 'error', true);
       }
       setLoading(false);
-      throw err;
+      if (throwErrors) throw err;
     });
   }, [data, flowData, session]); // eslint-disable-line
 
