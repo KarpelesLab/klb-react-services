@@ -9,7 +9,6 @@ const deepCopy = (object) => {
 
 export const useResource = (endpoint, params = null, restSettings = null) => {
 	let settings = { ...defaultSettings, ...(restSettings ? restSettings : {}) };
-
 	const [resource, setResource] = useState(null);
 	const [catchRedirect, handleError] = useApiErrorHandler();
 	const [loading, setLoading] = useState(false);
@@ -40,7 +39,7 @@ export const useResource = (endpoint, params = null, restSettings = null) => {
 				})
 				.catch(e => {
 					setResource({ error: e });
-					if (s.handleError) handleError(e);
+					if (s.handleError) handleError(e, endpoint, params, s);
 					else {
 						throw e;
 					}
@@ -93,7 +92,10 @@ export const useResourceList = (endpoint, restSettings = null) => {
 				return list;
 			})
 			.catch(d => {
-				if (s.handleError) handleError(d);
+				if (s.handleError) handleError(d, endpoint, {
+					...(filters ? filters : lastFilter),
+					...(paging ? paging : lastPaging),
+				}, s);
 				else {
 					throw d;
 				}
@@ -143,7 +145,7 @@ export const useAction = (endpoint, method = 'POST', restSettings = null) => {
 				return res;
 			})
 			.catch(d => {
-				if (s.handleError) handleError(d);
+				if (s.handleError) handleError(d, endpoint, params, s);
 				else {
 					throw d;
 				}
@@ -212,7 +214,7 @@ export const useFileUploader = (restSettings = null) => {
 				return res;
 			})
 			.catch(d => {
-				if (s.handleError) handleError(d);
+				if (s.handleError) handleError(d, endpoint, params, s);
 				else {
 					throw d;
 				}

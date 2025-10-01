@@ -1,6 +1,7 @@
 import React, { createContext, useCallback, useState } from 'react';
 
 export const defaultRestContext = {
+	otpRequiredCallback: null,
 	snackMessageCallback: null,
 	logoutUserCallback: null,
 	restErrorCallback: null,
@@ -14,6 +15,12 @@ export const RestContextContainer = ({ children }) => {
 	const setSnackMessageCallback = useCallback(callback => {
 		setContext(prev => {
 			return { ...prev, snackMessageCallback: callback };
+		});
+	}, [setContext]); // eslint-disable-line
+
+	const setOtpRequiredCallbackCallback = useCallback(callback => {
+		setContext(prev => {
+			return { ...prev, otpRequiredCallback: callback };
 		});
 	}, [setContext]); // eslint-disable-line
 
@@ -38,7 +45,7 @@ export const RestContextContainer = ({ children }) => {
 
 	return (
 		<RestContext.Provider
-			value={{ restContext, setSnackMessageCallback, setLogoutUserCallback, setRestErrorCallbackCallback, setLastError }}>
+			value={{ restContext, setSnackMessageCallback, setLogoutUserCallback, setRestErrorCallbackCallback, setLastError, setOtpRequiredCallbackCallback }}>
 			{children}
 		</RestContext.Provider>
 	);
