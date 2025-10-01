@@ -10,7 +10,7 @@ export const useApiErrorHandler = () => {
 		throw result;
 	};
 
-	const handleError = error => {
+	const handleError = (error, endpoint = null, params = null, settings = null, action = null)  => {
 		if (process.env.NODE_ENV !== 'production') {
 			console.log(error);
 		}
@@ -33,6 +33,11 @@ export const useApiErrorHandler = () => {
 			case 'login_error_no_login':
 				if (restContext.snackMessageCallback)
 					restContext.snackMessageCallback(error.token, 'error', true);
+				break;
+			case 'error_otp_required':
+				if (restContext.otpRequiredCallback) {
+					restContext.otpRequiredCallback(error.otp_session, error.otp_action, endpoint, params);
+				}
 				break;
 			default:
 				if (error.exception === 'Exception\\Fields') {
