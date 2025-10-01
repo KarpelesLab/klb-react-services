@@ -36,6 +36,7 @@ const LoginContextContainer = _ref => {
   const [formTitle, setFormTitle] = (0, _react.useState)('');
   const [fields, setFields] = (0, _react.useState)([]);
   const [oauthFields, setOAuthFields] = (0, _react.useState)([]);
+  const skipEffect = (0, _react.useRef)(false);
   const callRest = (0, _react.useCallback)(() => {
     setLoading(true);
     let params = {
@@ -68,8 +69,13 @@ const LoginContextContainer = _ref => {
   }, [data, flowData, session]); // eslint-disable-line
 
   (0, _react.useEffect)(() => {
+    if (skipEffect.current) {
+      skipEffect.current = false;
+      return;
+    }
     callRest().then(d => {
       if (!d) return;
+      resetData();
       setFlowData(d);
     });
   }, [data]); // eslint-disable-line
@@ -78,6 +84,10 @@ const LoginContextContainer = _ref => {
     if (flowData) setSession(flowData.data.session);
     // eslint-disable-next-line
   }, [flowData]);
+  const resetData = () => {
+    skipEffect.current = true;
+    setData({});
+  };
   const goBack = () => {
     setData({});
     setSession(null);
