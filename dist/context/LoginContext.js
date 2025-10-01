@@ -53,9 +53,11 @@ const LoginContextContainer = _ref => {
         if (form && form.files && form.files.profile_pic) {
           uploadFile(form.files.profile_pic.target, form.files.profile_pic.file, form.files.profile_pic.param).finally(() => onValidated(res.data));
         } else onValidated(res.data);
+        setData({});
         return flowData;
       } else {
         setLoading(false);
+        setData({});
         return res;
       }
     }).catch(err => {

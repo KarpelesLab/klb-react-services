@@ -50,11 +50,9 @@ export const LoginContextContainer = ({ children, onValidated, throwErrors = tru
 					} else 
 						onValidated(res.data);
 
-					setData({});
 					return flowData;
 				} else {
 					setLoading(false);
-					setData({});
 					return res;
 				}
 			})
