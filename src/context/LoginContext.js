@@ -34,6 +34,8 @@ export const LoginContextContainer = ({ children, onValidated }) => {
 				params.session = currentQuery.session;
 			if (currentQuery.return_to)
 				params.return_to = currentQuery.return_to;
+			if (currentQuery.action)
+				params.action = currentQuery.action;
 		}
 
 		return rest(getUserFlowEndpoint(), 'POST', params)

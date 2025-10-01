@@ -45,6 +45,7 @@ const LoginContextContainer = _ref => {
       const currentQuery = _queryString.default.parse(location.search);
       if (currentQuery.session) params.session = currentQuery.session;
       if (currentQuery.return_to) params.return_to = currentQuery.return_to;
+      if (currentQuery.action) params.action = currentQuery.action;
     }
     return (0, _klbfw.rest)((0, _userEndpoints.getUserFlowEndpoint)(), 'POST', params).then(res => {
       if (res.data && res.data.complete) {

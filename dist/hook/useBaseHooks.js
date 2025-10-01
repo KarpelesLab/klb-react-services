@@ -37,6 +37,12 @@ const useResource = function (endpoint) {
       }));
       return;
     }
+    if (s.extraParams) {
+      params = {
+        ...(params ?? {}),
+        ...s.extraParams
+      };
+    }
     if (!s.silent) setLoading(true);
     return (0, _klbfw.rest)(endpoint, 'GET', params ? params : {}, s.context).then(d => s.catchRedirect ? catchRedirect(d) : d).then(d => s.innerThen ? s.innerThen(d) : d).then(r => {
       setResource(r);
@@ -90,7 +96,8 @@ const useResourceList = function (endpoint) {
     if (paging) setLastPaging(paging);
     return (0, _klbfw.rest)(endpoint, 'GET', {
       ...(filters ? filters : lastFilter),
-      ...(paging ? paging : lastPaging)
+      ...(paging ? paging : lastPaging),
+      ...(s.extraParams ?? {})
     }, s.context).then(d => s.catchRedirect ? catchRedirect(d) : d).then(d => s.innerThen ? s.innerThen(d) : d).then(res => {
       if (restContext.snackMessageCallback && s.snackMessageToken) restContext.snackMessageCallback(s.snackMessageToken, s.snackMessageSeverity, true);
       return res;
@@ -147,6 +154,12 @@ const useAction = function (endpoint) {
       ...(settingsOverride ? settingsOverride : {})
     };
     if (!s.silent) setLoading(true);
+    if (s.extraParams) {
+      params = {
+        ...(params ?? {}),
+        ...s.extraParams
+      };
+    }
     return (0, _klbfw.rest)(endpoint, method, params, s.context).then(d => s.catchRedirect ? catchRedirect(d) : d).then(d => s.rawResult ? d : d.data).then(d => s.innerThen ? s.innerThen(d) : d).then(res => {
       if (restContext.snackMessageCallback && s.snackMessageToken) restContext.snackMessageCallback(s.snackMessageToken, s.snackMessageSeverity, true);
       return res;
@@ -184,6 +197,12 @@ const useFileUploader = function () {
       ...settings,
       ...(settingsOverride ? settingsOverride : {})
     };
+    if (s.extraParams) {
+      params = {
+        ...(params ?? {}),
+        ...s.extraParams
+      };
+    }
     return new Promise((resolve, reject) => {
       if (!s.silent) setUploading(true);
       _klbfw.upload.onprogress = d => {
