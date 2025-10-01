@@ -9,7 +9,7 @@ import { useFileUploader }     from '../hook/useBaseHooks';
 export const defaultLoginContext = {};
 export const LoginContext = createContext(defaultLoginContext);
 
-export const LoginContextContainer = ({ children, onValidated }) => {
+export const LoginContextContainer = ({ children, onValidated, throwErrors = true }) => {
 	const { restContext } = useContext(RestContext);
 	const [uploadFile, uploadingFile, uploadProgress] = useFileUploader();
 
@@ -64,7 +64,7 @@ export const LoginContextContainer = ({ children, onValidated }) => {
 						restContext.snackMessageCallback('login_flow_error', 'error', true);
 				}
 				setLoading(false);
-				throw err;
+				if (throwErrors) throw err;
 			});
 
 	}, [data, flowData, session]); // eslint-disable-line
