@@ -87,10 +87,12 @@ export const LoginContextContainer = ({ children, onValidated, throwErrors = tru
 	const resetData = () => {
 		skipEffect.current = true;
 		setData({});
+		setForm({});
 	};
 
 	const goBack = () => {
 		setData({});
+		setForm({});
 		setSession(null);
 	};
 
