@@ -68,7 +68,10 @@ const LoginContextContainer = _ref => {
   }, [data, flowData, session]); // eslint-disable-line
 
   (0, _react.useEffect)(() => {
-    callRest().then(setFlowData);
+    callRest().then(d => {
+      if (!d) return;
+      setFlowData(d);
+    });
   }, [data]); // eslint-disable-line
 
   (0, _react.useEffect)(() => {
