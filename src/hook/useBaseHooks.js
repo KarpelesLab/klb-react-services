@@ -24,6 +24,10 @@ export const useResource = (endpoint, params = null, restSettings = null) => {
 				return;
 			}
 
+			if (s.extraParams) {
+				params = {...(params ?? {}), ...s.extraParams};
+			}
+
 			if (!s.silent) setLoading(true);
 			return rest(endpoint, 'GET', params ? params : {}, s.context)
 				.then(d => s.catchRedirect ? catchRedirect(d) : d)
@@ -79,6 +83,7 @@ export const useResourceList = (endpoint, restSettings = null) => {
 		return rest(endpoint, 'GET', {
 			...(filters ? filters : lastFilter),
 			...(paging ? paging : lastPaging),
+			...(s.extraParams ?? {}),
 		}, s.context)
 			.then(d => s.catchRedirect ? catchRedirect(d) : d)
 			.then(d => s.innerThen ? s.innerThen(d) : d)
@@ -135,6 +140,9 @@ export const useAction = (endpoint, method = 'POST', restSettings = null) => {
 	const doAction = useCallback((params = {}, settingsOverride = null) => {
 		const s = { ...settings, ...(settingsOverride ? settingsOverride : {}) };
 		if (!s.silent) setLoading(true);
+		if (s.extraParams) {
+			params = {...(params ?? {}), ...s.extraParams};
+		}
 		return rest(endpoint, method, params, s.context)
 			.then(d => s.catchRedirect ? catchRedirect(d) : d)
 			.then(d => s.rawResult ? d : d.data)
@@ -170,6 +178,9 @@ export const useFileUploader = (restSettings = null) => {
 		const total = files.length;
 		let current = 0;
 		const s = { ...settings, ...(settingsOverride ? settingsOverride : {}) };
+		if (s.extraParams) {
+			params = {...(params ?? {}), ...s.extraParams};
+		}
 		return new Promise((resolve, reject) => {
 			if (!s.silent) setUploading(true);
 			upload.onprogress = d => {

@@ -15,7 +15,11 @@ const useApiErrorHandler = () => {
     if (!result || !result.result || result.result !== 'redirect') return result;
     throw result;
   };
-  const handleError = error => {
+  const handleError = function (error) {
+    let endpoint = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+    let params = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+    let settings = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+    let action = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
     if (process.env.NODE_ENV !== 'production') {
       console.log(error);
     }
@@ -33,6 +37,11 @@ const useApiErrorHandler = () => {
         break;
       case 'login_error_no_login':
         if (restContext.snackMessageCallback) restContext.snackMessageCallback(error.token, 'error', true);
+        break;
+      case 'error_otp_required':
+        if (restContext.otpRequiredCallback) {
+          restContext.otpRequiredCallback(error.otp_session, error.otp_action, endpoint, params);
+        }
         break;
       default:
         if (error.exception === 'Exception\\Fields') {
