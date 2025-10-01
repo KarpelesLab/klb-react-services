@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
+import React, {createContext, useCallback, useContext, useEffect, useRef, useState} from 'react';
 import queryString             from 'query-string';
 import { rest }                from '@karpeleslab/klbfw';
 import { useLocation }         from 'react-router-dom';
@@ -24,6 +24,7 @@ export const LoginContextContainer = ({ children, onValidated, throwErrors = tru
 	const [formTitle, setFormTitle] = useState('');
 	const [fields, setFields] = useState([]);
 	const [oauthFields, setOAuthFields] = useState([]);
+	const skipEffect = useRef(false);
 
 	const callRest = useCallback(() => {
 		setLoading(true);
@@ -70,7 +71,11 @@ export const LoginContextContainer = ({ children, onValidated, throwErrors = tru
 	}, [data, flowData, session]); // eslint-disable-line
 
 	useEffect(() => {
-		callRest().then(d => {if(!d) return; setFlowData(d)});
+		if (skipEffect.current) {
+			skipEffect.current = false;
+			return;
+		}
+		callRest().then(d => {if(!d) return; resetData();setFlowData(d)});
 	}, [data]); // eslint-disable-line
 
 	useEffect(() => {
@@ -78,6 +83,11 @@ export const LoginContextContainer = ({ children, onValidated, throwErrors = tru
 			setSession(flowData.data.session);
 		// eslint-disable-next-line
 	}, [flowData]);
+
+	const resetData = () => {
+		skipEffect.current = true;
+		setData({});
+	};
 
 	const goBack = () => {
 		setData({});
