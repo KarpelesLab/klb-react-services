@@ -1,6 +1,6 @@
 {
   "name": "@karpeleslab/klb-react-services",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "dependencies": {
     "@karpeleslab/klbfw": "^0.2.10",
     "query-string": "^9.1.1"
