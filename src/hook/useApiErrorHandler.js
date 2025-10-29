@@ -15,7 +15,7 @@ export const useApiErrorHandler = () => {
 			console.log(error);
 		}
 
-		let reThrow = true;
+		let reThrow = settings?.reThrow ?? true;
 		let msg = '';
 
 		switch (error.token) {
